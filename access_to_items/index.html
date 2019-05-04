@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title> Доступ до елементів </title>
+    <style>
+        h1 {
+            text-align: center;
+        }
+
+        input {
+            margin: 5px;
+        }
+
+        #city {
+            width: 300px;
+        }
+    </style>
+    <script>
+        function mul() {
+            var a = parseInt(document.getElementById("a").value)
+            var b = parseInt(document.getElementById("b").value)
+            var c1 = parseInt(document.getElementById("c").value)
+            var c = a * b
+
+            let span1 = document.createElement("span")
+            span1.innerText = "Правильна відповідь"
+            document.getElementById("result").appendChild(span1)
+
+            let result = document.createElement("input")
+            result.type = "number"
+            result.value = c
+            document.getElementById("result").appendChild(result)
+
+            let br = document.createElement("br")
+            document.getElementById("result").appendChild(br)
+
+            let span2 = document.createElement("span")
+            if (c1 == c) {
+                span2.innerText = "Ваша відповідь правильна"
+            }
+            else {
+                span2.innerText = "Ваша відповідь не правильна"
+            }
+            document.getElementById("result").appendChild(span2)
+        }
+
+        function book() {
+            var result1 = document.getElementById("result1")
+            result1.innerHTML += `<br>`
+
+            result1.innerHTML += `Ваше бронювання: <br>`        
+
+            var city = document.getElementById("city").value
+            result1.innerHTML += `Місто: ${city} <br>`
+
+            if (document.getElementById("busines").checked)
+            {
+                result1.innerHTML += `Мета поїздки: Бізнес <br>`
+            } 
+            else
+            {
+                result1.innerHTML += `Мета поїздки: Відпочинок <br>` 
+            }
+
+            if (document.getElementById("days").checked)
+            {
+                result1.innerHTML += `Дати: на разі не відомі <br>` 
+            }
+            else
+            {
+                var day1 = document.getElementById("day1").value
+                result1.innerHTML += `Дата заїзду: ${day1} <br>`
+                var day2 = document.getElementById("day2").value
+                result1.innerHTML += `Дата виїзду: ${day2} <br>` 
+            }
+            var guests = document.getElementById("guests").value
+            result1.innerHTML += `Кількість гостей: ${guests} <br>`
+        }
+
+        function table() {
+            var rows = document.getElementById("tr").value
+            var columns = document.getElementById("td").value
+
+            var table2 = document.createElement("table")
+
+            for (let i = 0; i < rows; i++) {
+
+                var td = document.createElement("td")
+                var tr = document.createElement("tr")
+                td.innerText += `Магазин ${i}`
+                tr.appendChild(td) 
+                for (let j = 0; j < columns; j++) {
+                    td.innerText += `${i + 1} * ${j + 1}`
+                    tr.appendChild(td)
+                }
+                table2.appendChild(tr)
+            }
+            document.getElementById("table1").appendChild(table2)
+        }
+
+        window.onload = function () {
+            document.getElementById("mul").onclick = mul
+            document.getElementById("book").onclick = book
+            document.getElementById("table").onclick = table
+        }
+
+    </script> 
+</head>
+
+<body>
+    <header>
+        <h1> Доступ до елементів </h1>
+        <hr>
+    </header>
+
+    <main>
+        <!--Task1-->
+        <label>
+            Перше число <input type="number" id="a">
+        </label>
+        <br>
+        <label>
+            Друге число <input type="number" id="b">
+        </label>
+        <br>
+        <label>
+            Ваша відповідь <input type="number" id="c">
+        </label>
+        <br>
+        <label>
+            <input type="button" value="Перевірити" id="mul">
+        </label>
+        <div id="result">
+
+        </div>
+        <hr>
+        <!--Task2-->
+        <label>
+            <input type="text" id="city" placeholder="Наприклад, місто, область, район або готель">
+        </label>
+        <br>
+        <label>
+            Мета поїздки:
+            <input type="radio" name="goal" id="busines" checked> Бізнес
+            <input type="radio" name="goal" id="holiday"> Відпочинок
+        </label>
+        <br>
+        <label>
+            <table>
+                <tr>
+                    <td> Дата заїзду </td>
+                    <td> Дата виїзду </td>
+                </tr>
+                <tr>
+                    <td> <input type="date" name="day" id="day1"> </td>
+                    <td> <input type="date" name="day" id="day2"> </td>
+                </tr>
+            </table>
+        </label>
+        <label>
+            <input type="checkbox" name="days" id="days"> Точні дати подорожі на разі невідомі 
+        </label>
+        <br>
+        <label>
+            Кількість гостей
+            <select id="guests">
+                <option> 1 дорослий </option>
+                <option> 2 дорослі </option>
+                <option> 1 дорослий 1 дитина </option>
+                <option> 1 дорослий 2 дитини </option>
+                <option> 2 дорослий 1 дитина </option>
+                <option> 2 дорослий 2 дитини </option>
+            </select>
+        </label>
+        <label>
+            <input type="button" value="Бронювати" id="book">
+        </label>
+        <div id="result1">
+
+        </div>
+        <hr>
+        <!--Task3-->
+        <label> 
+            Кількість магазині 
+            <input type="text" name="tr" id="tr">
+        </label>
+        <br>
+        <label>
+            Кількість робочих днів
+            <input type="text" name="td" id="td">
+        </label>
+        <br>
+        <label>
+            <input type="button" value="Створити таблицю" id="table">
+        </label>
+        <div id="table1">
+
+        </div>
+    </main>
+
+</body>
+
+</html>

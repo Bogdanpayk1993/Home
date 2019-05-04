@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title> cockroach </title>
+    <style>
+        button {
+            border: 0px;
+        }
+    </style>
+    <script>
+        class Cockroach {
+            constructor(maxX, maxY, size, onHit) {
+                this.maxX = maxX
+                this.maxY = maxY
+                this.size = size
+                this.left = this.getRandomValue(1, maxX)
+                this.top = this.getRandomValue(1, maxY)
+                this.speed = 200 + this.getRandomValue(0, 600)
+                this.onHit = onHit
+            }
+            getRandomValue(min, max) {
+                return min + Math.floor(Math.random() * (max - min + 1))
+            }
+            correctValuePosition(value, maxValue) {
+                if (value < 60)
+                    return maxValue + 60 + value
+                if (value > maxValue + 60)
+                    return value - maxValue + 60
+                return value
+            }
+            move() {
+                this.left += this.getRandomValue(-20, 20)
+                this.left = this.correctValuePosition(this.left, this.maxX)
+                this.top += this.getRandomValue(-20, 20)
+                this.top = this.correctValuePosition(this.top, this.maxY)
+                this.creature.style.left = this.left + "px"
+                this.creature.style.top = this.top + "px"
+            }
+            onClick() {
+                clearInterval(this.timer)
+                this.creature.style.backgroundColor = "red"
+                if (this.onHit)
+                    this.onHit()
+            }
+            render(containerId, container) {
+                this.creature = document.createElement("button")
+                this.creature.innerText = "*"
+                this.creature.style.position = "absolute"
+                this.creature.style.width = this.size + "px"
+                this.creature.style.height = this.size + "px"
+                this.creature.style.left = this.left + "px"
+                this.creature.style.top = this.top + "px"
+                this.creature.onclick = this.onClick.bind(this)
+                if (container)
+                    container.appendChild(this.creature)
+                else
+                    document.getElementById(containerId).appendChild(this.creature)
+                this.timer = setInterval(this.move.bind(this), this.speed)
+            }
+        }
+        class Game {
+            constructor(cocCount, cocSize, plaseGameSize) {
+                this.cocCount = cocCount
+                this.cocSize = cocSize
+                this.plaseGameSize = plaseGameSize
+            }
+            onCocHit(num) {
+                this.cocCount--
+                this.aliveCount.innerText = this.cocCount
+            }
+            render(containerId) {
+                const container = document.getElementById(containerId)
+                const div = document.createElement("div")
+                div.innerText = "Кількість живих тараканів"
+
+                this.aliveCount = document.createElement("span")
+                this.aliveCount.innerText = this.cocCount
+
+                div.appendChild(this.aliveCount)
+                container.appendChild(div)
+                //------------------
+                const field = document.createElement("div")
+                for (let i = 0; i < this.cocCount; i++) {
+                    let cockroach = new Cockroach(this.plaseGameSize, this.plaseGameSize,
+                        this.cocSize, this.onCocHit.bind(this))
+                    cockroach.render("", field)
+                }
+                container.appendChild(field)
+            }
+        }
+
+        window.onload = function () {
+            let game = new Game(10, 20, 500)
+            game.render("game")
+        }
+    </script>
+</head>
+
+<body>
+
+    <div id="game">
+
+    </div>
+</body>
+
+</html>

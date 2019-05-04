@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title> Encapsulation </title>
+    <style>
+        h1 {
+            text-align: center;
+        }
+    </style>
+    <script>
+
+        class Rectangle {
+            constructor (widht, height, coefficient) {
+                this.widht = widht
+                this.height = height
+                this.coefficient = coefficient    У конструктор треба передавати тільки те, що треба одразу і без нього неможна
+            }
+
+            perimeter() {
+                this.perimeter = this.widht * 2 + this.height * 2   Не додавай як властивість, функція повинна була повертати 
+            }
+
+            area() {
+                this.area = this.widht * this.height   Не додавай як властивість, функція повинна була повертати значення
+            }
+
+            scaling(coefficient) {      Те, що треба функції одноразово передавай через формальні параметри
+                this.widht = this.widht * coefficient
+                this.height = this.height * coefficient
+            }
+
+            render() {
+                this.scaling()   Навіщо викликати цей метод?
+                this.perimeter()  Навіщо викликати цей метод?
+                let p1 = document.createElement("p")
+                p1.innerText = `Периметер - ${this.perimeter}`
+                document.getElementById("result").appendChild(p1)
+
+                this.area()
+                let p2 = document.createElement("p")
+                p2.innerText = `Площа - ${this.area}`
+                document.getElementById("result").appendChild(p2)
+            }
+        }
+
+        function task1() {
+            var widht = parseFloat(document.getElementById("imp1").value)
+            var height = parseFloat(document.getElementById("imp2").value)
+            var coefficient = parseFloat(document.getElementById("imp3").value)
+            var rectangle = new Rectangle(widht, height, coefficient)
+            rectangle.render()
+        }
+
+        function task1_input() {
+            let l1 = document.createElement("label")
+            l1.innerText = "Висота - "
+            document.getElementById("result").appendChild(l1)
+            let imp1 = document.createElement("input")
+            imp1.type = "numder"
+            imp1.id = "imp1"
+            document.getElementById("result").appendChild(imp1)
+
+            let br = document.createElement("br")
+            document.getElementById("result").appendChild(br)
+
+            let l2 = document.createElement("label")
+            l2.innerText = "Ширина - "
+            document.getElementById("result").appendChild(l2)
+            let imp2 = document.createElement("input")
+            imp2.type = "number"
+            imp2.id = "imp2"
+            document.getElementById("result").appendChild(imp2)
+
+            let br2 = document.createElement("br")
+            document.getElementById("result").appendChild(br2)
+            
+            let l3 = document.createElement("label")
+            l3.innerText = "Коефіцієнт масштабування - "
+            document.getElementById("result").appendChild(l3)
+            let imp3 = document.createElement("input")
+            imp3.type = "number"
+            imp3.id = "imp3"
+            document.getElementById("result").appendChild(imp3)
+
+            let btn = document.createElement("input")
+            btn.type ="button"
+            btn.value = "Розрахунок"
+            btn.onclick = this.task1.bind(this)
+            document.getElementById("result").appendChild(btn)
+        }
+
+        function menu() {
+            var task = parseInt(document.getElementById("task").value)
+            switch (task) {
+                case 1:
+                    task1_input()
+                    break
+            }
+        } 
+
+        window.onload = function () {
+            document.getElementById("menu").onclick = menu
+        }
+
+    </script>
+</head>
+
+<body>
+
+    <header>
+        <h1> Encapsulation </h1>
+        <hr>
+    </header>
+
+    <main>
+        <label>
+            Введіть номер завдання -
+            <input type="text" id="task">
+            <input type="button" value="Вибрати" id="menu">
+        </label>
+        <div id="result">
+
+        </div>
+        <hr>
+    </main>
+
+</body>
+
+</html>

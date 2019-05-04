@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title> Ігри </title>
+    <style>
+        h1 {
+            text-align: center;
+        }
+
+        nav {
+            text-align: center;
+        }
+        button {
+            width: 150px;
+        }
+    </style>
+
+    <script>
+        class Engineer {
+            constructor(count_mines, size) {
+                this.count_mines = count_mines
+                this.size = size
+            }
+            getRandomMinesPositions() {
+                var positions = []
+                for (let i = 0; i < this.size; i++) {
+                    var positions1 = []
+                    for (let j = 0; j < this.size; j++) {
+                        positions1.push(0)
+                    }
+                    positions.push(positions1)
+                }
+                for (let i = 0; i < this.count_mines; i++) {
+                    let x
+                    let y
+                    do {
+                        x = 0 + Math.floor(Math.random() * (this.size))
+                        y = 0 + Math.floor(Math.random() * (this.size))
+                    } while (positions[x][y] != 0);
+                    positions[x][y] = 9
+                }
+                return positions
+            }
+            cellClick() {
+                var td = this
+                if (td.getAttribute("isMine") == 9) {
+                    for (var i = 0; i < td.getAttribute("size"); i++) {
+                        for (var j = 0; j < td.getAttribute("size"); j++) {
+                            var td1 = document.getElementById("table").rows[i].cells[j]
+                            if (td1.getAttribute("isMine") == 0) {
+                                td1.style.background = "green"
+                            }
+                            else {
+                                td1.style.background = "red"
+                                td1.innerText = "*"
+                            }
+                        }
+                    }
+                    alert("Ви програли")
+                }
+                else {
+                    td.style.background = "green"
+                }
+            }
+            render(containersID) {
+                this.minesPositions = this.getRandomMinesPositions()
+                var container = document.getElementById(containersID)
+                container.innerHTML = ""
+                var tbl = document.createElement("table")
+                tbl.border = "2px solid black"
+                tbl.id = "table"
+                for (let i = 0; i < this.size; i++) {
+                    var tr = document.createElement("tr")
+                    for (let j = 0; j < this.size; j++) {
+                        var td = document.createElement("td")
+                        td.width = "20px"
+                        td.height = "20px"
+                        td.style.textAlign = "center"
+                        td.setAttribute("isMine", this.minesPositions[i][j])
+                        td.setAttribute("size", this.size)
+                        td.onclick = this.cellClick
+                        tr.appendChild(td)
+                    }
+                    tbl.appendChild(tr)
+                }
+                container.appendChild(tbl)
+            }
+        }
+        function engineer() {
+            let engineer = new Engineer(10, 5)
+            engineer.render("place_game")
+        }
+        class Place_magic {
+            constructor(...positions) {
+                this.positions = positions
+                this.bals = 0
+                this.course = 0
+            }
+            next() {
+                var r = Math.floor(Math.random() * this.positions.length)
+                this.bals = this.bals + this.positions[r]
+                var p = document.getElementById("p")
+                p.innerText = "Кількість бaлів нa ході - " + this.positions[r] + "\nЗагальна кількість балів - " + this.bals
+                this.course = this.course + 1
+                var p1 = document.createElement("p")
+                p1.innerText = "Хід №" + this.course + "\nКількість бaлів нa ході - " + this.positions[r] + "\nЗагальна кількість балів - " + this.bals
+                var div = document.getElementById("div")
+                div.appendChild(p1)
+            }
+            render(containersID) {
+                var container = document.getElementById(containersID)
+                container.innerHTML = ""
+                var hr = document.createElement("hr")
+                container.appendChild(hr)
+                var button = document.createElement("button")
+                button.innerText = "Наступний хід"
+                button.style.width = "120px"
+                button.onclick = this.next.bind(this)
+                container.appendChild(button)
+                var p = document.createElement("p")
+                p.id = "p"
+                p.innerText = "Кількість бaлів нa ході - 0\nЗагальна кількість балів - 0"
+                container.appendChild(p)
+                var hr = document.createElement("hr")
+                container.appendChild(hr)
+                var div = document.createElement("div")
+                div.id = "div"
+                container.appendChild(div)
+            }
+        }
+        function place_magic() {
+            var place_magic = new Place_magic(100, -200, 300, -400, 500)
+            place_magic.render("place_game")
+        }
+        class Bull_and_cows {
+            constructor() {
+                this.number = []
+            }
+            get_number() {
+                this.number.push(String(Math.floor(Math.random() * 10)))
+                do {
+                    var n2 = String(Math.floor(Math.random() * 10))
+                } while (this.number[0] == n2)
+                this.number.push(n2)
+                do {
+                    var n3 = String(Math.floor(Math.random() * 10))
+                } while (this.number[0] == n3 || this.number[1] == n3)
+                this.number.push(n3)
+                do {
+                    var n4 = String(Math.floor(Math.random() * 10))
+                } while (this.number[0] == n4 || this.number[1] == n4 || this.number[2] == n4)
+                this.number.push(n4)
+            }
+            check() {
+                let values = this.inp.map(el => el.value)
+                var bull = values.reduce(
+                    (prev, el, i) => (el == this.number[i] ? prev + 1 : prev),
+                    0
+                )
+                var cows = values.reduce(
+                    (prev, el, i) =>
+                        el != this.number[i] && this.number.includes(el)
+                            ? prev + 1
+                            : prev,
+                    0
+                )
+                var p = document.createElement("p")
+                p.innerText = `${values.join("  ")} : Корови - ${cows} Бики - ${bull}`
+                document.getElementById("result").appendChild(p)
+                if (bull == 4) {
+                    alert("Ви виграли")
+                }
+            }
+            render(containersID) {
+                this.get_number()
+                var container = document.getElementById(containersID)
+                container.innerHTML = ""
+                var hr = document.createElement("hr")
+                container.appendChild(hr)
+                this.inp = []
+                for (let i = 0; i < 4; i++) {
+                    var input = document.createElement("input")
+                    input.type = "number"
+                    container.appendChild(input)
+                    this.inp.push(input)
+                }
+                var btn = document.createElement("button")
+                btn.innerText = "Перевірити"
+                btn.onclick = this.check.bind(this)
+                container.appendChild(btn)
+                var hr = document.createElement("hr")
+                container.appendChild(hr)
+                var div = document.createElement("div")
+                div.id = "result"
+                container.appendChild(div)
+            }
+        }
+        function bull_and_cows() {
+            var bull_and_cows = new Bull_and_cows()
+            bull_and_cows.render("place_game")
+        }
+        class Thimblres {
+            constructor() {
+                this.positions
+            }
+            do() {
+                var button = this
+                this.positions = [0, 0, 0]
+                var r = 0 + Math.floor(Math.random() * 3)
+                this.positions[r] = 1
+                if (this.positions[button.getAttribute("position")] == 1) {
+                    button.innerText = "1"
+                }
+                else {
+                    button.innerText = "0"
+                }
+                setTimeout(function () { button.innerText = "\\_/" }, 1000)
+            }
+            render(containersID) {
+                var container = document.getElementById(containersID)
+                container.innerHTML = ""
+                var hr = document.createElement("hr")
+                container.appendChild(hr)
+                for (var i = 0; i < 3; i++) {
+                    var button = document.createElement("button")
+                    button.style.width = "40px"
+                    button.style.height = "40px"
+                    button.style.margin = "5px"
+                    button.innerText = "\\_/"
+                    button.setAttribute("position", i)
+                    button.onclick = this.do
+                    container.appendChild(button)
+                }
+            }
+        }
+        function thimblres() {
+            var thimblres = new Thimblres()
+            thimblres.render("place_game")
+        }
+
+        class Crosses_zero {
+            constructor() {
+                this.player = 0
+            }
+
+            onclick(e) {
+                var td = e.target
+                if (this.player == 0) {
+                    if (td.innerText == "") {
+                        td.innerText = "0"
+                        this.player = (this.player + 1) % 2
+                        this.btn[0].style.background = "red"
+                        this.btn[1].style.background = "green"
+                    }
+                }
+                else {
+                    if (td.innerText == "") {
+                        td.innerText = "X"
+                        this.player = (this.player + 1) % 2
+                        this.btn[0].style.background = "green"
+                        this.btn[1].style.background = "red"
+                    }
+                }
+            }
+
+            render(containersID) {
+                this.btn = []
+
+                var container = document.getElementById(containersID)
+                container.innerText = ""
+
+                var hr = document.createElement("hr")
+                container.appendChild(hr)
+
+                for (var i = 0; i < 2; i++) {
+                    var button = document.createElement("button")
+                    button.innerText = `Ігрок ${i + 1}`
+                    container.appendChild(button)
+                    this.btn.push(button)
+                }
+
+                var br = document.createElement("br")
+                container.appendChild(br)
+
+                var br = document.createElement("br")
+                container.appendChild(br)
+
+                var tbl = document.createElement("table")
+                tbl.border = "2px solid black"
+
+                for (let i = 0; i < 3; i++) {
+                    var tr = document.createElement("tr")
+
+                    for (let i = 0; i < 3; i++) {
+                        var td = document.createElement("td")
+                        td.style.width = "92px"
+                        td.style.height = "92px"
+                        td.style.textAlign = "Center"
+                        td.style.fontSize = "30pt"
+                        td.innerText = ""
+                        td.onclick = this.onclick.bind(this)
+                        tr.appendChild(td)
+                    }
+                    tbl.appendChild(tr)
+                }
+                container.appendChild(tbl)
+
+                this.btn[0].style.background = "green"
+                this.btn[1].style.background = "red"
+            }
+        }
+
+        function crosses_zero() {
+            var crosses_zero = new Crosses_zero()
+            crosses_zero.render("place_game")
+        }
+
+        class Bull {
+            constructor () {
+                this.bull = []
+            }
+
+            get_bull() {
+                var bull = []
+                for (let i = 0; i < 10; i++) {
+                    var rows = [] 
+                    for (let j = 0; j < 10; j++)
+                    {
+                        var cells = 0
+                        rows.push(cells)
+                    }
+                    this.bull.push(rows)    
+                }
+            }
+
+            render(containersID) {
+                this.get_bull()
+                var container = document.getElementById(containersID)
+                container.innerText = ""
+
+                var hr = document.createElement("hr")
+                container.appendChild(hr)
+
+                var table = document.createElement("table")
+                table.border = "2px solid black"
+
+                for (let i = 0; i < 10; i++) {
+                    var tr = document.createElement("tr")
+                    for (let j = 0; j < 10; j++) {
+                        var td = document.createElement("td")
+                        td.width = "20px"
+                        td.height = "20px"
+                        td.style.textAlign = "center"
+                        tr.appendChild(td)
+                    }
+                    table.appendChild(tr)
+                }
+                container.appendChild(table)
+            }
+        }
+
+        function bull() {
+            var bull = new Bull()
+            bull.render("place_game")
+        }
+
+        window.onload = function () {
+            document.getElementById("engineer").onclick = engineer
+            document.getElementById("place_magic").onclick = place_magic
+            document.getElementById("crosses_zero").onclick = crosses_zero
+            document.getElementById("bull_and_cows").onclick = bull_and_cows
+            document.getElementById("thimblres").onclick = thimblres
+            document.getElementById("bull").onclick = bull 
+        }
+    </script>
+
+</head>
+
+<body>
+
+    <header>
+        <h1> Ігри </h1>
+        <hr>
+    </header>
+
+    <main>
+
+        <nav>
+            <button id="engineer"> Сапер </button> <button id="place_magic"> Поле чудес </button>
+            <button id="crosses_zero"> Хрестики нулики </button> <button id="bull"> Бики </button>
+            <button id="bull_and_cows"> Бики і корови </button> <button id="thimblres"> Наперстки </button>
+        </nav>
+
+        <div id="place_game">
+
+        </div>
+
+    </main>
+
+</body>
+
+</html>

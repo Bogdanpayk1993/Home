@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title> Classes </title>
+    <style>
+        h1 {
+            text-align: center;
+        }
+        input {
+            margin-top: 10px;
+        }
+    </style>
+    <script>
+
+        class Generate {
+            constructor(max, min) {
+                this.max = max
+                this.min = min
+            }
+
+            generate() {
+                this.r = 0 + Math.floor(Math.random() * (100 - 0 + 1))
+            }
+
+            audit() {
+                let span = document.createElement("samp")
+                if (this.max > this.r && this.min < this.r) {
+                    span.innerText = "good"
+                }
+                else {
+                    span.innerText = "bad"
+                }
+                document.getElementById("gr1").value = this.r
+                document.getElementById("gr2").appendChild(span)
+            }
+        }
+
+        class Money {
+            constructor(name, number, counter) {
+                this.name = name
+                this.number = number
+                this.counter = counter
+            }
+
+            add() {
+                var operation = parseInt(document.getElementById("operation").value)
+                this.counter = this.counter + operation
+                let p = document.createElement("p")
+                p.innerText = `Сума на рахунку - ${this.counter}`
+                document.getElementById("result").appendChild(p)
+            }
+
+            sub() {
+                var operation = parseInt(document.getElementById("operation").value)
+                this.counter = this.counter - operation
+                let p = document.createElement("p")
+                p.innerText = `Сума на рахунку - ${this.counter}`
+                document.getElementById("result").appendChild(p)
+            }
+
+            add_b() {
+                let samp = document.createElement("samp")
+                samp.innerText = "Cума поповнення рахунку - "
+                document.getElementById("result").appendChild(samp)
+
+                let input = document.createElement("input")
+                input.type = "number"
+                input.id = "operation"
+                document.getElementById("result").appendChild(input)
+
+                let button = document.createElement("button")
+                button.innerText = "ok"
+                button.onclick = this.add.bind(this)
+                document.getElementById("result").appendChild(button)
+            }
+
+            sub_b() {
+                let samp = document.createElement("samp")
+                samp.innerText = "Cума зняття коштів - "
+                document.getElementById("result").appendChild(samp)
+
+                let input = document.createElement("input")
+                input.type = "number"
+                input.id = "operation"
+                document.getElementById("result").appendChild(input)
+
+                let button = document.createElement("button")
+                button.innerText = "ok"
+                button.onclick = this.sub.bind(this)
+                document.getElementById("result").appendChild(button)
+            }
+        }
+
+        class Cube{
+            constructor (counter, number) {
+                this.counter = counter
+                this.number = number
+            }
+
+            audit() {
+                if (this.number <= this.counter) this.game() 
+                else
+                {
+                    let p = document.createElement("p")
+                    p.innerText = "Кубік не має такої грані"
+                    document.getElementById("game").appendChild(p)
+                }
+            }
+
+            game() {
+                let value = parseInt(1 + Math.floor(Math.random() * this.counter))
+
+                var p1 = document.createElement("p")
+                p1.innerText = `Грань кубика - ${value}`
+                document.getElementById("game").appendChild(p1)
+                
+                var p = document.createElement("p")
+                if (value == this.number) 
+                {
+                    p.innerText = "Ви вгадали"
+                }
+                else
+                {
+                    p.innerText = "Ви не вгадали"
+                }
+                document.getElementById("game").appendChild(p)
+            }
+
+        }
+
+        function generate1() {
+            var max = parseInt(document.getElementById("max").value)
+            var min = parseInt(document.getElementById("min").value)
+            var generate = new Generate(max, min)
+            generate.generate()
+            generate.audit()
+        }
+
+        function money_add() {
+            var name = document.getElementById("name").value
+            var number = document.getElementById("number").value
+            var counter = parseInt(document.getElementById("counter").value)
+            var money = new Money(name, number, counter)
+            money.add_b()
+        }
+
+        function money_sub() {
+            var name = document.getElementById("name").value
+            var number = document.getElementById("number").value
+            var counter = parseInt(document.getElementById("counter").value)
+            var money = new Money(name, number, counter)
+            money.sub_b()
+        }
+
+        function game() {
+            var counter = parseInt(document.getElementById("counter1").value)
+            var number = parseInt(document.getElementById("value").value)
+            var cube = new Cube(counter, number)
+            cube.audit()
+        }
+
+        window.onload = function () {
+            document.getElementById("number").onclick = generate1
+            document.getElementById("add").onclick = money_add
+            document.getElementById("sub").onclick = money_sub
+            document.getElementById("start_game").onclick = game
+        }
+
+    </script>
+</head>
+
+<body>
+
+    <header>
+        <h1> Classes </h1>
+        <hr>
+    </header>
+
+    <main>
+
+        <label>
+            Minimal value -
+            <input type="number" id="min">
+        </label>
+        <label>
+            Maximum value -
+            <input type="number" id="max">
+        </label>
+        <label>
+            <input type="button" value="Generate number" id="number">
+        </label>
+        <label>
+            Generated number -
+            <input type="number" id="gr1">
+        </label>
+        <label id="gr2">
+
+        </label>
+        <hr>
+
+        <label>
+            ПІБ -
+            <input type="text" id="name">
+        </label>
+        <label>
+            Номер рахунку -
+            <input type="number" id="number">
+        </label>
+        <label>
+            Кількість коштів -
+            <input type="number" id="counter">
+        </label>
+        <label>
+            <input type="button" value="Зняття грошей з рахунку" id="sub">
+        </label>
+        <label>
+            <input type="button" value="Додавання грошей на рахунок" id="add">
+        </label>
+        <div id="result">
+
+        </div>
+        <hr>
+
+        <label>
+            Кількість граней грального кубика -
+            <input type="number" id="counter1">
+        </label>
+        <label>
+            Прогнозоване значення -
+            <input type="number" id="value">
+        </label>
+        <label>
+            <input type="button" value="Грати" id="start_game">
+        </label>
+        <div id="game">
+
+        </div>
+        <hr>
+
+    </main>
+
+</body>
+
+</html>

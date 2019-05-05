@@ -14,6 +14,7 @@
         nav {
             text-align: center;
         }
+
         button {
             width: 150px;
         }
@@ -25,6 +26,7 @@
                 this.count_mines = count_mines
                 this.size = size
             }
+            
             getRandomMinesPositions() {
                 var positions = []
                 for (let i = 0; i < this.size; i++) {
@@ -45,6 +47,7 @@
                 }
                 return positions
             }
+
             cellClick() {
                 var td = this
                 if (td.getAttribute("isMine") == 9) {
@@ -66,6 +69,7 @@
                     td.style.background = "green"
                 }
             }
+
             render(containersID) {
                 this.minesPositions = this.getRandomMinesPositions()
                 var container = document.getElementById(containersID)
@@ -90,16 +94,19 @@
                 container.appendChild(tbl)
             }
         }
+
         function engineer() {
             let engineer = new Engineer(10, 5)
             engineer.render("place_game")
         }
+
         class Place_magic {
             constructor(...positions) {
                 this.positions = positions
                 this.bals = 0
                 this.course = 0
             }
+
             next() {
                 var r = Math.floor(Math.random() * this.positions.length)
                 this.bals = this.bals + this.positions[r]
@@ -111,6 +118,7 @@
                 var div = document.getElementById("div")
                 div.appendChild(p1)
             }
+
             render(containersID) {
                 var container = document.getElementById(containersID)
                 container.innerHTML = ""
@@ -132,14 +140,17 @@
                 container.appendChild(div)
             }
         }
+
         function place_magic() {
             var place_magic = new Place_magic(100, -200, 300, -400, 500)
             place_magic.render("place_game")
         }
+
         class Bull_and_cows {
             constructor() {
                 this.number = []
             }
+
             get_number() {
                 this.number.push(String(Math.floor(Math.random() * 10)))
                 do {
@@ -155,6 +166,7 @@
                 } while (this.number[0] == n4 || this.number[1] == n4 || this.number[2] == n4)
                 this.number.push(n4)
             }
+
             check() {
                 let values = this.inp.map(el => el.value)
                 var bull = values.reduce(
@@ -175,6 +187,7 @@
                     alert("Ви виграли")
                 }
             }
+
             render(containersID) {
                 this.get_number()
                 var container = document.getElementById(containersID)
@@ -199,14 +212,17 @@
                 container.appendChild(div)
             }
         }
+
         function bull_and_cows() {
             var bull_and_cows = new Bull_and_cows()
             bull_and_cows.render("place_game")
         }
+
         class Thimblres {
             constructor() {
                 this.positions
             }
+
             do() {
                 var button = this
                 this.positions = [0, 0, 0]
@@ -220,6 +236,7 @@
                 }
                 setTimeout(function () { button.innerText = "\\_/" }, 1000)
             }
+
             render(containersID) {
                 var container = document.getElementById(containersID)
                 container.innerHTML = ""
@@ -237,6 +254,7 @@
                 }
             }
         }
+
         function thimblres() {
             var thimblres = new Thimblres()
             thimblres.render("place_game")
@@ -320,20 +338,100 @@
         }
 
         class Bull {
-            constructor () {
+            constructor() {
                 this.bull = []
+                this.bulls = 100
             }
 
             get_bull() {
-                var bull = []
                 for (let i = 0; i < 10; i++) {
-                    var rows = [] 
-                    for (let j = 0; j < 10; j++)
-                    {
+                    var rows = []
+                    for (let j = 0; j < 10; j++) {
                         var cells = 0
                         rows.push(cells)
                     }
-                    this.bull.push(rows)    
+                    this.bull.push(rows)
+                }
+                this.bull[0][0] = this.bulls
+            }
+
+            do(e) {
+                var td = e.target
+                td.style.background = "red"
+                this.bull[td.getAttribute("x")][td.getAttribute("y")] = -1
+                this.go()
+            }
+
+            go() {
+                var bull1 = []
+                for (let i = 0; i < 10; i++) {
+                    var rows = []
+                    for (let j = 0; j < 10; j++) {
+                        var cells = this.bull[i][j]
+                        rows.push(cells)
+                    }
+                    bull1.push(rows)
+                }
+                for (let i = 0; i < 10; i++) {
+                    for (let j = 0; j < 10; j++) {
+                        if (this.bull[i][j] > 0) {
+                            do {
+                                var p = Math.floor(Math.random() * 2)
+                                switch (p) {
+                                    case 0:
+                                        if (j != 9) {
+                                            if (bull1[i][j + 1] != -1) {
+                                                bull1[i][j + 1]++
+                                                bull1[i][j]--
+                                                this.bull[i][j]--
+                                            }
+                                            else {
+                                                bull1[i][j]--
+                                                this.bulls--
+                                            }
+                                        }
+                                        break;
+
+                                    case 1:
+                                        if (i != 9) {
+                                            if (bull1[i + 1][j] != -1) {
+                                                bull1[i + 1][j]++
+                                                bull1[i][j]--
+                                                this.bull[i][j]--
+                                            }
+                                            else {
+                                                bull1[i][j]--
+                                                this.bulls--
+                                            }
+                                        }
+                                        break;
+
+                                    default:
+                                        break;
+                                }
+                            } while (bull1[i][j] != 0 && this.bulls != 0);
+                        }
+                    }
+                }
+                this.bull = bull1
+                for (let i = 0; i < 10; i++) {
+                    for (let j = 0; j < 10; j++) {
+                        var td = document.getElementById("table").rows[i].cells[j]
+                        if (this.bull[i][j] > 0) {
+                            td.innerText = "*"
+                        }
+                        else {
+                            td.innerText = ""
+                        }
+                    }
+                }
+                if (this.bulls == 0) {
+                    alert("Ви виграли")
+                    return
+                }
+                if (bull1[9][9] > 0) {
+                    alert("Ви програли")
+                    return
                 }
             }
 
@@ -347,6 +445,7 @@
 
                 var table = document.createElement("table")
                 table.border = "2px solid black"
+                table.id = "table"
 
                 for (let i = 0; i < 10; i++) {
                     var tr = document.createElement("tr")
@@ -354,12 +453,18 @@
                         var td = document.createElement("td")
                         td.width = "20px"
                         td.height = "20px"
+                        td.setAttribute("x", i)
+                        td.setAttribute("y", j)
                         td.style.textAlign = "center"
+                        td.onclick = this.do.bind(this)
                         tr.appendChild(td)
                     }
                     table.appendChild(tr)
                 }
                 container.appendChild(table)
+
+                var td1 = document.getElementById("table").rows[0].cells[0]
+                td1.innerText = "*"
             }
         }
 
@@ -374,7 +479,7 @@
             document.getElementById("crosses_zero").onclick = crosses_zero
             document.getElementById("bull_and_cows").onclick = bull_and_cows
             document.getElementById("thimblres").onclick = thimblres
-            document.getElementById("bull").onclick = bull 
+            document.getElementById("bull").onclick = bull
         }
     </script>
 

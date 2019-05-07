@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title> Успадкування </title>
+    <style>
+        h1 {
+            text-align: center;
+        }
+    </style>
+    <script>
+
+        class Range {
+            constructor(minValue, maxValue) {
+                this.minValue = minValue
+                this.maxValue = maxValue
+            }
+
+            inRange(value) {
+                if (value >= this.minValue && value < this.maxValue) {
+                    return value
+                }
+            }
+
+            toString() {
+                return `minValue: ${this.minValue}; maxValue: ${this.maxValue}`
+            }
+        }
+
+        class PensionerChecker extends Range {
+            constructor(minValue = 60, maxValue = 140) {
+                super(minValue, maxValue)
+            }
+
+            isPensioner(age) {
+                return this.inRange(age)
+            }
+
+            toString() {
+                return `minValue: ${this.minValue}; maxValue: ${this.maxValue}`
+            }
+
+            onClick() {
+                const val = parseInt(this.inp.value)
+                if (this.isPensioner(val)) {
+                    this.inp.style.background = "green"
+                }
+                else {
+                    this.inp.style.background = "red"
+                }
+            }
+
+            render(containerID) {
+                var div = document.getElementById(containerID)
+
+                this.inp = document.createElement("input")
+                this.inp.type = "number"
+                div.appendChild(this.inp)
+
+                var btn = document.createElement("button")
+                btn.innerText = "Чи пенсіонер"
+                btn.onclick = this.onClick.bind(this)
+                div.appendChild(btn)
+
+            }
+        }
+
+        function pensioner() {
+            var pensioner = new PensionerChecker()
+            pensioner.render("result")
+        }
+
+        class Dice {
+            constructor(faceCount) {
+                this.faceCount = faceCount
+            }
+
+            get_number() {
+                return Math.floor(Math.random() * (this.faceCount + 1))
+            }
+        }
+
+        class Dice_super extends Dice {
+            constructor(faceCount = 6, attemptCount = 6) {
+                super(faceCount)
+                this.attemptCount = attemptCount
+            }
+
+            do() {
+                var evarage = 0
+                for (let i = 0; i < this.attemptCount; i++) {
+                    evarage = evarage + this.get_number()
+                }
+                evarage = evarage / this.attemptCount
+                this.p.innerText = "Середне значення - " + evarage
+            }
+
+            render(containerID) {
+                var div = document.getElementById(containerID)
+                this.p = document.createElement("p")
+                div.appendChild(this.p)
+            }
+        }
+
+        function dice() {
+            var faceCount = parseInt(document.getElementById("inp1").value)
+            var attemptCount = parseInt(document.getElementById("inp2").value)
+            var dice_super = new Dice_super(faceCount, attemptCount)
+            dice_super.render("result")
+            dice_super.do()
+        }
+
+        function dice_super() {
+            var div = document.getElementById("result")
+            div.innerText = ""
+
+            var samp = document.createElement("samp")
+            samp.innerText = "Кількість граней - "
+            div.appendChild(samp)
+
+            var inp = document.createElement("input")
+            inp.type = "number"
+            inp.id = "inp1"
+            div.appendChild(inp)
+
+            var samp2 = document.createElement("samp")
+            samp2.innerText = "Кількість спроб - "
+            div.appendChild(samp2)
+
+            var inp1 = document.createElement("input")
+            inp1.type = "number"
+            inp1.id = "inp2"
+            div.appendChild(inp1)
+
+            var btn = document.createElement("button")
+            btn.innerText = "Кинути"
+            btn.onclick = dice
+            div.appendChild(btn)
+        }
+
+        class Rectangel {
+            constructor(a, b) {
+                this.a = a
+                this.b = b
+            }
+
+            perimeter() {
+                this.perimeter = (this.a * 2) + (this.b * 2)
+            }
+
+            area() {
+                this.area = this.a * this.b
+                return this.area
+            }
+
+            toString() {
+                return `Периметр - ${this.perimeter}; Площа - ${this.area}`
+            }
+        }
+
+        class Paralelepiped extends Rectangel{
+            constructor(a, b, h) {
+                super(a, b)
+                this.h = h
+            }
+
+            area() {
+                this.area = (super.area() * 2) + (this.a * this.h * 2) + (this.b * this.h * 2)
+            }
+
+            volume() {
+                this.volume = this.a * this.b * this.h
+            } 
+
+            toString() {
+                return `Площа поверхні - ${this.area}; Об'єм - ${this.volume}`
+            }
+        }
+
+        function rectangel() {
+            var paralelepiped = new Paralelepiped(5, 6, 8)
+            paralelepiped.area()
+            paralelepiped.volume()
+            document.write(paralelepiped.toString())
+        }
+
+        window.onload = function () {
+            document.getElementById("1").onclick = pensioner
+            document.getElementById("2").onclick = dice_super
+            document.getElementById("3").onclick = rectangel
+        }
+
+    </script>
+</head>
+
+<body>
+
+    <head>
+        <h1> Успадкування </h1>
+        <hr>
+    </head>
+
+</body>
+
+<button id="1"> Пенсіонер </button> <button id="2"> Кубикі </button> <button id="3"> Паралелепіпед </button>
+
+<div id="result">
+
+</div>
+
+</html>

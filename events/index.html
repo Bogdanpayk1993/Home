@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title> Події </title>
+    <style>
+        h1 {
+            text-align: center
+        }
+
+        nav {
+            text-align: center
+        }
+    </style>
+    <script>
+
+        class Calculator {
+            constructor() {
+                this.a
+                this.b
+                this.operation
+                this.operations = [["7", "8", "9", "+"], ["4", "5", "6", "-"], ["1", "2", "3", "*"], ["0", "С", "=", "/"]]
+                this.operationsv = [["7", "8", "9", "10"], ["4", "5", "6", "11"], ["1", "2", "3", "12"], ["0", "15", "14", "13"]]
+            }
+
+            do() {
+                this.b = parseInt(this.input.value)
+                if (this.operation == 10) {
+                    this.a = this.a + this.b
+                }
+                if (this.operation == 11) {
+                    this.a = this.a - this.b
+                }
+                if (this.operation == 12) {
+                    this.a = this.a * this.b
+                }
+                if (this.operation == 13) {
+                    this.a = this.a / this.b
+                }
+            }
+
+            onClick(e) {
+                var number = e.target.value
+                if (number < 10) {
+                    this.input.value = parseInt(this.input.value) * 10 + parseInt(number)
+                }
+
+                if (number > 9 && number < 14) {
+                    if (isNaN(this.operation)) {
+                        this.a = parseInt(this.input.value)
+                    }
+                    else {
+                        this.do()
+                    }
+                    this.operation = parseInt(number)
+                    this.input.value = "0"
+                }
+
+                if (number == 14) {
+                    this.do()
+                    this.input.value = this.a
+                }
+
+                if (number == 15) {
+                    this.input.value = "0"
+                    this.a = NaN
+                    this.b = NaN
+                    this.operation = NaN
+                }
+            }
+
+            render(conteinerId) {
+                var conteiner = document.getElementById(conteinerId)
+                conteiner.innerText = ""
+
+                this.input = document.createElement("input")
+                this.input.type = "number"
+                this.input.value = "0"
+                conteiner.appendChild(this.input)
+
+                var tbl = document.createElement("table")
+                tbl.onclick = this.onClick.bind(this)
+                for (let i = 0; i < 4; i++) {
+                    var tr = document.createElement("tr")
+                    for (let j = 0; j < 4; j++) {
+                        var td = document.createElement("td")
+
+                        let btn = document.createElement("button")
+                        btn.innerText = this.operations[i][j]
+                        btn.value = this.operationsv[i][j]
+                        btn.style.width = "25px"
+                        td.appendChild(btn)
+
+                        tr.appendChild(td)
+                    }
+                    tbl.appendChild(tr)
+                }
+                conteiner.appendChild(tbl)
+            }
+        }
+
+        function calculator() {
+            var calculator = new Calculator()
+            calculator.render("result")
+        }
+
+        class Spots {
+            constructor() {
+                this.plase = []
+            }
+
+            get_plase() {
+                for (let i = 0; i < 4; i++) {
+                    var tr = []
+                    for (let j = 0; j < 4; j++) {
+                        tr.push(i * 4 + j)
+                        this.tbl.rows[i].cells[j].innerText = i * 4 + j
+                    }
+                    this.plase.push(tr)
+                }
+
+                for (let i = 0; i < 10; i++) {
+                    var x1 = Math.floor(Math.random() * 4)
+                    var y1 = Math.floor(Math.random() * 4)
+                    var x2 = Math.floor(Math.random() * 4)
+                    var y2 = Math.floor(Math.random() * 4)
+
+                    this.change(x1, y1, x2, y2)
+                }
+            }
+
+            change(x1, y1, x2, y2) {
+                var buf1 = this.tbl.rows[x1].cells[y1].innerText
+                var buf2 = this.plase[x1][y1]
+
+                this.tbl.rows[x1].cells[y1].innerText = this.tbl.rows[x2].cells[y2].innerText
+                this.tbl.rows[x2].cells[y2].innerText = buf1
+
+                this.plase[x1][y1] = this.plase[x2][y2]
+                this.plase[x2][y2] = buf2
+            }
+
+            onClick(e) {
+                var td = e.target
+                var x = parseInt(td.getAttribute("x"))
+                var y = parseInt(td.getAttribute("y"))
+                
+                if (y > 0)
+                {
+                    if (parseInt(this.plase[x][y - 1]) == 0)
+                    {
+                        this.change(x, y, x, y - 1)
+                        return
+                    }
+                }
+
+                if (y < 3)
+                {
+                    if (parseInt(this.plase[x][y + 1]) == 0)
+                    {
+                        this.change(x, y, x, y + 1)
+                        return
+                    }
+                }
+
+                if (x > 0)
+                {
+                    if (parseInt(this.plase[x - 1][y]) == 0)
+                    {
+                        this.change(x, y, x - 1, y)
+                        return
+                    }
+                }
+
+                if (x < 3)
+                {
+                    if (parseInt(this.plase[x + 1][y]) == 0)
+                    {
+                        this.change(x, y, x + 1, y)
+                        return
+                    }
+                }
+            }
+
+            render(conteinerId) {
+                var conteiner = document.getElementById(conteinerId)
+                conteiner.innerText = ""
+
+                this.tbl = document.createElement("table")
+                this.tbl.onclick = this.onClick.bind(this)
+                for (let i = 0; i < 4; i++) {
+                    var tr = document.createElement("tr")
+                    for (let j = 0; j < 4; j++) {
+                        var td = document.createElement("td")
+                        td.style.border = "1px solid black"
+                        td.style.textAlign = "center"
+                        td.style.width = "20px"
+                        td.style.width = "20px"
+                        td.style.background = "yellow"
+                        td.setAttribute("x", i)
+                        td.setAttribute("y", j)
+                        tr.appendChild(td)
+                    }
+                    this.tbl.appendChild(tr)
+                }
+                conteiner.appendChild(this.tbl)
+                this.get_plase()
+            }
+        }
+
+        function spots() {
+            var spots = new Spots()
+            spots.render("result")
+        }
+
+        window.onload = function () {
+            document.getElementById("0").onclick = calculator
+            document.getElementById("3").onclick = spots
+        }
+    </script>
+</head>
+
+<body>
+
+    <header>
+        <h1> Події </h1>
+        <hr>
+    </header>
+
+    <main>
+        <nav>
+            <button id="0"> Калькулятор </button> <button id="3"> П'ятнашки </button>
+        </nav>
+
+        <hr>
+
+        <div id="result"> </div>
+    </main>
+
+</body>
+
+</html>

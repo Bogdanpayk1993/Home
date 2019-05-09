@@ -17,25 +17,25 @@
             constructor (widht, height, coefficient) {
                 this.widht = widht
                 this.height = height
-                this.coefficient = coefficient    У конструктор треба передавати тільки те, що треба одразу і без нього неможна
+                this.coefficient = coefficient 
             }
 
             perimeter() {
-                this.perimeter = this.widht * 2 + this.height * 2   Не додавай як властивість, функція повинна була повертати 
+                this.perimeter = this.widht * 2 + this.height * 2   
             }
 
             area() {
-                this.area = this.widht * this.height   Не додавай як властивість, функція повинна була повертати значення
+                this.area = this.widht * this.height  
             }
 
-            scaling(coefficient) {      Те, що треба функції одноразово передавай через формальні параметри
+            scaling(coefficient) {      
                 this.widht = this.widht * coefficient
                 this.height = this.height * coefficient
             }
 
             render() {
-                this.scaling()   Навіщо викликати цей метод?
-                this.perimeter()  Навіщо викликати цей метод?
+                this.scaling()   
+                this.perimeter() 
                 let p1 = document.createElement("p")
                 p1.innerText = `Периметер - ${this.perimeter}`
                 document.getElementById("result").appendChild(p1)

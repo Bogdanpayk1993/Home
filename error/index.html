@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Error</title>
+    <style> 
+        h1 {
+            text-align: center;
+        }
+    </style>
+    <script>
+        class Student {
+            constructor ()
+            {
+                this.month = 0
+                this.rating = 0;
+            }
+
+            check()
+            {
+                this.month = parseInt(this.inp1.value)
+                this.rating = parseInt(this.inp2.value) 
+            }
+
+            render(containerId)
+            {
+                let div = document.getElementById("result")
+
+                let samp1 = document.createElement("samp")
+                samp1.innerText = "Місяць - "
+                div.appendChild(samp1)
+
+                this.inp1 = document.createElement("input")
+                div.appendChild(this.inp1)
+
+                let samp2 = document.createElement("samp")
+                samp2.innerText = "Оцінка - "
+                div.appendChild(samp2)
+
+                this.inp2 = document.createElement("input")
+                div.appendChild(this.inp2)
+
+                let btn = document.createElement("button")
+                btn.innerText = "Перевірити"
+                btn.onclick = this.check.bind(this)
+                div.appendChild(btn)
+
+                this.div = document.createElement("div")
+                div.appendChild(this.div)
+            }
+        }
+        
+        window.onload = function() {
+            let student = new Student()
+            student.render("result")
+        }
+
+    </script>
+</head>
+<body>
+    
+    <header>
+        <h1>Error</h1>
+        <hr>
+    </header>
+
+    <main>
+        <div id="result">
+
+        </div>
+    </main>
+
+</body>
+</html>

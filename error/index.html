@@ -1,31 +1,88 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Error</title>
-    <style> 
+    <style>
         h1 {
             text-align: center;
         }
     </style>
     <script>
+        class monthIsNotNumberError extends Error {
+            constructor() {
+                super();
+                this.message = "Місяць повинен бути числом"
+                this.name = "manthIsNotNumberError"
+                this.stack = (new Error()).stack
+            }
+        }
+
+        class inputIncorrectMonthError extends Error {
+            constructor() {
+                super();
+                this.message = "Введено не існуючий місяць"
+                this.name = "inputIncorrectMonthError"
+                this.stack = (new Error()).stack
+            }
+        }
+
+        class monthIsHolidayError extends Error {
+            constructor() {
+                super();
+                this.message = "Обраний місяць припадає на канікули"
+                this.name = "monthIsHolidayError"
+                this.stack = (new Error()).stack
+            }
+        }
+
+        class ratingIsNotNumberError extends Error {
+            constructor() {
+                super();
+                this.message = "Оцінка повинна бути числом"
+                this.name = "ratingIsNotNumberError"
+                this.stack = (new Error()).stack
+            }
+        }
+
+        class inputIncorrectRatingError extends Error {
+            constructor() {
+                super();
+                this.message = "Введено не існуючу оцінку"
+                this.name = "inputIncorrectRatingError"
+                this.stack = (new Error()).stack
+            }
+        }
+
         class Student {
-            constructor ()
-            {
+            constructor() {
                 this.month = 0
                 this.rating = 0;
             }
 
-            check()
-            {
-                this.month = parseInt(this.inp1.value)
-                this.rating = parseInt(this.inp2.value) 
+            check() {
+                try {
+                    this.month = parseInt(this.inp1.value)
+                    this.rating = parseInt(this.inp2.value)
+                    if (isNaN(this.month)) throw new monthIsNotNumberError()
+                    if (this.month < 1 || this.month > 12) throw new inputIncorrectMonthError()
+                    if (this.month > 5 && this.month < 9) throw new monthIsHolidayError()
+                    if (isNaN(this.rating)) throw new ratingIsNotNumberError()
+                    if (this.rating < 1 || this.rating > 100) throw new inputIncorrectRatingError()
+                    if (this.rating < 90 && this.month != 5 && this.month != 12)
+                        this.p.innerText = "Учень зможе виправити оцінку"
+                    else
+                        this.p.innerText = "Учень не зможе виправити оцінку"
+                }
+                catch (e) {
+                    this.p.innerText = e.message
+                }
             }
 
-            render(containerId)
-            {
+            render(containerId) {
                 let div = document.getElementById("result")
 
                 let samp1 = document.createElement("samp")
@@ -47,20 +104,24 @@
                 btn.onclick = this.check.bind(this)
                 div.appendChild(btn)
 
+                this.p = document.createElement("p")
+                div.appendChild(this.p)
+
                 this.div = document.createElement("div")
                 div.appendChild(this.div)
             }
         }
-        
-        window.onload = function() {
+
+        window.onload = function () {
             let student = new Student()
             student.render("result")
         }
 
     </script>
 </head>
+
 <body>
-    
+
     <header>
         <h1>Error</h1>
         <hr>
@@ -73,4 +134,5 @@
     </main>
 
 </body>
+
 </html>

@@ -5,17 +5,6 @@ import Goods_jsx from './components/goods_jsx'
 import Day from './components/information_about_film'
 
 function App() {
-  /*
-    ReactDOM.render(
-      React.createElement(
-        Pupil,
-        {
-          name: "Hello"
-        }
-      ),
-      document.getElementById("root")
-    );
-  */
   return (
     <div className="App">
       <Goods_jsx name="Молоко" prise="30" counterday="10" rating="5" />
@@ -45,14 +34,4 @@ function App() {
     </div>
   );
 }
-/*
-var Pupil = React.createClass({
-  render: function () {
-    return React.DOM.div(
-      null,
-      React.DOM.h1(null, this.props.name)
-    );
-  }
-})
-*/
 export default App;

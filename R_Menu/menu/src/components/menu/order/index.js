@@ -36,7 +36,7 @@ class Order extends Component {
                                 </tr>)
                         }
                         <tr>
-                            <td colSpan="2"> Загальна вратість: </td>
+                            <td colSpan="2"> <strong> Загальна вратість: </strong> </td>
                             <td> {sum} </td>
                         </tr>
                     </tbody>

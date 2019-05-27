@@ -17,7 +17,7 @@ class Menu extends Component {
         if (ind == -1)
         {
             this.order.push(dish)
-            
+
             const { order } = this.state
             this.setState({
                 order: [...order, {...[dish[0], 1, dish[1]]}]

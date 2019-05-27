@@ -7,8 +7,8 @@ class KindDish extends Component {
     }
 
     take_dish(row) {
-        let dish = this.props.dishs[parseInt(row)]
-        this.addDishInOrder = this.props.addDishInOrder
+        let dish = this.props.dishs[parseInt(row)]   //Не робіть так (функція повинна приймати ціле число)
+        this.addDishInOrder = this.props.addDishInOrder  Не зовсім розумію, чому тут використовується props, при зустрічі обговоримо
         this.addDishInOrder(dish)
     }
 
@@ -28,7 +28,7 @@ class KindDish extends Component {
                             dishs.map((el, row) => 
                             <tr key={row} onClick={this.take_dish.bind(this, row)}>
                                 {
-                                    el.map((el, cels) =>
+                                    el.map((el, cels) => Обережно з назвами
                                     <td key={cels}> 
                                         {el}
                                     </td>)

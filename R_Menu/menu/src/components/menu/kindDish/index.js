@@ -41,5 +41,4 @@ class KindDish extends Component {
         );
     }
 }
-
 export default KindDish;

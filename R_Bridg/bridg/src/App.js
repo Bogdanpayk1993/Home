@@ -1,13 +1,13 @@
 import React from 'react';
 import './App.css';
-import User from './components/user';
+import UserAuthentication from './components/user-authentication';
 
 function App() {
   return (
     <div className="App">
       <h1> Брідж </h1>
       <hr/>
-      <User />
+      <UserAuthentication />
     </div>
   );
 }

@@ -43,27 +43,27 @@ class Game extends Component {
         const { userName } = this.props
         return (
             <>
-                <div>
-                    <span className='spanGame'> {userName} - {this.scoresUser} </span>
+                <div className="score">
+                    <span> {userName} - {this.scoresUser} </span>
                     VS
-                    <span className='spanGame'> Computer - {this.sceresComuter} </span>
+                    <span> Computer - {this.sceresComuter} </span>
                 </div>
                 <br/>
                 <table>
                     <tbody>
                         <tr>
-                            <td className="td1">
+                            <td>
 
                             </td>
                             <td>
                                 <PrintCard mydeskCard={this.Computer.mydeckCards} card="closed" />
                             </td>
-                            <td className="td2">
+                            <td>
 
                             </td>
                         </tr>
                         <tr>
-                            <td className="td1">
+                            <td>
                                 <img src="image/колода.png" />
                             </td>
                             <td className="usedCard">
@@ -71,13 +71,13 @@ class Game extends Component {
                             </td>
                         </tr>
                         <tr>
-                            <td className="td1">
+                            <td>
 
                             </td>
                             <td>
                                 <User giveCard={this.giveCard} />
                             </td>
-                            <td className="td2">
+                            <td>
 
                             </td>
                         </tr>

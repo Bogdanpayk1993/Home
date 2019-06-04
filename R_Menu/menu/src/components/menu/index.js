@@ -20,13 +20,13 @@ class Menu extends Component {
 
             const { order } = this.state
             this.setState({
-                order: [...order, {...[dish[0], 1, dish[1]]}]
+                order: [...order, {"name":dish["name"], "counter":1, "price":dish["price"]}]
             })
         }
         else
         {
             const { order } = this.state
-            order[ind][1] = parseInt(order[ind][1]) + 1 
+            order[ind]["counter"] = parseInt(order[ind]["counter"]) + 1 
             this.setState({
                 order: [...order]
             })

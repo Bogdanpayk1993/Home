@@ -11,7 +11,7 @@ class Order extends Component {
 
         var sum = 0
 
-        order.forEach((el) => {sum += el[1] * el[2]});
+        order.forEach((el) => {sum += el["counter"] * el["price"]});
 
         return (
             <>
@@ -28,9 +28,9 @@ class Order extends Component {
                                 <tr key={row}>
                                     {
                                         <>
-                                            <td> {el[0]} </td>
-                                            <td> {el[1]} </td>
-                                            <td> {el[2]} </td>
+                                            <td> {el["name"]} </td>
+                                            <td> {el["counter"]} </td>
+                                            <td> {el["price"]} </td>
                                         </>
                                     }
                                 </tr>)

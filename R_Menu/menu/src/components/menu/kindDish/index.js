@@ -25,13 +25,14 @@ class KindDish extends Component {
                             <td> Час очікування </td>
                         </tr>
                         {
-                            dishs.map((el, row) =>
+                           dishs.map((el, row) =>
                                 <tr key={row} onClick={() => this.take_dish(row)}>
                                     {
-                                        el.map((el, cels) =>
-                                            <td key={cels}>
-                                                {el}
-                                            </td>)
+                                        <>
+                                        <td> {el["name"]} </td>
+                                        <td> {el["price"]} </td>
+                                        <td> {el["time"]} </td>
+                                        </>
                                     }
                                 </tr>)
                         }

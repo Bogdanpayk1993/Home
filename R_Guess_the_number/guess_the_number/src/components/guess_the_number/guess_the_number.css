@@ -1,0 +1,26 @@
+table {
+    margin: auto;
+    border-collapse: collapse;
+}
+
+td {
+    border: 3px solid black;
+}
+
+span {
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+label {
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+input {
+    margin-left: 10px;
+}
+
+button {
+    margin-left: 20px;
+}

@@ -50,16 +50,17 @@ class Guess_the_number extends Component {
     backToStep = (stepNum) => {
         const { history } = this.state
         let gameState = history[stepNum]
-        //history.splice(stepNum, history.length - stepNum)
+        let history1 = history.slice()
+        history1.splice(stepNum, history.length - stepNum)
         this.setState({
-            gameState: gameState,
-            //history: history
+            history: [...history1],
+            gameState: gameState
         })
     }
 
     render() {
-        const { history } = this.state
-        const { prevSteps, player1Score, player2Score } = this.state.gameState
+        const { history, gameState } = this.state
+        const { prevSteps, player1Score, player2Score } = gameState
         return (
             <>
                 <div>
@@ -108,14 +109,14 @@ class Guess_the_number extends Component {
                                     null
                                 )
                         }
-                        <div>
-                            {
-                                history.map((histStep, i) => (
-                                    <button key={i} onClick={() => this.backToStep(i)} > Крок {i} </button>
-                                ))
-                            }
-                        </div>
                     </label>
+                    <div>
+                        {
+                            history.map((Step, i) => (
+                                <button key={i} onClick={() => this.backToStep(i)} > Крок {i} </button>
+                            ))
+                        }
+                    </div>
                 </div>
             </>
         );

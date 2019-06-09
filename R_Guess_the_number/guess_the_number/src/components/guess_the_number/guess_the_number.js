@@ -4,14 +4,26 @@ import './guess_the_number.css'
 class Guess_the_number extends Component {
     constructor(props) {
         super(props);
-        this.state = {
-            history: [],
-            gameState: {
-                prevSteps: [],
-                player1Score: 0,
-                player2Score: 0
+        this.state = this.start()
+    }
+
+    start() {
+        if (localStorage.getItem("state"))
+        {
+            this.state = JSON.parse(localStorage.getItem("state"))
+        }
+        else
+        {
+            this.state =  {
+                history: [],
+                gameState: {
+                    prevSteps: [],
+                    player1Score: 0,
+                    player2Score: 0
+                }
             }
         }
+        return this.state
     }
 
     onClick = () => {
@@ -61,6 +73,7 @@ class Guess_the_number extends Component {
     render() {
         const { history, gameState } = this.state
         const { prevSteps, player1Score, player2Score } = gameState
+        localStorage.setItem("state", JSON.stringify(this.state))
         return (
             <>
                 <div>

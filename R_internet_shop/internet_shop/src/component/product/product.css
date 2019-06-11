@@ -1,0 +1,29 @@
+.product {
+    float: left;
+    width: 22.6vw;
+    margin: 1vw;
+}
+
+span:nth-child(1) {
+    border-radius: 2vw;
+    padding-left: 0.5vw;
+    padding-right: 0.5vw;
+    font-weight: bold;
+    font-size: 8pt;
+}
+
+span:nth-child(3) {
+    font-size: 10pt;
+}
+
+span:nth-child(5) {
+    font-size: 11pt;
+}
+
+span:nth-child(7) {
+    border-radius: 1vw;
+    padding-left: 0.5vw;
+    padding-right: 0.5vw;
+    margin-right: 0.5vw;
+    font-size: 11pt;
+}

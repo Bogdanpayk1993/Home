@@ -14,13 +14,15 @@ class Product extends Component {
                 {
                     (data) => (
                         <div className="product">
-                            <span style={{backgroundColor: data[0], color: data[1]}}> {statys} </span>
-                            <img style={{width: data[2]}} src={image} />
-                            <span style={{color: data[3]}}> {stock} </span>
-                            <br/>
-                            <span style={{color: data[4]}}> {description} </span>
-                            <br/>
-                            <span style={{backgroundColor: data[5], color: data[6]}}> {price} </span>
+                            <span style={{ backgroundColor: data[0], color: data[1] }}> {statys} </span>
+                            <div style={{ textAlign: "center"}}>
+                                <img style={{ width: data[2]}} src={image} />
+                            </div>
+                            <span style={{ color: data[3] }}> {stock} </span>
+                            <br />
+                            <span style={{ color: data[4] }}> {description} </span>
+                            <br />
+                            <span style={{ backgroundColor: data[5], color: data[6] }}> {price} </span>
                             <button> Купити </button>
                         </div>
                     )

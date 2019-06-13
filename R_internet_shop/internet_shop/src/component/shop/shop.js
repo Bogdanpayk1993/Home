@@ -21,7 +21,7 @@ class Shop extends Component {
                 {
                     product.map((el, i) => (
                         <>
-                            <DataProvider value={[el["statys"] == "ТОП ПРОДАЖ" ? color0 = "orange" : color0 = "red", color1="white", size = "22vw", color2 = "red", color3 = "blue", color4 = "yellow", color5 ="red"]} key={i}>
+                            <DataProvider value={[el["statys"] == "ТОП ПРОДАЖ" ? color0 = "orange" : color0 = "red", color1="white", size = "15vw", color2 = "red", color3 = "blue", color4 = "yellow", color5 ="red"]} key={i}>
                                 <Product statys={el["statys"]}
                                     image={el["image"]}
                                     stock={el["stock"]}

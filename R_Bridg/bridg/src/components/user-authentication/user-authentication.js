@@ -29,12 +29,15 @@ class UserAuthentication extends Component {
                 {
                     this.result == false ?
                         (
+                            /*
                             <>
                                 <span> Введіть ім'я - </span>
                                 <input type="text" ref="name"/>
                                 <button onClick={this.onClick.bind(this)}> Почати гру </button>
                                 <br />
                             </>
+                            */
+                           <Game userName="Bogdan" />
                         )
                         :
                         (

@@ -7,7 +7,9 @@ import Computer from '../../../computer/computer'
 class Game extends Component {
     constructor(props) {
         super(props);
-        this.state = {}
+        this.state = {
+            usedCard:[]
+        }
 
         this.scoresUser = 0
         this.sceresComuter = 0
@@ -15,7 +17,7 @@ class Game extends Component {
         this.deckCards = this.getDeckCards()
         this.usedCard = this.getFirstUsedCard()
 
-        this.Computer = new Computer(this.giveCard)
+        this.Computer = new Computer(this.giveCard, this.make_cours, this.check_cours)
     }
 
     getDeckCards() {
@@ -39,6 +41,42 @@ class Game extends Component {
         return card
     }
 
+    check_cours = (card) => {
+        if ((card > 0 && card < 10 && this.usedCard[0] > 0 && this.usedCard[0] < 10) ||
+            (card > 9 && card < 19 && this.usedCard[0] > 9 && this.usedCard[0] < 19) ||
+            (card > 18 && card < 28 && this.usedCard[0] > 18 && this.usedCard[0] < 28) ||
+            (card > 27 && card < 37 && this.usedCard[0] > 27 && this.usedCard[0] < 37) ||
+            card == 6 || card == 15|| card == 24 || card == 33 ||
+            card % 9 == this.usedCard[0] % 9)
+        {
+            return(true)            
+        }    
+        else
+        {
+            return(false)
+        }
+    }
+
+    make_cours = (card) => {
+        if ((card > 0 && card < 10 && this.usedCard[0] > 0 && this.usedCard[0] < 10) ||
+            (card > 9 && card < 19 && this.usedCard[0] > 9 && this.usedCard[0] < 19) ||
+            (card > 18 && card < 28 && this.usedCard[0] > 18 && this.usedCard[0] < 28) ||
+            (card > 27 && card < 37 && this.usedCard[0] > 27 && this.usedCard[0] < 37) ||
+            card == 6 || card == 15|| card == 24 || card == 33 ||
+            card % 9 == this.usedCard[0] % 9)
+        {
+            this.usedCard.unshift(card)
+            this.setState({
+                usedCard: [...this.usedCard] 
+            })
+            return(true)
+        } 
+        else
+        {
+            return(false)
+        }
+    }
+
     render() {
         const { userName } = this.props
         return (
@@ -56,7 +94,7 @@ class Game extends Component {
 
                             </td>
                             <td>
-                                <PrintCard mydeskCard={this.Computer.mydeckCards} card="closed" />
+                                <PrintCard mydeskCard={this.Computer.mydeckCards} card="open" />
                             </td>
                             <td>
 
@@ -75,7 +113,7 @@ class Game extends Component {
 
                             </td>
                             <td>
-                                <User giveCard={this.giveCard} />
+                                <User giveCard={this.giveCard} make_cours={this.make_cours} make_cours_computer={this.Computer.make_cours_computer} />
                             </td>
                             <td>
 
@@ -84,7 +122,7 @@ class Game extends Component {
                     </tbody>
                 </table>
             </>
-        );
+        )
     }
 }
 

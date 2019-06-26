@@ -1,98 +1,105 @@
+import ActionGenerators from '../actions/ActionGenerators'
+
 class Computer {
-    constructor(giveCard, make_cours, check_cours) {
+    constructor(store, giveCard, check_move, render_again) {
         this.giveCard = giveCard
-        this.make_cours = make_cours
-        this.check_cours = check_cours
-        this.mydeckCards = this.getStartCards()
+        this.check_move = check_move
+        this.render_again = render_again
+        this.store = store
+        this.getStartCard()
     }
 
-    getStartCards() {
-        let mydeckcards = []
-        for (let i = 0; i < 8; i++) {
-            mydeckcards.unshift(this.giveCard())
+    getStartCard() {
+        for (let i = 0; i < 4; i++) {
+            this.store.dispatch(ActionGenerators.takeCardComputer(this.giveCard()))
         }
-        return mydeckcards
     }
 
-    make_cours_computer = () => {
+    make_move_computer = () => {
+        let mydeckCards = Object.keys(this.store.getState().computer)
+        let enable = this.throw_first_card(mydeckCards) 
+
+        if (enable == false) {
+            this.store.dispatch(ActionGenerators.takeCardComputer(this.giveCard()))
+            mydeckCards = Object.keys(this.store.getState().computer)
+            enable = this.throw_first_card(mydeckCards)
+        }
+        this.render_again()
+    }
+
+    throw_first_card(mydeckCards) {
         let enable = false
 
-        let can_cours = []
-        this.mydeckCards.forEach((el, i) => {
-            let enable1 = this.check_cours(el)
+        let can_move = []
+        mydeckCards.forEach((el, i) => {
+            let enable1 = this.check_move(el)
             if (enable1 == true) {
-                can_cours.push(this.mydeckCards[i])
+                can_move.push(mydeckCards[i])
             }
         })
 
-        let need_cours = []
-        can_cours.forEach((el) => {
+        let need_move = []
+        can_move.forEach((el) => {
             switch (el % 9) {
                 case 1: //6
-                    need_cours.push(1)
+                    need_move.push(1)
                     break
                 case 2: //7
-                    need_cours.push(2)
+                    need_move.push(2)
                     break
                 case 3: //8
-                    need_cours.push(4)
+                    need_move.push(4)
                     break
                 case 4: //9
-                    need_cours.push(3)
+                    need_move.push(3)
                     break
                 case 5: //10
-                    need_cours.push(3)
+                    need_move.push(3)
                     break
                 case 6: //В
-                    need_cours.push(0)
+                    need_move.push(0)
                     break
                 case 7: //Д
-                    need_cours.push(3)
+                    need_move.push(3)
                     break
                 case 8: //К
-                    need_cours.push(3)
+                    need_move.push(3)
                     break
                 case 0: //Т
-                    need_cours.push(4)
+                    need_move.push(4)
                     break
             }
         })
 
-        if (need_cours.length > 0)
+        if (need_move.length > 0)
         {
-            can_cours.map((el1, i) => {
-                this.mydeckCards.map((el2) => {
+            can_move.map((el1, i) => {
+                mydeckCards.map((el2) => {
                     if((el1 % 9 == el2 % 9) && (el1 != el2))
                     {
-                        need_cours[i]++
+                        need_move[i]++
                     }
                 })
             })
 
             let max = 0
-            for (let i = 1; i < need_cours.length; i++)
+            for (let i = 1; i < need_move.length; i++)
             {
-                if (need_cours[max] < need_cours[i])
+                if (need_move[max] < need_move[i])
                 {
                     max = i
                 }
             }
 
-            let index = this.mydeckCards.indexOf(can_cours[max])
-            enable = this.make_cours(this.mydeckCards[index])
+            let id = mydeckCards.indexOf(can_move[max])
+            enable = this.check_move(mydeckCards[id])
             if (enable == true)
             {
-                this.mydeckCards.splice(index, 1)
+                this.store.dispatch(ActionGenerators.throwCardComputer(parseInt(mydeckCards[id])))
             }
         }
 
-        if (enable == false) {
-            this.mydeckCards.unshift(this.giveCard())
-            enable = this.make_cours(this.mydeckCards[0])
-            if (enable == true) {
-                this.mydeckCards.splice(0, 1)
-            }
-        }
+        return enable
     }
 }
 

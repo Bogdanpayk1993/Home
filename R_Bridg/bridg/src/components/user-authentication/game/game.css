@@ -19,12 +19,13 @@ img {
 }
 td:first-child {
     width: 10vw;
+    padding-right: 5vw;
 }
 td:nth-of-type(2) img {
-    margin-left: -4vw;
+    margin-left: -5vw;
 }
 td:nth-of-type(3) {
-    width: 22vw;
+    width: 10vw;
 }
 .usedCard {
     text-align: left;

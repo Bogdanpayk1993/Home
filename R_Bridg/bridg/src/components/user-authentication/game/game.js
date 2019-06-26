@@ -1,80 +1,65 @@
 import React, { Component } from 'react'
+import PropsTypes from 'prop-types'
 import './game.css'
 import User from './user/user'
 import PrintCard from './printcard/printcard'
 import Computer from '../../../computer/computer'
+import ActionGenerators from '../../../actions/ActionGenerators'
 
 class Game extends Component {
     constructor(props) {
         super(props);
+        this.store = this.props.store
+ 
         this.state = {
-            usedCard:[]
+            cours: 0
         }
 
         this.scoresUser = 0
         this.sceresComuter = 0
 
-        this.deckCards = this.getDeckCards()
-        this.usedCard = this.getFirstUsedCard()
-
-        this.Computer = new Computer(this.giveCard, this.make_cours, this.check_cours)
+        this.getDeckCards()
+        this.getFirstUsedCard()
+        this.Computer = new Computer(this.store, this.giveCard, this.check_move, this.render_again)
     }
 
     getDeckCards() {
-        let deckCards = []
         for (let i = 0; i < 36; i++) {
-            deckCards.push(i + 1)
+            this.store.dispatch(ActionGenerators.getColod(i + 1))
         }
-        return deckCards
     }
-
+    
     getFirstUsedCard() {
-        let firstUsedCard = []
-        firstUsedCard.push(this.giveCard())
-        return firstUsedCard
+        this.store.dispatch(ActionGenerators.getFirstUsedCard(this.giveCard()))
     }
 
     giveCard = () => {
-        let r = Math.floor(Math.random() * this.deckCards.length)
-        let card = this.deckCards[r]
-        this.deckCards.splice(r, 1)
-        return card
+        let deskCard = Object.keys(this.store.getState().colod)
+        let index = Math.floor(Math.random() * deskCard.length)
+        return deskCard[index]
     }
 
-    check_cours = (card) => {
-        if ((card > 0 && card < 10 && this.usedCard[0] > 0 && this.usedCard[0] < 10) ||
-            (card > 9 && card < 19 && this.usedCard[0] > 9 && this.usedCard[0] < 19) ||
-            (card > 18 && card < 28 && this.usedCard[0] > 18 && this.usedCard[0] < 28) ||
-            (card > 27 && card < 37 && this.usedCard[0] > 27 && this.usedCard[0] < 37) ||
-            card == 6 || card == 15|| card == 24 || card == 33 ||
-            card % 9 == this.usedCard[0] % 9)
-        {
-            return(true)            
-        }    
-        else
-        {
-            return(false)
+    check_move = (card) => {
+        let keys = Object.keys(this.store.getState().usedCard)
+        let usedCard = this.store.getState().usedCard[keys[keys.length - 1]].card
+        if ((card > 0 && card < 10 && usedCard > 0 && usedCard < 10) ||
+            (card > 9 && card < 19 && usedCard > 9 && usedCard < 19) ||
+            (card > 18 && card < 28 && usedCard > 18 && usedCard < 28) ||
+            (card > 27 && card < 37 && usedCard > 27 && usedCard < 37) ||
+            card == 6 || card == 15 || card == 24 || card == 33 ||
+            card % 9 == usedCard % 9) {
+            return (true)
+        }
+        else {
+            return (false)
         }
     }
 
-    make_cours = (card) => {
-        if ((card > 0 && card < 10 && this.usedCard[0] > 0 && this.usedCard[0] < 10) ||
-            (card > 9 && card < 19 && this.usedCard[0] > 9 && this.usedCard[0] < 19) ||
-            (card > 18 && card < 28 && this.usedCard[0] > 18 && this.usedCard[0] < 28) ||
-            (card > 27 && card < 37 && this.usedCard[0] > 27 && this.usedCard[0] < 37) ||
-            card == 6 || card == 15|| card == 24 || card == 33 ||
-            card % 9 == this.usedCard[0] % 9)
-        {
-            this.usedCard.unshift(card)
-            this.setState({
-                usedCard: [...this.usedCard] 
-            })
-            return(true)
-        } 
-        else
-        {
-            return(false)
-        }
+    render_again = () => {
+        let new_cours = parseInt(this.state.cours) + 1
+        this.setState({
+            cours: new_cours
+        })
     }
 
     render() {
@@ -86,7 +71,7 @@ class Game extends Component {
                     VS
                     <span> Computer - {this.sceresComuter} </span>
                 </div>
-                <br/>
+                <br />
                 <table>
                     <tbody>
                         <tr>
@@ -94,7 +79,7 @@ class Game extends Component {
 
                             </td>
                             <td>
-                                <PrintCard mydeskCard={this.Computer.mydeckCards} card="open" />
+                                <PrintCard card="computer" store={this.store} />
                             </td>
                             <td>
 
@@ -105,7 +90,7 @@ class Game extends Component {
                                 <img src="image/колода.png" />
                             </td>
                             <td className="usedCard">
-                                <PrintCard mydeskCard={this.usedCard} card="open" />
+                                <PrintCard card="usedCard" store={this.store} />
                             </td>
                         </tr>
                         <tr>
@@ -113,7 +98,7 @@ class Game extends Component {
 
                             </td>
                             <td>
-                                <User giveCard={this.giveCard} make_cours={this.make_cours} make_cours_computer={this.Computer.make_cours_computer} />
+                                <User store={this.store} giveCard={this.giveCard} check_move={this.check_move} make_move_computer={this.Computer.make_move_computer} render_again={this.render_again} />
                             </td>
                             <td>
 
@@ -123,7 +108,11 @@ class Game extends Component {
                 </table>
             </>
         )
-    }
+    };
 }
 
-export default Game;
+Game.propTypes = {
+    store: PropsTypes.object.isRequired
+}
+
+export default Game

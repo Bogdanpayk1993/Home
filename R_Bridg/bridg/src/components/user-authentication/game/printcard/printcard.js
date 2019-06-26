@@ -1,25 +1,37 @@
-import React, {Component} from 'react'
+import React, { Component } from 'react'
 
 class PrintCard extends Component {
     constructor(props) {
         super(props);
+        this.store = this.props.store
     }
 
-    render() { 
-        const {mydeskCard, card} = this.props
-        return (  
+    render() {
+        const { card } = this.props
+        return (
             <div>
                 {
-                    mydeskCard.map((el, i) => 
-                        card == "closed" ?
-                            <img src={`image/колода.png`} key={el} />
-                            :
-                            <img src={`image/${el}.png`} key={el} />
-                    )
+                    card == "usedCard" ?
+                        (
+                            Object.keys(this.store.getState().usedCard).map((el) =>
+                                (
+                                    <img src={`image/${this.store.getState().usedCard[el].card}.png`} key={el} />
+                                )
+                            )
+
+                        )
+                        :
+                        (
+                            Object.keys(this.store.getState().computer).map((el) =>
+                                (
+                                    <img src={`image/${el}.png`} key={el} />
+                                )
+                            )
+                        )
                 }
             </div>
         );
     }
 }
- 
+
 export default PrintCard;

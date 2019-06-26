@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import Game from './game'
+import store from '../../store/store'
 
 class UserAuthentication extends Component {
     constructor(props) {
@@ -24,6 +25,7 @@ class UserAuthentication extends Component {
     }
 
     render() {
+        localStorage.setItem("game", JSON.stringify(store.getState().card))
         return (
             <>
                 {
@@ -37,11 +39,11 @@ class UserAuthentication extends Component {
                                 <br />
                             </>
                             */
-                           <Game userName="Bogdan" />
+                           <Game userName="Bogdan" store={store} />
                         )
                         :
                         (
-                            <Game userName={this.state.name} />
+                            <Game userName={this.state.name} store={store} />
                         )
                 }
             </>

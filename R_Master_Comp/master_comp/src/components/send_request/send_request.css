@@ -1,0 +1,47 @@
+.footer {
+    background-image: url(../../citymap.png);
+    background-size: 100vw; 
+    color: black;
+    font-size: 1.3vw;
+    font-style: italic;
+    font-weight: bold;
+    margin-bottom: 0.5vh;
+}
+
+.footer input {
+    max-width: 400px;
+    width: 45vw;
+    margin: 0.2vh;
+}
+
+.footer textarea {
+    max-width: 400px;
+    width: 45vw;
+    margin: 0.2vh;
+} 
+
+.footer button {
+    background-color: rgba(0, 0, 0, 0.2);
+    border: 2px solid black;
+    border-radius: 1vw;
+    font-size: 1.3vw;
+    font-style: italic;
+    font-weight: bold;
+    color: black;
+    width: 12vw;
+    margin: auto;
+}
+
+.footer {
+    margin-bottom: 1vh;
+}
+
+.footer form {
+    background-color: rgba(0, 0, 0, 0.2);
+    border-radius: 5vw;
+    max-width: 410px;
+    width: 47vw;
+    margin: auto;
+    padding: 1vw;
+    padding-right: 1vw;   
+}

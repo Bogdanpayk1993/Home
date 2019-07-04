@@ -20,7 +20,9 @@ class Game extends Component {
 
         this.getDeckCards()
         this.getFirstUsedCard()
+
         this.Computer = new Computer(this.store, this.giveCard, this.check_move, this.render_again)
+        this.Computer.add_card()
     }
 
     getDeckCards() {
@@ -30,7 +32,7 @@ class Game extends Component {
     }
     
     getFirstUsedCard() {
-        this.store.dispatch(ActionGenerators.getFirstUsedCard(this.giveCard()))
+        this.store.dispatch(ActionGenerators.getFirstUsedCard(parseInt(this.giveCard())))
     }
 
     giveCard = () => {

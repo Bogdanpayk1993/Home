@@ -1,0 +1,63 @@
+table {
+    width: 100%;
+}
+
+.header {
+    background-color: rgba(0, 0, 0, 0.2);
+}
+
+.header td:first-child {
+    width: 20vw;
+    padding-left: 12vw;
+}
+
+.header td img {
+    width: 2vw;
+    height: 2vw;
+    margin-top: 0.3vw;
+    margin-right: 1.5vw;
+}
+
+.header td:nth-child(2) {
+    text-align: right;
+    padding-right: 5vw;
+}
+
+form {
+    color: black;
+    font-size: 1.5vw;
+    font-style: italic;
+    font-weight: bold;
+}
+
+select {
+    border: 0px;
+    font-weight: bold;
+    font-size: 1.5vw;
+    font-style: italic;
+    margin-left: 0.5vw;
+    margin-bottom: 0.1vw;
+    background-color: rgba(0, 0, 0, 0.2);
+    padding: 0.3vw;
+}
+
+option {
+    font-weight: bold;
+    font-size: 1.5vw;
+    font-style: italic;
+    background-color: #c1d5e0;
+}
+
+span img {
+    vertical-align: -2.5vw;
+    height: 12vw;
+    margin-right: 2vw;
+}
+
+span {
+    text-align: center;
+    color: black;
+    font-size: 10vw;
+    font-style: italic;
+    font-weight: 600;
+}

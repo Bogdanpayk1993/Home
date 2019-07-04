@@ -10,19 +10,39 @@ class User extends Component {
 
     getStartCard() {
         for (let i = 0; i < 5; i++) {
-            this.store.dispatch(ActionGenerators.takeCardUser(this.props.giveCard()))
+            this.store.dispatch(ActionGenerators.takeCardUser(parseInt(this.props.giveCard())))
         }
     }
 
     make_move_user(id) {
         const { check_move, make_move_computer, render_again } = this.props
-        let enable = check_move(id)
-        if (enable == true)
+        let enable1 = check_move(id)
+
+        if (enable1 == true)
         {
             this.store.dispatch(ActionGenerators.throwCardUser(parseInt(id)))
-            render_again()
-            make_move_computer()
+
+            let enable2 = this.check_add_card()
+            if (enable2 == false)
+            {
+                make_move_computer()
+            }
         }
+        render_again()
+    }
+
+    check_add_card() {
+        let usedCard = Object.keys(this.store.getState().usedCard) 
+        let mydeskCards = Object.keys(this.store.getState().user)
+        let enable = false
+
+        mydeskCards.map((el) => {
+            if (this.store.getState().usedCard[usedCard[usedCard.length - 1]].card % 9 == el % 9)
+            {
+                enable = true
+            }
+        })
+        return enable
     }
 
     render() {

@@ -16,18 +16,22 @@ class Computer {
     }
 
     make_move_computer = () => {
-        let mydeckCards = Object.keys(this.store.getState().computer)
-        let enable = this.throw_first_card(mydeckCards) 
+        let enable = this.throw_first_card()
 
         if (enable == false) {
             this.store.dispatch(ActionGenerators.takeCardComputer(this.giveCard()))
-            mydeckCards = Object.keys(this.store.getState().computer)
-            enable = this.throw_first_card(mydeckCards)
+            enable = this.throw_first_card()
         }
-        this.render_again()
+
+        if (enable == true) {
+            this.add_card()
+            this.render_again()
+        }
     }
 
-    throw_first_card(mydeckCards) {
+    throw_first_card() {
+        let mydeckCards = Object.keys(this.store.getState().computer)
+        let usedCard_key = Object.keys(this.store.getState().usedCard)
         let enable = false
 
         let can_move = []
@@ -71,35 +75,80 @@ class Computer {
             }
         })
 
-        if (need_move.length > 0)
-        {
-            can_move.map((el1, i) => {
-                mydeckCards.map((el2) => {
-                    if((el1 % 9 == el2 % 9) && (el1 != el2))
-                    {
-                        need_move[i]++
+        if (need_move.length > 0) {
+            can_move.map((el, i) => {
+                mydeckCards.map((el1) => {
+                    if ((el > 0 && el < 10 && el1 > 0 && el1 < 10) ||
+                        (el > 9 && el < 19 && el1 > 9 && el1 < 19) ||
+                        (el > 18 && el < 28 && el1 > 18 && el1 < 28) ||
+                        (el > 27 && el < 37 && el1 > 27 && el1 < 37)) {
+                        need_move[i] = need_move[i] * 2
                     }
                 })
             })
 
-            let max = 0
-            for (let i = 1; i < need_move.length; i++)
-            {
-                if (need_move[max] < need_move[i])
-                {
-                    max = i
-                }
+            let max = need_move.indexOf(Math.max(...need_move))
+            let max1 = mydeckCards.indexOf(can_move[max])
+            let enable1 = false
+
+            if (this.store.getState().usedCard[usedCard_key[usedCard_key.length - 1]].card % 9 == mydeckCards[max1] % 9) {
+                mydeckCards.forEach((el, i) => {
+                    if (el % 9 == mydeckCards[max1] % 9 && el != mydeckCards[max1] && enable1 == false) {
+                        max1 = i
+                        enable1 = true
+                    }
+                })
             }
 
-            let id = mydeckCards.indexOf(can_move[max])
-            enable = this.check_move(mydeckCards[id])
-            if (enable == true)
-            {
-                this.store.dispatch(ActionGenerators.throwCardComputer(parseInt(mydeckCards[id])))
+            enable = this.check_move(mydeckCards[max1])
+            if (enable == true) {
+                this.store.dispatch(ActionGenerators.throwCardComputer(parseInt(mydeckCards[max1])))
             }
         }
-
         return enable
+    }
+
+    add_card() {
+        let usedCard = Object.keys(this.store.getState().usedCard)
+        let mydeckCards = Object.keys(this.store.getState().computer)
+
+        let can_move = []
+        mydeckCards.forEach((el) => {
+            if (this.store.getState().usedCard[usedCard[usedCard.length - 1]].card % 9 == el % 9) {
+                can_move.push(el)
+            }
+        })
+
+        if (can_move.length > 0) {
+            if (can_move.length == 1) {
+                this.store.dispatch(ActionGenerators.throwCardComputer(parseInt(can_move[0])))
+            }
+            else {
+                let need_move = []
+                can_move.map((el) => {
+                    let counter = 0
+                    mydeckCards.forEach((el1) => {
+                        if ((el > 0 && el < 10 && el1 > 0 && el1 < 10) ||
+                            (el > 9 && el < 19 && el1 > 9 && el1 < 19) ||
+                            (el > 18 && el < 28 && el1 > 18 && el1 < 28) ||
+                            (el > 27 && el < 37 && el1 > 27 && el1 < 37)) {
+                            counter++
+                        }
+                    })
+                    need_move.push(counter)
+                })
+
+                let max_index = need_move.indexOf(Math.max(...need_move))
+
+                let buf = can_move[max_index]
+                can_move[max_index] = can_move[can_move.length - 1]
+                can_move[can_move.length - 1] = buf
+
+                can_move.forEach((el) => {
+                    this.store.dispatch(ActionGenerators.throwCardComputer(el))
+                })
+            }
+        }
     }
 }
 

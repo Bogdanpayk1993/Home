@@ -1,5 +1,4 @@
 import ActionType from "../constants/ActionType"
-import ActionGenarators from "../actions/ActionGenerators"
 
 const Redusers = (state, action) => {
     switch (action.type) {

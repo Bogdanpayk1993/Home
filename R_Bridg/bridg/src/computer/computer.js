@@ -45,8 +45,8 @@ class Computer {
         let need_move = []
         can_move.forEach((el) => {
             switch (el % 9) {
-                case 1: //6
-                    need_move.push(1)
+                case 1: //6 
+                    need_move.push(8)
                     break
                 case 2: //7
                     need_move.push(2)
@@ -146,8 +146,51 @@ class Computer {
 
                 can_move.forEach((el) => {
                     this.store.dispatch(ActionGenerators.throwCardComputer(el))
+                    if (el % 9 == 3)
+                    {
+                        this.store.dispatch(ActionGenerators.takeCardUser(this.giveCard()))
+                    }
                 })
             }
+        }
+        this.check_last_card_computer()
+    }
+
+    check_last_card_computer() {
+        let usedCard = Object.keys(this.store.getState().usedCard)
+        let mydeckCards = Object.keys(this.store.getState().computer)
+
+        switch (this.store.getState().usedCard[usedCard[usedCard.length - 1]].card % 9) {
+            case 0:
+                this.make_move_computer()
+                break;
+
+            case 1:
+                let enable = false
+                do {
+                    let enable1
+                    mydeckCards.map((el) => {
+                        enable1 = this.check_move(el)
+                        if (enable1 == true) {
+                            enable = true
+                        }
+                    })
+                    if (enable == false) {
+                        this.store.dispatch(ActionGenerators.takeCardComputer(this.giveCard()))
+                        mydeckCards = Object.keys(this.store.getState().computer)
+                    }
+                } while (enable == false)
+                this.make_move_computer()
+                break;
+
+            case 3:
+                this.store.dispatch(ActionGenerators.takeCardUser(this.giveCard()))
+                this.render_again()
+                this.make_move_computer()
+                break;    
+
+            default:
+                break;
         }
     }
 }

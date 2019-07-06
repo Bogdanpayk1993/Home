@@ -10,7 +10,7 @@ class Game extends Component {
     constructor(props) {
         super(props);
         this.store = this.props.store
- 
+
         this.state = {
             cours: 0
         }
@@ -30,7 +30,7 @@ class Game extends Component {
             this.store.dispatch(ActionGenerators.getColod(i + 1))
         }
     }
-    
+
     getFirstUsedCard() {
         this.store.dispatch(ActionGenerators.getFirstUsedCard(parseInt(this.giveCard())))
     }
@@ -39,6 +39,35 @@ class Game extends Component {
         let deskCard = Object.keys(this.store.getState().colod)
         let index = Math.floor(Math.random() * deskCard.length)
         return deskCard[index]
+    }
+
+    check_move_user = () => {
+        let enable = false
+
+        let userCard = Object.keys(this.store.getState().user)
+        userCard.map((el) => {
+            let enable1 = this.check_move(el)
+            if (enable1 == true) {
+                enable = true
+            }
+        })
+
+        if (enable == false) {
+            this.store.dispatch(ActionGenerators.takeCardUser(parseInt(this.giveCard())))
+
+            userCard = Object.keys(this.store.getState().user)
+            userCard.map((el) => {
+                let enable1 = this.check_move(el)
+                if (enable1 == true) {
+                    enable = true
+                }
+            })
+        }
+
+        if (enable == false) {
+            this.Computer.make_move_computer()
+            this.check_move_user()
+        }
     }
 
     check_move = (card) => {
@@ -100,7 +129,7 @@ class Game extends Component {
 
                             </td>
                             <td>
-                                <User store={this.store} giveCard={this.giveCard} check_move={this.check_move} make_move_computer={this.Computer.make_move_computer} render_again={this.render_again} />
+                                <User store={this.store} giveCard={this.giveCard} check_move={this.check_move} check_move_user={this.check_move_user} make_move_computer={this.Computer.make_move_computer} render_again={this.render_again} />
                             </td>
                             <td>
 

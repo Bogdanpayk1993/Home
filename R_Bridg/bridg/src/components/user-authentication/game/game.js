@@ -27,12 +27,20 @@ class Game extends Component {
 
     getDeckCards() {
         for (let i = 0; i < 36; i++) {
-            this.store.dispatch(ActionGenerators.getColod(i + 1))
+            this.store.dispatch(ActionGenerators.getColod(i + 1, 0))
         }
     }
 
     getFirstUsedCard() {
-        this.store.dispatch(ActionGenerators.getFirstUsedCard(parseInt(this.giveCard())))
+        let seven = this.store.getState().seven
+        let firstCard = parseInt(this.giveCard())
+        if (firstCard % 9 == 2) {
+            seven++
+        }
+        if (firstCard % 9 == 3) {
+            this.store.dispatch(ActionGenerators.takeCardUser(this.giveCard()))
+        }
+        this.store.dispatch(ActionGenerators.getFirstUsedCard(firstCard, seven))
     }
 
     giveCard = () => {
@@ -43,9 +51,40 @@ class Game extends Component {
 
     check_move_user = () => {
         let enable = false
+        let seven = this.store.getState().seven
 
-        let userCard = Object.keys(this.store.getState().user)
-        userCard.map((el) => {
+        if (seven != 0) {
+            let mydeckCards = Object.keys(this.store.getState().user)
+
+            let enable1 = false
+            mydeckCards.map((el) => {
+                if (el % 9 == 2) {
+                    enable1 = true
+                }
+            })
+
+            if (enable1 == false) {
+                this.store.dispatch(ActionGenerators.takeCardUser(parseInt(this.giveCard())))
+                mydeckCards = Object.keys(this.store.getState().user)
+
+                mydeckCards.map((el) => {
+                    if (el % 9 == 2) {
+                        enable1 = true
+                    }
+                })
+            }
+
+            if (enable1 == false) {
+                for (let i = 0; i < seven * 2 - 1; i++) {
+                    this.store.dispatch(ActionGenerators.takeCardUser(parseInt(this.giveCard())))
+                }
+                this.store.dispatch(ActionGenerators.throwSeven())
+                this.render_again()
+            }
+        }
+
+        let mydeckCards = Object.keys(this.store.getState().user)
+        mydeckCards.map((el) => {
             let enable1 = this.check_move(el)
             if (enable1 == true) {
                 enable = true
@@ -55,8 +94,8 @@ class Game extends Component {
         if (enable == false) {
             this.store.dispatch(ActionGenerators.takeCardUser(parseInt(this.giveCard())))
 
-            userCard = Object.keys(this.store.getState().user)
-            userCard.map((el) => {
+            mydeckCards = Object.keys(this.store.getState().user)
+            mydeckCards.map((el) => {
                 let enable1 = this.check_move(el)
                 if (enable1 == true) {
                     enable = true
@@ -72,13 +111,15 @@ class Game extends Component {
 
     check_move = (card) => {
         let keys = Object.keys(this.store.getState().usedCard)
+        let seven = this.store.getState().seven 
         let usedCard = this.store.getState().usedCard[keys[keys.length - 1]].card
-        if ((card > 0 && card < 10 && usedCard > 0 && usedCard < 10) ||
+        
+        if ((((card > 0 && card < 10 && usedCard > 0 && usedCard < 10) ||
             (card > 9 && card < 19 && usedCard > 9 && usedCard < 19) ||
             (card > 18 && card < 28 && usedCard > 18 && usedCard < 28) ||
             (card > 27 && card < 37 && usedCard > 27 && usedCard < 37) ||
             card == 6 || card == 15 || card == 24 || card == 33 ||
-            card % 9 == usedCard % 9) {
+            card % 9 == usedCard % 9) && seven == 0) || (card % 9 == 2 && seven != 0)) {
             return (true)
         }
         else {

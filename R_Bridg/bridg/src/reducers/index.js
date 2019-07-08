@@ -7,7 +7,8 @@ const Redusers = (state, action) => {
                 colod: { ...(state.colod), [action.payload.id]: action.payload },
                 usedCard: { ...(state.usedCard) },
                 computer: { ...(state.computer) },
-                user: { ...(state.user) }
+                user: { ...(state.user) },
+                seven: action.payload.seven
             }
         case ActionType.GET_FIRST_USED_CARD:
             let ob = { ...state.colod }
@@ -16,7 +17,8 @@ const Redusers = (state, action) => {
                 colod: ob,
                 usedCard: { ...(state.usedCard), [action.payload.id]: action.payload },
                 computer: { ...(state.computer) },
-                user: { ...(state.user) }
+                user: { ...(state.user) },
+                seven: action.payload.seven
             }
         case ActionType.TAKE_CARD_COMPUTER:
             let ob1 = { ...state.colod }
@@ -25,7 +27,8 @@ const Redusers = (state, action) => {
                 colod: ob1,
                 usedCard: { ...(state.usedCard) },  
                 computer: { ...(state.computer), [action.payload.id]: action.payload },
-                user: { ...(state.user) }
+                user: { ...(state.user) },
+                seven: state.seven
             }
         case ActionType.THROW_CARD_COMPUTER:
             let ob2 = { ...state.computer }
@@ -34,7 +37,8 @@ const Redusers = (state, action) => {
                 colod: { ...(state.colod) },
                 usedCard: { ...(state.usedCard), [action.payload.id]: action.payload },
                 computer: ob2,
-                user: { ...(state.user) }
+                user: { ...(state.user) },
+                seven: action.payload.seven
             }
         case ActionType.TAKE_CARD_USER:
             let ob3 = { ...state.colod }
@@ -44,6 +48,7 @@ const Redusers = (state, action) => {
                 usedCard: { ...(state.usedCard) },
                 computer: { ...(state.computer) },
                 user: { ...(state.user), [action.payload.id]: action.payload },
+                seven: state.seven
             }
         case ActionType.THROW_CARD_USER:
             let ob4 = { ...state.user }
@@ -52,7 +57,16 @@ const Redusers = (state, action) => {
                 colod: { ...(state.colod) },
                 usedCard: { ...(state.usedCard), [action.payload.id]: action.payload },
                 computer: { ...(state.computer) },
-                user: ob4
+                user: ob4,
+                seven: action.payload.seven
+            }
+        case ActionType.THROW_SEVEN:
+            return {
+                colod: { ...(state.colod) },
+                usedCard: { ...(state.usedCard) },
+                computer: { ...(state.computer) },
+                user: { ...(state.user) },
+                seven: action.payload.seven
             }
         default:
             return state;

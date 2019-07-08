@@ -32,15 +32,59 @@ class Computer {
     throw_first_card() {
         let mydeckCards = Object.keys(this.store.getState().computer)
         let usedCard_key = Object.keys(this.store.getState().usedCard)
+        let seven = this.store.getState().seven
         let enable = false
 
         let can_move = []
-        mydeckCards.forEach((el, i) => {
-            let enable1 = this.check_move(el)
-            if (enable1 == true) {
-                can_move.push(mydeckCards[i])
+        if (seven != 0) {
+            let enable1 = false
+            mydeckCards.map((el) => {
+                if (el % 9 == 2) {
+                    enable1 = true
+                }
+            })
+
+            if (enable1 == false) {
+                this.store.dispatch(ActionGenerators.takeCardComputer(parseInt(this.giveCard())))
+                mydeckCards = Object.keys(this.store.getState().computer)
+
+                mydeckCards.map((el) => {
+                    if (el % 9 == 2) {
+                        enable1 = true
+                    }
+                })
             }
-        })
+
+            if (enable1 == false) {
+                for (let i = 0; i < seven * 2 - 1; i++) {
+                    this.store.dispatch(ActionGenerators.takeCardComputer(parseInt(this.giveCard())))
+                }
+                this.store.dispatch(ActionGenerators.throwSeven())
+                this.render_again()
+
+                mydeckCards.forEach((el, i) => {
+                    let enable1 = this.check_move(el)
+                    if (enable1 == true) {
+                        can_move.push(mydeckCards[i])
+                    }
+                })
+            }
+            else {
+                mydeckCards.forEach((el, i) => {
+                    if (el % 9 == 2) {
+                        can_move.push(mydeckCards[i])
+                    }
+                })
+            }
+        }
+        else {
+            mydeckCards.forEach((el, i) => {
+                let enable1 = this.check_move(el)
+                if (enable1 == true) {
+                    can_move.push(mydeckCards[i])
+                }
+            })
+        }
 
         let need_move = []
         can_move.forEach((el) => {
@@ -102,7 +146,17 @@ class Computer {
 
             enable = this.check_move(mydeckCards[max1])
             if (enable == true) {
-                this.store.dispatch(ActionGenerators.throwCardComputer(parseInt(mydeckCards[max1])))
+                let seven = this.store.getState().seven
+                if (mydeckCards[max1] % 9 == 2) {
+                    seven++
+                }
+                else {
+                    seven = 0
+                }
+                this.store.dispatch(ActionGenerators.throwCardComputer(parseInt(mydeckCards[max1]), seven))
+                if (mydeckCards[max1] % 9 == 3) {
+                    this.store.dispatch(ActionGenerators.takeCardUser(this.giveCard()))
+                }
             }
         }
         return enable
@@ -121,7 +175,14 @@ class Computer {
 
         if (can_move.length > 0) {
             if (can_move.length == 1) {
-                this.store.dispatch(ActionGenerators.throwCardComputer(parseInt(can_move[0])))
+                let seven = this.store.getState().seven
+                if (can_move[0] % 9 == 2) {
+                    seven++
+                }
+                this.store.dispatch(ActionGenerators.throwCardComputer(parseInt(can_move[0]), seven))
+                if (can_move[0] % 9 == 3) {
+                    this.store.dispatch(ActionGenerators.takeCardUser(this.giveCard()))
+                }
             }
             else {
                 let need_move = []
@@ -145,13 +206,17 @@ class Computer {
                 can_move[can_move.length - 1] = buf
 
                 can_move.forEach((el) => {
-                    this.store.dispatch(ActionGenerators.throwCardComputer(el))
-                    if (el % 9 == 3)
-                    {
+                    let seven = this.store.getState().seven
+                    if (el % 9 == 2) {
+                        seven++
+                    }
+                    this.store.dispatch(ActionGenerators.throwCardComputer(el, seven))
+                    if (el % 9 == 3) {
                         this.store.dispatch(ActionGenerators.takeCardUser(this.giveCard()))
                     }
                 })
             }
+
         }
         this.check_last_card_computer()
     }
@@ -183,11 +248,13 @@ class Computer {
                 this.make_move_computer()
                 break;
 
+            case 2: 
+                break;
+
             case 3:
-                this.store.dispatch(ActionGenerators.takeCardUser(this.giveCard()))
                 this.render_again()
                 this.make_move_computer()
-                break;    
+                break;
 
             default:
                 break;

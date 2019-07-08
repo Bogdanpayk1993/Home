@@ -32,13 +32,19 @@ class User extends Component {
         }
 
         if (enable1 == true) {
-            this.store.dispatch(ActionGenerators.throwCardUser(parseInt(id)))
-            
-            if (id % 9 == 3)
+            let seven = this.store.getState().seven
+            if (id % 9 == 2) {
+                seven++
+            }
+            else
             {
+                seven = 0
+            }
+            this.store.dispatch(ActionGenerators.throwCardUser(parseInt(id), seven))
+            if (id % 9 == 3) {
                 this.store.dispatch(ActionGenerators.takeCardComputer(giveCard()))
             }
-            
+
             this.corse = true
 
             let enable2 = this.check_add_card()
@@ -64,8 +70,7 @@ class User extends Component {
         return enable
     }
 
-    check_last_card_user()
-    {
+    check_last_card_user() {
         const { giveCard, check_move, check_move_user, make_move_computer } = this.props
         let usedCard = Object.keys(this.store.getState().usedCard)
         let mydeckCards = Object.keys(this.store.getState().user)
@@ -77,9 +82,8 @@ class User extends Component {
 
             case 1:
                 let enable = false
-                do
-                {
-                    let enable1 
+                do {
+                    let enable1
                     mydeckCards.map((el) => {
                         enable1 = check_move(el)
                         if (enable1 == true) {
@@ -92,6 +96,10 @@ class User extends Component {
                     }
                 }
                 while (enable == false)
+                break;
+
+            case 2:
+                make_move_computer()
                 break;
 
             case 3:

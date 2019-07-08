@@ -5,5 +5,6 @@ const ActionTypes={
     THROW_CARD_COMPUTER:"THROW_CARD_COMPUTER",
     TAKE_CARD_USER:"TAKE_CARD_USER",
     THROW_CARD_USER:"THROW_CARD_USER",
+    THROW_SEVEN:"THROW_SEVENS"
 }
 export default ActionTypes;

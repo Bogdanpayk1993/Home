@@ -2,20 +2,22 @@ import ActionTypes from '../constants/ActionType'
 import {v4} from "uuid"
 
 const ActionGenerators = {
-    getColod:function(cardId){
+    getColod:function(cardId, seven){
         return {
             type:ActionTypes.GET_COLOD,
             payload:{
-                id : cardId
+                id : cardId,
+                seven : seven
             }
         }
     },
-    getFirstUsedCard:function(cardId){
+    getFirstUsedCard:function(cardId, seven){
         return {
             type:ActionTypes.GET_FIRST_USED_CARD,
             payload:{
                 id : v4(),
-                card: cardId
+                card : cardId,
+                seven : seven
             }
         }
     },
@@ -27,12 +29,13 @@ const ActionGenerators = {
             }
         }
     },
-    throwCardComputer:function(cardId){
+    throwCardComputer:function(cardId, seven){
         return {
             type:ActionTypes.THROW_CARD_COMPUTER,
             payload:{
                 id : v4(),
-                card : cardId
+                card : cardId,
+                seven : seven
             }
         }
     },
@@ -44,14 +47,23 @@ const ActionGenerators = {
             }
         }
     },
-    throwCardUser:function(cardId){
+    throwCardUser:function(cardId, seven){
         return {
             type:ActionTypes.THROW_CARD_USER,
             payload:{
                 id : v4(),
-                card : cardId
+                card : cardId,
+                seven : seven
             }
         }
     },
+    throwSeven:function(){
+        return {
+            type:ActionTypes.THROW_SEVEN,
+            payload:{
+                seven : 0
+            }
+        }
+    }
 }
 export default ActionGenerators;

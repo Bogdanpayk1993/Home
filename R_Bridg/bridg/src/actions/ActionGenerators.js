@@ -7,7 +7,8 @@ const ActionGenerators = {
             type:ActionTypes.GET_COLOD,
             payload:{
                 id : cardId,
-                seven : seven
+                seven : seven,
+                mast : 0
             }
         }
     },
@@ -62,6 +63,14 @@ const ActionGenerators = {
             type:ActionTypes.THROW_SEVEN,
             payload:{
                 seven : 0
+            }
+        }
+    },
+    changeMast:function(mast){
+        return {
+            type:ActionTypes.CHANGE_MAST,
+            payload:{
+                mast : mast
             }
         }
     }

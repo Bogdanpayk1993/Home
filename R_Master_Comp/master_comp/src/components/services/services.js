@@ -21,7 +21,6 @@ const Services = () => (
                 </tr>
                 <tr>
                     <td>
-
                         <h3> Встановлення <br /> OC Windows </h3>
                     </td>
                     <td>

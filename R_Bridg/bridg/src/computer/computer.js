@@ -1,10 +1,11 @@
 import ActionGenerators from '../actions/ActionGenerators'
 
 class Computer {
-    constructor(store, giveCard, check_move, render_again) {
+    constructor(store, giveCard, check_move, render_again, check_move_user) {
         this.giveCard = giveCard
         this.check_move = check_move
         this.render_again = render_again
+        this.check_move_user = check_move_user
         this.store = store
         this.getStartCard()
     }
@@ -33,6 +34,7 @@ class Computer {
         let mydeckCards = Object.keys(this.store.getState().computer)
         let usedCard_key = Object.keys(this.store.getState().usedCard)
         let seven = this.store.getState().seven
+        let mast = this.store.getState().mast
         let enable = false
 
         let can_move = []
@@ -61,39 +63,25 @@ class Computer {
                 }
                 this.store.dispatch(ActionGenerators.throwSeven())
                 this.render_again()
+            }
+        }
 
-                mydeckCards.forEach((el, i) => {
-                    let enable1 = this.check_move(el)
-                    if (enable1 == true) {
-                        can_move.push(mydeckCards[i])
-                    }
-                })
+        mydeckCards.forEach((el, i) => {
+            let enable1 = this.check_move(el)
+            if (enable1 == true) {
+                can_move.push(mydeckCards[i])
             }
-            else {
-                mydeckCards.forEach((el, i) => {
-                    if (el % 9 == 2) {
-                        can_move.push(mydeckCards[i])
-                    }
-                })
-            }
-        }
-        else {
-            mydeckCards.forEach((el, i) => {
-                let enable1 = this.check_move(el)
-                if (enable1 == true) {
-                    can_move.push(mydeckCards[i])
-                }
-            })
-        }
+        })
+
 
         let need_move = []
         can_move.forEach((el) => {
             switch (el % 9) {
                 case 1: //6 
-                    need_move.push(8)
+                    need_move.push(1)
                     break
                 case 2: //7
-                    need_move.push(2)
+                    need_move.push(8)
                     break
                 case 3: //8
                     need_move.push(4)
@@ -135,7 +123,7 @@ class Computer {
             let max1 = mydeckCards.indexOf(can_move[max])
             let enable1 = false
 
-            if (this.store.getState().usedCard[usedCard_key[usedCard_key.length - 1]].card % 9 == mydeckCards[max1] % 9) {
+            if (this.store.getState().usedCard[usedCard_key[usedCard_key.length - 1]].card % 9 == mydeckCards[max1] % 9 && mast == 0) {
                 mydeckCards.forEach((el, i) => {
                     if (el % 9 == mydeckCards[max1] % 9 && el != mydeckCards[max1] && enable1 == false) {
                         max1 = i
@@ -144,8 +132,8 @@ class Computer {
                 })
             }
 
-            enable = this.check_move(mydeckCards[max1])
-            if (enable == true) {
+            if (max1 != -1) {
+                enable = true
                 let seven = this.store.getState().seven
                 if (mydeckCards[max1] % 9 == 2) {
                     seven++
@@ -154,11 +142,13 @@ class Computer {
                     seven = 0
                 }
                 this.store.dispatch(ActionGenerators.throwCardComputer(parseInt(mydeckCards[max1]), seven))
+                this.store.dispatch(ActionGenerators.changeMast(0))
                 if (mydeckCards[max1] % 9 == 3) {
                     this.store.dispatch(ActionGenerators.takeCardUser(this.giveCard()))
                 }
             }
         }
+        this.render_again()
         return enable
     }
 
@@ -216,13 +206,14 @@ class Computer {
                     }
                 })
             }
-
+            this.render_again()
         }
         this.check_last_card_computer()
     }
 
     check_last_card_computer() {
         let usedCard = Object.keys(this.store.getState().usedCard)
+        let userCard = Object.keys(this.store.getState().user)
         let mydeckCards = Object.keys(this.store.getState().computer)
 
         switch (this.store.getState().usedCard[usedCard[usedCard.length - 1]].card % 9) {
@@ -248,7 +239,7 @@ class Computer {
                 this.make_move_computer()
                 break;
 
-            case 2: 
+            case 2:
                 break;
 
             case 3:
@@ -256,7 +247,38 @@ class Computer {
                 this.make_move_computer()
                 break;
 
+            case 6:
+                var mast = [0, 0, 0, 0]
+
+                mydeckCards.forEach((el) => {
+                    if (el > 0 && el < 10) {
+                        mast[0]++
+                    }
+                    if (el > 9 && el < 19) {
+                        mast[1]++
+                    }
+                    if (el > 18 && el < 28) {
+                        mast[2]++
+                    }
+                    if (el > 27 && el < 37) {
+                        mast[3]++
+                    }
+                })
+
+                let max = mast.indexOf(Math.max(...mast))
+                max++
+
+                this.store.dispatch(ActionGenerators.changeMast(max))
+
+                if (userCard.length > 0) {
+                    this.check_move_user()
+                }
+                break;
+
             default:
+                if (userCard.length > 0) {
+                    this.check_move_user()
+                }
                 break;
         }
     }

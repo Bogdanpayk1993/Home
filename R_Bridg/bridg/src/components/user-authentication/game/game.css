@@ -3,7 +3,7 @@
     font-size: 1.2vw;
 }
 table {
-    width: 100vw;
+    width: 98.5vw;
 }
 img {
     width: 7.9vw;
@@ -18,8 +18,8 @@ img {
     margin-right: 39vw;
 }
 td:first-child {
-    width: 10vw;
-    padding-right: 5vw;
+    width: 20vw;
+    padding-right: 2vw;
 }
 td:nth-of-type(2) img {
     margin-left: -5vw;
@@ -30,4 +30,15 @@ td:nth-of-type(3) {
 .usedCard {
     text-align: left;
     padding-left: 3vw;
+}
+.game {
+    position: absolute;
+}
+.colod {
+    float: left;
+}
+.mast {
+    margin-top: 2vw;
+    margin-left: 1vw;
+    vertical-align: top;
 }

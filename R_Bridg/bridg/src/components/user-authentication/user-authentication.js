@@ -17,8 +17,7 @@ class UserAuthentication extends Component {
         this.setState({
             name: this.refs.name.value
         })
-        if (this.result == false)
-        {
+        if (this.result == false) {
             alert("Перша літера імені повинна бути велика, після імені можуть йти цифри")
             this.refs.name.value = ""
         }
@@ -39,7 +38,7 @@ class UserAuthentication extends Component {
                                 <br />
                             </>
                             */
-                           <Game userName="Bogdan" store={store} />
+                            <Game userName="Bogdan" store={store} />
                         )
                         :
                         (

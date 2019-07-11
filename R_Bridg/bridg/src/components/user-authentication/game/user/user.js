@@ -27,6 +27,7 @@ class User extends Component {
         }
         else {
             if (this.store.getState().usedCard[usedCard[usedCard.length - 1]].card % 9 == id % 9) {
+                this.store.dispatch(ActionGenerators.changeMast(0))
                 enable1 = true
             }
         }
@@ -36,22 +37,35 @@ class User extends Component {
             if (id % 9 == 2) {
                 seven++
             }
-            else
-            {
+            else {
                 seven = 0
             }
+
             this.store.dispatch(ActionGenerators.throwCardUser(parseInt(id), seven))
+            this.store.dispatch(ActionGenerators.changeMast(0))
+
             if (id % 9 == 3) {
                 this.store.dispatch(ActionGenerators.takeCardComputer(giveCard()))
             }
 
             this.corse = true
 
-            let enable2 = this.check_add_card()
-            if (enable2 == false) {
-                this.check_last_card_user()
+            if (id % 9 != 6)
+            {
+                let enable2 = this.check_add_card()
+                if (enable2 == false) {
+                    this.check_last_card_user()
+                    this.corse = false
+                    check_move_user()
+                }
+            }
+            else
+            {
                 this.corse = false
-                check_move_user()
+                let enable2 = this.check_add_card()
+                if (enable2 == true) {
+                    this.store.dispatch(ActionGenerators.changeMast(5))
+                }
             }
         }
         render_again()
@@ -71,7 +85,7 @@ class User extends Component {
     }
 
     check_last_card_user() {
-        const { giveCard, check_move, check_move_user, make_move_computer } = this.props
+        const { giveCard, check_move, check_move_user, make_move_computer, render_again } = this.props
         let usedCard = Object.keys(this.store.getState().usedCard)
         let mydeckCards = Object.keys(this.store.getState().user)
 
@@ -106,6 +120,11 @@ class User extends Component {
                 check_move_user()
                 break;
 
+            case 6:
+                this.corse = false
+                render_again()
+                break;
+
             default:
                 make_move_computer()
                 break;
@@ -117,8 +136,7 @@ class User extends Component {
             <div>
                 {
                     Object.keys(this.store.getState().user).map((el) =>
-                        <img src={`image/${el}.png`} key={el} onClick={this.make_move_user.bind(this, el)} />
-                    )
+                        <img src={`image/${el}.png`} key={el} onClick={this.make_move_user.bind(this, el)} />)
                 }
             </div>
         );

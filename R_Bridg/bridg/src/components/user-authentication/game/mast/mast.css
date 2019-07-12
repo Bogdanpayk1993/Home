@@ -8,8 +8,9 @@
 }
 .mast_div {
     width: 100%;
-    height: 85vh;
-    line-height: 98vh;
+    height: 80vh;
+    line-height: 94.8vh;
+    margin-bottom: 0.5vw;
     background-color: rgba(0, 0, 0, 0.4);
     position: absolute;
 }

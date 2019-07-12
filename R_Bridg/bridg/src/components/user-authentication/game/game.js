@@ -136,6 +136,79 @@ class Game extends Component {
         })
     }
 
+    check_last_card_user = () => {
+        let usedCard = Object.keys(this.store.getState().usedCard)
+        let mydeckCards = Object.keys(this.store.getState().user)
+
+        switch (this.store.getState().usedCard[usedCard[usedCard.length - 1]].card % 9) {
+            case 0:
+                this.check_move_user()
+                break;
+
+            case 1:
+                let enable = false
+                do {
+                    let enable1
+                    mydeckCards.map((el) => {
+                        enable1 = this.check_move(el)
+                        if (enable1 == true) {
+                            enable = true
+                        }
+                    })
+                    if (enable == false) {
+                        this.store.dispatch(ActionGenerators.takeCardUser(this.giveCard()))
+                        mydeckCards = Object.keys(this.store.getState().user)
+                    }
+                }
+                while (enable == false)
+                break;
+
+            case 2:
+                this.Computer.make_move_computer()
+                break;
+
+            case 3:
+                this.check_move_user()
+                break;
+
+            case 6:
+                this.corse = false
+                this.render_again()
+                break;
+
+            default:
+                this.Computer.make_move_computer()
+                break;
+        }
+    }
+
+    finish_corse = () => {
+        let usedCard = Object.keys(this.store.getState().usedCard)
+        let mast = this.store.getState().mast
+        let seven = this.store.getState().seven
+        let corse = this.store.getState().corse
+
+        if (corse == 1)
+        {
+            if (this.store.getState().usedCard[usedCard[usedCard.length - 1]].card % 9 == 6 && mast == 5) {
+                this.store.dispatch(ActionGenerators.changeMast(0))
+            }
+            this.check_last_card_user()
+        }
+        else
+        {
+            if (seven != 0)
+            {
+                for (let i = 0; i < seven * 2; i++) {
+                    this.store.dispatch(ActionGenerators.takeCardUser(parseInt(this.giveCard())))
+                }
+                this.store.dispatch(ActionGenerators.throwSeven())
+                this.store.dispatch(ActionGenerators.changeCorse(0))
+                this.render_again()
+            }
+        }
+    }
+
     render() {
         const { userName } = this.props
         let keys = Object.keys(this.store.getState().usedCard)
@@ -149,7 +222,6 @@ class Game extends Component {
                     VS
                     <span> Computer - {this.sceresComuter} </span>
                 </div>
-                <br />
                 <div className="game">
                     <br />
                     <table>
@@ -176,13 +248,16 @@ class Game extends Component {
                                 <td className="usedCard">
                                     <PrintCard card="usedCard" store={this.store} />
                                 </td>
+                                <td>
+                                    <button onClick={this.finish_corse}> Завершити хід </button>
+                                </td>
                             </tr>
                             <tr>
                                 <td>
 
                                 </td>
                                 <td>
-                                    <User store={this.store} giveCard={this.giveCard} check_move={this.check_move} check_move_user={this.check_move_user} make_move_computer={this.Computer.make_move_computer} render_again={this.render_again} />
+                                    <User store={this.store} giveCard={this.giveCard} check_move={this.check_move} check_move_user={this.check_move_user} make_move_computer={this.Computer.make_move_computer} render_again={this.render_again} check_last_card_user={this.check_last_card_user} />
                                 </td>
                                 <td>
 

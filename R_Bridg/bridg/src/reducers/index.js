@@ -9,7 +9,9 @@ const Redusers = (state, action) => {
                 computer: { ...(state.computer) },
                 user: { ...(state.user) },
                 seven: action.payload.seven,
-                mast: action.payload.mast
+                mast: action.payload.mast,
+                corse: action.payload.corse
+                
             }
         case ActionType.GET_FIRST_USED_CARD:
             let ob = { ...state.colod }
@@ -20,7 +22,8 @@ const Redusers = (state, action) => {
                 computer: { ...(state.computer) },
                 user: { ...(state.user) },
                 seven: action.payload.seven,
-                mast: state.mast
+                mast: state.mast,
+                corse: state.corse
             }
         case ActionType.TAKE_CARD_COMPUTER:
             let ob1 = { ...state.colod }
@@ -31,7 +34,8 @@ const Redusers = (state, action) => {
                 computer: { ...(state.computer), [action.payload.id]: action.payload },
                 user: { ...(state.user) },
                 seven: state.seven,
-                mast: state.mast
+                mast: state.mast,
+                corse: state.corse
             }
         case ActionType.THROW_CARD_COMPUTER:
             let ob2 = { ...state.computer }
@@ -42,7 +46,8 @@ const Redusers = (state, action) => {
                 computer: ob2,
                 user: { ...(state.user) },
                 seven: action.payload.seven,
-                mast: state.mast
+                mast: state.mast,
+                corse: action.payload.corse
             }
         case ActionType.TAKE_CARD_USER:
             let ob3 = { ...state.colod }
@@ -53,7 +58,8 @@ const Redusers = (state, action) => {
                 computer: { ...(state.computer) },
                 user: { ...(state.user), [action.payload.id]: action.payload },
                 seven: state.seven,
-                mast: state.mast
+                mast: state.mast,
+                corse: state.corse
             }
         case ActionType.THROW_CARD_USER:
             let ob4 = { ...state.user }
@@ -64,7 +70,8 @@ const Redusers = (state, action) => {
                 computer: { ...(state.computer) },
                 user: ob4,
                 seven: action.payload.seven,
-                mast: state.mast
+                mast: state.mast,
+                corse: action.payload.corse
             }
         case ActionType.THROW_SEVEN:
             return {
@@ -73,7 +80,8 @@ const Redusers = (state, action) => {
                 computer: { ...(state.computer) },
                 user: { ...(state.user) },
                 seven: action.payload.seven,
-                mast: state.mast
+                mast: state.mast,
+                corse: state.corse
 
             }
         case ActionType.CHANGE_MAST:
@@ -83,7 +91,18 @@ const Redusers = (state, action) => {
                 computer: { ...(state.computer) },
                 user: { ...(state.user) },
                 seven: state.seven,
-                mast: action.payload.mast
+                mast: action.payload.mast,
+                corse: state.corse
+            }
+        case ActionType.CHENGE_CORSE:
+            return {
+                colod: { ...(state.colod) },
+                usedCard: { ...(state.usedCard) },
+                computer: { ...(state.computer) },
+                user: { ...(state.user) },
+                seven: state.seven,
+                mast: state.mast,
+                corse: action.payload.corse
             }
         default:
             return state;

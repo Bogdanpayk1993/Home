@@ -19,7 +19,7 @@ class User extends Component {
 
     make_move_user(id) {
         let usedCard = Object.keys(this.store.getState().usedCard)
-        const { giveCard, check_move, check_move_user, render_again } = this.props
+        const { giveCard, check_move, check_move_user, render_again, check_last_card_user } = this.props
 
         let enable1
         if (this.corse == false) {
@@ -54,7 +54,7 @@ class User extends Component {
             {
                 let enable2 = this.check_add_card()
                 if (enable2 == false) {
-                    this.check_last_card_user()
+                    check_last_card_user()
                     this.corse = false
                     check_move_user()
                 }
@@ -82,53 +82,6 @@ class User extends Component {
             }
         })
         return enable
-    }
-
-    check_last_card_user() {
-        const { giveCard, check_move, check_move_user, make_move_computer, render_again } = this.props
-        let usedCard = Object.keys(this.store.getState().usedCard)
-        let mydeckCards = Object.keys(this.store.getState().user)
-
-        switch (this.store.getState().usedCard[usedCard[usedCard.length - 1]].card % 9) {
-            case 0:
-                check_move_user()
-                break;
-
-            case 1:
-                let enable = false
-                do {
-                    let enable1
-                    mydeckCards.map((el) => {
-                        enable1 = check_move(el)
-                        if (enable1 == true) {
-                            enable = true
-                        }
-                    })
-                    if (enable == false) {
-                        this.store.dispatch(ActionGenerators.takeCardUser(giveCard()))
-                        mydeckCards = Object.keys(this.store.getState().user)
-                    }
-                }
-                while (enable == false)
-                break;
-
-            case 2:
-                make_move_computer()
-                break;
-
-            case 3:
-                check_move_user()
-                break;
-
-            case 6:
-                this.corse = false
-                render_again()
-                break;
-
-            default:
-                make_move_computer()
-                break;
-        }
     }
 
     render() {

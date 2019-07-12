@@ -8,7 +8,8 @@ const ActionGenerators = {
             payload:{
                 id : cardId,
                 seven : seven,
-                mast : 0
+                mast : 0,
+                corse : 0
             }
         }
     },
@@ -36,7 +37,8 @@ const ActionGenerators = {
             payload:{
                 id : v4(),
                 card : cardId,
-                seven : seven
+                seven : seven,
+                corse : 0
             }
         }
     },
@@ -54,7 +56,8 @@ const ActionGenerators = {
             payload:{
                 id : v4(),
                 card : cardId,
-                seven : seven
+                seven : seven,
+                corse : 1
             }
         }
     },
@@ -71,6 +74,14 @@ const ActionGenerators = {
             type:ActionTypes.CHANGE_MAST,
             payload:{
                 mast : mast
+            }
+        }
+    },
+    changeCorse:function(corse){
+        return {
+            type:ActionTypes.CHENGE_CORSE,
+            payload:{
+                corse : corse
             }
         }
     }

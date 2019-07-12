@@ -8,6 +8,7 @@ class PrintCard extends Component {
 
     render() {
         const { card } = this.props
+        
         return (
             <div>
                 {

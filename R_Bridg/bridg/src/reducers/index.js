@@ -13,11 +13,23 @@ const Redusers = (state, action) => {
                 corse: action.payload.corse
                 
             }
-        case ActionType.GET_FIRST_USED_CARD:
-            let ob = { ...state.colod }
-            delete ob[action.payload.card]
+        case ActionType.GET_COLOD_AGAIN: 
+            let ob = { ...state.usedCard }
+            delete ob[action.payload.id]
             return {
-                colod: ob,
+                colod : { ...(state.colod), [action.payload.card]: action.payload.card },
+                usedCard: ob,
+                computer: { ...(state.computer) },
+                user: { ...(state.user) },
+                seven: state.seven,
+                mast: state.mast,
+                corse: state.corse
+            }
+        case ActionType.GET_FIRST_USED_CARD:
+            let ob0 = { ...state.colod }
+            delete ob0[action.payload.card]
+            return {
+                colod: ob0,
                 usedCard: { ...(state.usedCard), [action.payload.id]: action.payload },
                 computer: { ...(state.computer) },
                 user: { ...(state.user) },

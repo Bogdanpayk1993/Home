@@ -28,7 +28,7 @@ class Game extends Component {
 
     getDeckCards() {
         for (let i = 0; i < 36; i++) {
-            this.store.dispatch(ActionGenerators.getColod(i + 1, 0))
+            this.store.dispatch(ActionGenerators.getColod(i + 1))
         }
     }
 
@@ -46,8 +46,25 @@ class Game extends Component {
 
     giveCard = () => {
         let deskCard = Object.keys(this.store.getState().colod)
-        let index = Math.floor(Math.random() * deskCard.length)
-        return deskCard[index]
+        if (deskCard != 0)
+        {
+            let index = Math.floor(Math.random() * deskCard.length)
+            return deskCard[index]
+        }
+        else
+        {
+            let usedCard
+            
+            do {
+                usedCard = Object.keys(this.store.getState().usedCard)
+                this.store.dispatch(ActionGenerators.getColodAgain(this.store.getState().usedCard[usedCard[0]].id, this.store.getState().usedCard[usedCard[0]].card))
+            } while (usedCard.length - 1 > 1);
+
+            deskCard = Object.keys(this.store.getState().colod)
+
+            let index = Math.floor(Math.random() * deskCard.length)
+            return deskCard[index]
+        }
     }
 
     check_move_user = () => {

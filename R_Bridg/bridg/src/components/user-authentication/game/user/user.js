@@ -85,7 +85,8 @@ class User extends Component {
     }
 
     render() {
-        return (
+        
+        return (      
             <div>
                 {
                     Object.keys(this.store.getState().user).map((el) =>

@@ -2,14 +2,23 @@ import ActionTypes from '../constants/ActionType'
 import {v4} from "uuid"
 
 const ActionGenerators = {
-    getColod:function(cardId, seven){
+    getColod:function(cardId){
         return {
             type:ActionTypes.GET_COLOD,
             payload:{
                 id : cardId,
-                seven : seven,
+                seven : 0,
                 mast : 0,
                 corse : 0
+            }
+        }
+    },
+    getColodAgain:function(cardId, card){
+        return {
+            type:ActionTypes.GET_COLOD_AGAIN,
+            payload:{
+                id : cardId,
+                card : card
             }
         }
     },

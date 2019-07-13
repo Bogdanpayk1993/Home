@@ -1,11 +1,12 @@
 import ActionGenerators from '../actions/ActionGenerators'
 
 class Computer {
-    constructor(store, giveCard, check_move, render_again, check_move_user) {
+    constructor(store, giveCard, check_move, render_again, check_move_user, finish_state) {
         this.giveCard = giveCard
         this.check_move = check_move
         this.render_again = render_again
         this.check_move_user = check_move_user
+        this.finish_state = finish_state
         this.store = store
         this.getStartCard()
     }
@@ -270,14 +271,20 @@ class Computer {
 
                 this.store.dispatch(ActionGenerators.changeMast(max))
 
-                if (userCard.length > 0) {
+                if (mydeckCards.length != 0) {
                     this.check_move_user()
+                }
+                else {
+                    this.finish_state()
                 }
                 break;
 
             default:
-                if (userCard.length > 0) {
+                if (mydeckCards.length != 0) {
                     this.check_move_user()
+                }
+                else {
+                    this.finish_state()
                 }
                 break;
         }

@@ -22,7 +22,7 @@ class Game extends Component {
         this.getDeckCards()
         this.getFirstUsedCard()
 
-        this.Computer = new Computer(this.store, this.giveCard, this.check_move, this.render_again, this.check_move_user)
+        this.Computer = new Computer(this.store, this.giveCard, this.check_move, this.render_again, this.check_move_user, this.finish_stage)
         this.Computer.add_card()
     }
 
@@ -190,11 +190,26 @@ class Game extends Component {
 
             case 6:
                 this.corse = false
-                this.render_again()
+                if (mydeckCards != 0)
+                {    
+                    this.render_again()
+                }
+                else
+                {
+                    this.store.dispatch(ActionGenerators.changeMast(5))
+                    this.finish_stage()
+                }
                 break;
 
             default:
-                this.Computer.make_move_computer()
+                if(mydeckCards != 0)
+                {
+                    this.Computer.make_move_computer()
+                }
+                else
+                {
+                    this.finish_stage()
+                }
                 break;
         }
     }
@@ -224,6 +239,12 @@ class Game extends Component {
                 this.render_again()
             }
         }
+    }
+
+    finish_stage = () => {
+        let userCard = Object.keys(this.store.getState().user)
+        let computerCard = Object.keys(this.store.getState().computer)
+
     }
 
     render() {
@@ -285,7 +306,7 @@ class Game extends Component {
                 </div>
                 {
                     usedCard % 9 == 6 && mast == 0 ?
-                        <Mast store={this.store} make_move_computer={this.Computer.make_move_computer} check_move_user={this.check_move_user} render_again={this.render_again} />
+                        <Mast store={this.store} make_move_computer={this.Computer.make_move_computer} check_last_card_user={this.check_last_card_user} render_again={this.render_again} />
                         :
                         null
                 }

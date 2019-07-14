@@ -188,19 +188,6 @@ class Game extends Component {
                 this.check_move_user()
                 break;
 
-            case 6:
-                this.corse = false
-                if (mydeckCards != 0)
-                {    
-                    this.render_again()
-                }
-                else
-                {
-                    this.store.dispatch(ActionGenerators.changeMast(5))
-                    this.finish_stage()
-                }
-                break;
-
             default:
                 if(mydeckCards != 0)
                 {
@@ -216,16 +203,18 @@ class Game extends Component {
 
     finish_corse = () => {
         let usedCard = Object.keys(this.store.getState().usedCard)
-        let mast = this.store.getState().mast
         let seven = this.store.getState().seven
         let corse = this.store.getState().corse
 
         if (corse == 1)
         {
-            if (this.store.getState().usedCard[usedCard[usedCard.length - 1]].card % 9 == 6 && mast == 5) {
+            if (this.store.getState().usedCard[usedCard[usedCard.length - 1]].card % 9 == 6) {
                 this.store.dispatch(ActionGenerators.changeMast(0))
+                this.render_again()
             }
-            this.check_last_card_user()
+            else {
+                this.Computer.make_move_computer()
+            }
         }
         else
         {
@@ -244,6 +233,7 @@ class Game extends Component {
     finish_stage = () => {
         let userCard = Object.keys(this.store.getState().user)
         let computerCard = Object.keys(this.store.getState().computer)
+        alert("Finish_stage")
 
     }
 
@@ -295,7 +285,7 @@ class Game extends Component {
 
                                 </td>
                                 <td>
-                                    <User store={this.store} giveCard={this.giveCard} check_move={this.check_move} check_move_user={this.check_move_user} make_move_computer={this.Computer.make_move_computer} render_again={this.render_again} check_last_card_user={this.check_last_card_user} />
+                                    <User store={this.store} giveCard={this.giveCard} check_move={this.check_move} check_move_user={this.check_move_user} make_move_computer={this.Computer.make_move_computer} check_last_card_user={this.check_last_card_user} finish_stage={this.finish_stage} render_again={this.render_again} />
                                 </td>
                                 <td>
 

@@ -214,7 +214,6 @@ class Computer {
 
     check_last_card_computer() {
         let usedCard = Object.keys(this.store.getState().usedCard)
-        let userCard = Object.keys(this.store.getState().user)
         let mydeckCards = Object.keys(this.store.getState().computer)
 
         switch (this.store.getState().usedCard[usedCard[usedCard.length - 1]].card % 9) {
@@ -249,32 +248,32 @@ class Computer {
                 break;
 
             case 6:
-                var mast = [0, 0, 0, 0]
-
-                mydeckCards.forEach((el) => {
-                    if (el > 0 && el < 10) {
-                        mast[0]++
-                    }
-                    if (el > 9 && el < 19) {
-                        mast[1]++
-                    }
-                    if (el > 18 && el < 28) {
-                        mast[2]++
-                    }
-                    if (el > 27 && el < 37) {
-                        mast[3]++
-                    }
-                })
-
-                let max = mast.indexOf(Math.max(...mast))
-                max++
-
-                this.store.dispatch(ActionGenerators.changeMast(max))
-
                 if (mydeckCards.length != 0) {
+                    var mast = [0, 0, 0, 0]
+
+                    mydeckCards.forEach((el) => {
+                        if (el > 0 && el < 10) {
+                            mast[0]++
+                        }
+                        if (el > 9 && el < 19) {
+                            mast[1]++
+                        }
+                        if (el > 18 && el < 28) {
+                            mast[2]++
+                        }
+                        if (el > 27 && el < 37) {
+                            mast[3]++
+                        }
+                    })
+
+                    let max = mast.indexOf(Math.max(...mast))
+                    max++
+
+                    this.store.dispatch(ActionGenerators.changeMast(max))
                     this.check_move_user()
                 }
                 else {
+                    this.store.dispatch(ActionGenerators.changeMast(5))
                     this.finish_state()
                 }
                 break;

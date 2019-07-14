@@ -14,25 +14,21 @@ class Mast extends Component {
     mast1 = () => {
         this.store.dispatch(ActionGenerators.changeMast(1))
         this.make_move_computer()
-        this.check_last_card_user()
     }
 
     mast2 = () => {
         this.store.dispatch(ActionGenerators.changeMast(2))
         this.make_move_computer()
-        this.check_last_card_user()
     }
 
     mast3 = () => {
         this.store.dispatch(ActionGenerators.changeMast(3))
         this.make_move_computer()
-        this.check_last_card_user()
     }
 
     mast4 = () => {
         this.store.dispatch(ActionGenerators.changeMast(4))
         this.make_move_computer()
-        this.check_last_card_user()
     }
 
     render() {

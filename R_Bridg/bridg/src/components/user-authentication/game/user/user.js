@@ -19,7 +19,7 @@ class User extends Component {
 
     make_move_user(id) {
         let usedCard = Object.keys(this.store.getState().usedCard)
-        const { giveCard, check_move, check_move_user, render_again, check_last_card_user } = this.props
+        const { giveCard, check_move, check_move_user, render_again, check_last_card_user, finish_stage } = this.props
 
         let enable1
         if (this.corse == false) {
@@ -56,7 +56,11 @@ class User extends Component {
                 if (enable2 == false) {
                     check_last_card_user()
                     this.corse = false
-                    check_move_user()
+                    let mydeckCards = Object.keys(this.store.getState().user)
+                    if (mydeckCards.length > 0)
+                    {
+                        check_move_user()
+                    }
                 }
             }
             else
@@ -65,6 +69,15 @@ class User extends Component {
                 let enable2 = this.check_add_card()
                 if (enable2 == true) {
                     this.store.dispatch(ActionGenerators.changeMast(5))
+                }
+                else
+                {
+                    let mydeckCards = Object.keys(this.store.getState().user)
+                    if (mydeckCards.length == 0)
+                    {
+                        this.store.dispatch(ActionGenerators.changeMast(5))
+                        finish_stage()
+                    }
                 }
             }
         }

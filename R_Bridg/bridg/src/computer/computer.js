@@ -26,8 +26,12 @@ class Computer {
         }
 
         if (enable == true) {
-            this.add_card()
-            this.render_again()
+            let mydeckCards = Object.keys(this.store.getState().computer)
+            if (mydeckCards.length > 0) {
+                this.add_card()
+                this.render_again()
+            }
+            this.check_last_card_computer()
         }
     }
 
@@ -79,10 +83,10 @@ class Computer {
         can_move.forEach((el) => {
             switch (el % 9) {
                 case 1: //6 
-                    need_move.push(1)
+                    need_move.push(5)
                     break
                 case 2: //7
-                    need_move.push(8)
+                    need_move.push(2)
                     break
                 case 3: //8
                     need_move.push(4)
@@ -209,7 +213,6 @@ class Computer {
             }
             this.render_again()
         }
-        this.check_last_card_computer()
     }
 
     check_last_card_computer() {
@@ -240,6 +243,7 @@ class Computer {
                 break;
 
             case 2:
+                this.check_move_user()
                 break;
 
             case 3:

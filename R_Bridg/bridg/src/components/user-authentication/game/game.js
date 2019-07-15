@@ -24,6 +24,7 @@ class Game extends Component {
 
         this.Computer = new Computer(this.store, this.giveCard, this.check_move, this.render_again, this.check_move_user, this.finish_stage)
         this.Computer.add_card()
+        this.Computer.check_last_card_computer()
     }
 
     getDeckCards() {
@@ -46,15 +47,13 @@ class Game extends Component {
 
     giveCard = () => {
         let deskCard = Object.keys(this.store.getState().colod)
-        if (deskCard != 0)
-        {
+        if (deskCard != 0) {
             let index = Math.floor(Math.random() * deskCard.length)
             return deskCard[index]
         }
-        else
-        {
+        else {
             let usedCard
-            
+
             do {
                 usedCard = Object.keys(this.store.getState().usedCard)
                 this.store.dispatch(ActionGenerators.getColodAgain(this.store.getState().usedCard[usedCard[0]].id, this.store.getState().usedCard[usedCard[0]].card))
@@ -101,29 +100,33 @@ class Game extends Component {
             this.render_again()
         }
 
-        let mydeckCards = Object.keys(this.store.getState().user)
-        mydeckCards.map((el) => {
-            let enable1 = this.check_move(el)
-            if (enable1 == true) {
-                enable = true
-            }
-        })
-
-        if (enable == false) {
-            this.store.dispatch(ActionGenerators.takeCardUser(parseInt(this.giveCard())))
-
-            mydeckCards = Object.keys(this.store.getState().user)
+        let computerCard = Object.keys(this.store.getState().computer)
+        if (computerCard.length > 0)
+        {
+            let mydeckCards = Object.keys(this.store.getState().user)
             mydeckCards.map((el) => {
                 let enable1 = this.check_move(el)
                 if (enable1 == true) {
                     enable = true
                 }
             })
-        }
 
-        if (enable == false) {
-            this.Computer.make_move_computer()
-            this.check_move_user()
+            if (enable == false) {
+                this.store.dispatch(ActionGenerators.takeCardUser(parseInt(this.giveCard())))
+
+                mydeckCards = Object.keys(this.store.getState().user)
+                mydeckCards.map((el) => {
+                    let enable1 = this.check_move(el)
+                    if (enable1 == true) {
+                        enable = true
+                    }
+                })
+            }
+
+            if (enable == false) {
+                this.Computer.make_move_computer()
+                this.check_move_user()
+            }
         }
     }
 
@@ -189,12 +192,10 @@ class Game extends Component {
                 break;
 
             default:
-                if(mydeckCards != 0)
-                {
+                if (mydeckCards != 0) {
                     this.Computer.make_move_computer()
                 }
-                else
-                {
+                else {
                     this.finish_stage()
                 }
                 break;
@@ -206,8 +207,7 @@ class Game extends Component {
         let seven = this.store.getState().seven
         let corse = this.store.getState().corse
 
-        if (corse == 1)
-        {
+        if (corse == 1) {
             if (this.store.getState().usedCard[usedCard[usedCard.length - 1]].card % 9 == 6) {
                 this.store.dispatch(ActionGenerators.changeMast(0))
                 this.render_again()
@@ -216,10 +216,8 @@ class Game extends Component {
                 this.Computer.make_move_computer()
             }
         }
-        else
-        {
-            if (seven != 0)
-            {
+        else {
+            if (seven != 0) {
                 for (let i = 0; i < seven * 2; i++) {
                     this.store.dispatch(ActionGenerators.takeCardUser(parseInt(this.giveCard())))
                 }
@@ -242,6 +240,7 @@ class Game extends Component {
         let keys = Object.keys(this.store.getState().usedCard)
         let mast = this.store.getState().mast
         let usedCard = this.store.getState().usedCard[keys[keys.length - 1]].card
+        let computerCard = Object.keys(this.store.getState().computer)
 
         return (
             <>
@@ -272,6 +271,7 @@ class Game extends Component {
                                     {mast == 2 ? <img className="mast" src="image/Крест.png" /> : null}
                                     {mast == 3 ? <img className="mast" src="image/Буба.png" /> : null}
                                     {mast == 4 ? <img className="mast" src="image/Чирва.png" /> : null}
+
                                 </td>
                                 <td className="usedCard">
                                     <PrintCard card="usedCard" store={this.store} />

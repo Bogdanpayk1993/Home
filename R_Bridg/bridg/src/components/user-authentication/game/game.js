@@ -17,7 +17,7 @@ class Game extends Component {
         }
 
         this.scoresUser = 0
-        this.sceresComuter = 0
+        this.scoresComuter = 0
 
         this.getDeckCards()
         this.getFirstUsedCard()
@@ -247,7 +247,63 @@ class Game extends Component {
     finish_stage = () => {
         let userCard = Object.keys(this.store.getState().user)
         let computerCard = Object.keys(this.store.getState().computer)
-        alert("Finish_stage")
+
+        if (userCard.length == 0) {
+            computerCard.forEach((el) => {
+                switch (el % 9) {
+                    case 5:
+                        this.scoresComuter += 10
+                        break;
+
+                    case 6:
+                        this.scoresComuter += 20
+                        if (el == 24) {
+                            this.scoresComuter += 20
+                        }
+                        break;
+
+                    case 7:
+                        this.scoresComuter += 10
+                        break;
+
+                    case 8:
+                        this.scoresComuter += 10
+                        break;
+
+                    case 0:
+                        this.scoresComuter += 15
+                        break;
+                }
+            })
+        }
+        if (computerCard.length == 0) {
+            userCard.forEach((el) => {
+                switch (el % 9) {
+                    case 5:
+                        this.scoresUser += 10
+                        break;
+
+                    case 6:
+                        this.scoresUser += 20
+                        if (el == 24) {
+                            this.scoresUser += 20
+                        }
+                        break;
+
+                    case 7:
+                        this.scoresUser += 10
+                        break;
+
+                    case 8:
+                        this.scoresUser += 10
+                        break;
+
+                    case 0:
+                        this.scoresUser += 15
+                        break;
+                }
+            })
+        }
 
     }
 
@@ -262,7 +318,7 @@ class Game extends Component {
                 <div className="score">
                     <span> {userName} - {this.scoresUser} </span>
                     VS
-                    <span> Computer - {this.sceresComuter} </span>
+                    <span> Computer - {this.scoresComuter} </span>
                 </div>
                 <div className="game">
                     <br />

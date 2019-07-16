@@ -67,7 +67,6 @@ class Game extends Component {
     }
 
     check_move_user = () => {
-        let enable = false
         let seven = this.store.getState().seven
 
         if (seven != 0) {
@@ -101,32 +100,42 @@ class Game extends Component {
         }
 
         let computerCard = Object.keys(this.store.getState().computer)
-        if (computerCard.length > 0)
-        {
-            let mydeckCards = Object.keys(this.store.getState().user)
+        if (computerCard.length > 0) {
+            this.check_user()
+        }
+        else {
+            let keys = Object.keys(this.store.getState().usedCard)
+            if (this.store.getState().usedCard[keys[keys.length - 1]].card % 9 == 2) {
+                this.check_user()
+            }
+        }
+    }
+
+    check_user = () => {
+        let enable = false
+        let mydeckCards = Object.keys(this.store.getState().user)
+        mydeckCards.map((el) => {
+            let enable1 = this.check_move(el)
+            if (enable1 == true) {
+                enable = true
+            }
+        })
+
+        if (enable == false) {
+            this.store.dispatch(ActionGenerators.takeCardUser(parseInt(this.giveCard())))
+
+            mydeckCards = Object.keys(this.store.getState().user)
             mydeckCards.map((el) => {
                 let enable1 = this.check_move(el)
                 if (enable1 == true) {
                     enable = true
                 }
             })
+        }
 
-            if (enable == false) {
-                this.store.dispatch(ActionGenerators.takeCardUser(parseInt(this.giveCard())))
-
-                mydeckCards = Object.keys(this.store.getState().user)
-                mydeckCards.map((el) => {
-                    let enable1 = this.check_move(el)
-                    if (enable1 == true) {
-                        enable = true
-                    }
-                })
-            }
-
-            if (enable == false) {
-                this.Computer.make_move_computer()
-                this.check_move_user()
-            }
+        if (enable == false) {
+            this.Computer.make_move_computer()
+            this.check_move_user()
         }
     }
 
@@ -240,7 +249,6 @@ class Game extends Component {
         let keys = Object.keys(this.store.getState().usedCard)
         let mast = this.store.getState().mast
         let usedCard = this.store.getState().usedCard[keys[keys.length - 1]].card
-        let computerCard = Object.keys(this.store.getState().computer)
 
         return (
             <>

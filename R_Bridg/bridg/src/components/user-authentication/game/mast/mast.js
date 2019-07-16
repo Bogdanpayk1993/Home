@@ -7,7 +7,7 @@ class Mast extends Component {
         super(props);
         this.store = this.props.store
         this.make_move_computer = this.props.make_move_computer
-        this.check_last_card_user = this.props.check_last_card_user
+        this.check_user = this.props.check_user
         this.state = {}
     }
 
@@ -16,7 +16,7 @@ class Mast extends Component {
         this.make_move_computer()
         let computerCard = Object.keys(this.store.getState().computer)
         if (computerCard.length > 0) {
-            this.check_last_card_user()
+            this.check_user()
         }
     }
 
@@ -25,7 +25,7 @@ class Mast extends Component {
         this.make_move_computer()
         let computerCard = Object.keys(this.store.getState().computer)
         if (computerCard.length > 0) {
-            this.check_last_card_user()
+            this.check_user()
         }
     }
 
@@ -34,7 +34,7 @@ class Mast extends Component {
         this.make_move_computer()
         let computerCard = Object.keys(this.store.getState().computer)
         if (computerCard.length > 0) {
-            this.check_last_card_user()
+            this.check_user()
         }
     }
 
@@ -43,7 +43,7 @@ class Mast extends Component {
         this.make_move_computer()
         let computerCard = Object.keys(this.store.getState().computer)
         if (computerCard.length > 0) {
-            this.check_last_card_user()
+            this.check_user()
         }
     }
 

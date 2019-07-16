@@ -311,7 +311,7 @@ class Game extends Component {
                 </div>
                 {
                     usedCard % 9 == 6 && mast == 0 ?
-                        <Mast store={this.store} make_move_computer={this.Computer.make_move_computer} check_last_card_user={this.check_last_card_user} render_again={this.render_again} />
+                        <Mast store={this.store} make_move_computer={this.Computer.make_move_computer} check_user={this.check_user} render_again={this.render_again} />
                         :
                         null
                 }

@@ -5,16 +5,7 @@ class User extends Component {
     constructor(props) {
         super(props);
         this.store = this.props.store
-        this.getStartCard()
         this.corse = false
-    }
-
-    getStartCard() {
-        const { check_move_user } = this.props
-        for (let i = 0; i < 5; i++) {
-            this.store.dispatch(ActionGenerators.takeCardUser(parseInt(this.props.giveCard())))
-        }
-        check_move_user()
     }
 
     make_move_user(id) {

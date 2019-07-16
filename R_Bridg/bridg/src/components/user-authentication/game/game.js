@@ -21,6 +21,7 @@ class Game extends Component {
 
         this.getDeckCards()
         this.getFirstUsedCard()
+        this.getStartCardUser()
 
         this.Computer = new Computer(this.store, this.giveCard, this.check_move, this.render_again, this.check_move_user, this.finish_stage)
         this.Computer.add_card()
@@ -63,6 +64,12 @@ class Game extends Component {
 
             let index = Math.floor(Math.random() * deskCard.length)
             return deskCard[index]
+        }
+    }
+
+    getStartCardUser() {
+        for (let i = 0; i < 5; i++) {
+            this.store.dispatch(ActionGenerators.takeCardUser(parseInt(this.giveCard())))
         }
     }
 

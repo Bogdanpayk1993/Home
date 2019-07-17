@@ -48,3 +48,6 @@ td:nth-of-type(3) {
     margin-right: 2vw;
     vertical-align: top;
 }
+button {
+    background-color: rgba(0, 0, 0, 0.4);
+}

@@ -5,6 +5,7 @@ import User from './user/user'
 import PrintCard from './printcard/printcard'
 import Computer from '../../../computer/computer'
 import Mast from './mast/mast'
+import Result from './result/result'
 import ActionGenerators from '../../../actions/ActionGenerators'
 
 class Game extends Component {
@@ -17,7 +18,8 @@ class Game extends Component {
         }
 
         this.scoresUser = 0
-        this.scoresComuter = 0
+        this.scoresComputer = 0
+        this.result = false
 
         this.getDeckCards()
         this.getFirstUsedCard()
@@ -252,26 +254,26 @@ class Game extends Component {
             computerCard.forEach((el) => {
                 switch (el % 9) {
                     case 5:
-                        this.scoresComuter += 10
+                        this.scoresComputer += 10
                         break;
 
                     case 6:
-                        this.scoresComuter += 20
+                        this.scoresComputer += 20
                         if (el == 24) {
-                            this.scoresComuter += 20
+                            this.scoresComputer += 20
                         }
                         break;
 
                     case 7:
-                        this.scoresComuter += 10
+                        this.scoresComputer += 10
                         break;
 
                     case 8:
-                        this.scoresComuter += 10
+                        this.scoresComputer += 10
                         break;
 
                     case 0:
-                        this.scoresComuter += 15
+                        this.scoresComputer += 15
                         break;
                 }
             })
@@ -304,7 +306,8 @@ class Game extends Component {
                 }
             })
         }
-
+        this.result = true 
+        this.render()  
     }
 
     render() {
@@ -318,7 +321,7 @@ class Game extends Component {
                 <div className="score">
                     <span> {userName} - {this.scoresUser} </span>
                     VS
-                    <span> Computer - {this.scoresComuter} </span>
+                    <span> Computer - {this.scoresComputer} </span>
                 </div>
                 <div className="game">
                     <br />
@@ -368,6 +371,12 @@ class Game extends Component {
                 {
                     usedCard % 9 == 6 && mast == 0 ?
                         <Mast store={this.store} make_move_computer={this.Computer.make_move_computer} check_user={this.check_user} render_again={this.render_again} />
+                        :
+                        null
+                }
+                {
+                    this.result == true ?
+                        <Result userName={userName} scoresUser={this.scoresUser} scoresComputer={this.scoresComputer} /> 
                         :
                         null
                 }

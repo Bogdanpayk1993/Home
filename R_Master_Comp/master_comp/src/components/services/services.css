@@ -2,12 +2,12 @@
     border-spacing: 1vw 1vw;
 }
 .services td {
-    background-color: rgba(0, 0, 0, 0.2);
+    background-color: rgba(0, 0, 0, 0.6);
     border-radius: 2vw;
     border-spacing: 1vw;
     font-weight: bold;
     font-size: 1.5vw;
-    color: black;
+    color: rgba(246, 245, 245, 1);
     width: 20vw;
     height: 10vw;
 }

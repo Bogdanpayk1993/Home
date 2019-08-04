@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import ActionGenerators from '../../../../actions/ActionGenerators'
-import './result.css' 
+import './result.css'
 
 class Result extends Component {
     constructor(props) {
@@ -8,7 +8,7 @@ class Result extends Component {
         this.store = this.props.store
     }
 
-    restars() { 
+    restars() {
         const { render_again, start_game, result_false } = this.props
 
         this.store.dispatch(ActionGenerators.restart())
@@ -25,10 +25,27 @@ class Result extends Component {
                 <div>
                     {
                         scoresUser < 115 && scoresComputer < 115 ?
-                                <h1> Етап завершений: </h1>
+                            <h1> Етап завершений </h1>
                             :
-                                <h1> Гра завершена: </h1>
+                            null
                     }
+                    {
+                        scoresUser >= 115 ?
+                            <>
+                                <h1> Гра завершена: ви програли </h1>
+                            </>
+                            :
+                            null
+                    }
+                    {
+                        scoresComputer >= 115 ?
+                            <>
+                                <h1> Гра завершена: ви виграли </h1>
+                            </>
+                            :
+                            null
+                    }
+                    <h2> З рахунком : </h2>
                     <h3> {userName} - {scoresUser} </h3>
                     <h3> Computer - {scoresComputer} </h3>
                     <button onClick={this.restars.bind(this)}> Ok </button>
@@ -37,5 +54,5 @@ class Result extends Component {
         );
     }
 }
- 
+
 export default Result;

@@ -50,10 +50,12 @@ class Mast extends Component {
     render() {
         return (
             <div className="mast_div">
-                <img src="image/Чирва.png" onClick={this.mast4} />
-                <img src="image/Пика.png" onClick={this.mast1} />
-                <img src="image/Буба.png" onClick={this.mast3} />
-                <img src="image/Крест.png" onClick={this.mast2} />
+                <div>
+                    <img src="image/Чирва.png" onClick={this.mast4} />
+                    <img src="image/Пика.png" onClick={this.mast1} />
+                    <img src="image/Буба.png" onClick={this.mast3} />
+                    <img src="image/Крест.png" onClick={this.mast2} />
+                </div>
             </div>
         );
     }

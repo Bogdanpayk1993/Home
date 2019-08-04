@@ -1,6 +1,6 @@
 .App {
   text-align: center;
-  background-image: url(./background.jpg);
+  background-image: url(./wall.jpg);
   background-size: 100vw;
 }
 
@@ -36,6 +36,7 @@
 
 hr {
   color: black;
-  background-color: black;
-  height: 3px;
+  border: 0px;
+  background-color: rgba(0, 0, 0, 0.6);
+  height: 5px;
 }

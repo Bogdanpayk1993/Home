@@ -36,37 +36,53 @@ class Send_Request extends Component {
     render() {
         return (
             <div className="footer">
-                <h1> Зворотній зв'язок </h1>
-                <form>
-                    <label>
-                        Ім'я
+                <table>
+                    <tr>
+                        <td>
+                            <h1> Графік роботи: </h1>
+                            <div>
+                                <h2> Пн - Пт: 08:30 - 22:00 </h2>
+                                <h2> Сб - Нд: 09:00 - 21:00 </h2>
+                            </div>
+                            <h1> Наша адреса: </h1>
+                            <div>
+                                <h3> м.Ужгород вул.Стрільнична 80/А </h3>
+                            </div>
+                        </td>
+                        <td>
+                            <h1> Зворотній зв'язок </h1>
+                            <form>
+                                <label>
+                                    Ім'я
+                                <br />
+                                    <input ref="name" />
+                                    <br />
+                                </label>
+                                <label>
+                                    Email
+                                <br />
+                                    <input ref="email" />
+                                    <br />
+                                </label>
+                                <label>
+                                    Номер телефону
+                                <br />
+                                    <input ref="number" />
+                                    <br />
+                                </label>
+                                <label>
+                                    Повідомлення
+                                <br />
+                                    <textarea ref="message" rows="5" />
+                                    <br />
+                                </label>
+                                <button onClick={this.send} > Відправити </button>
+                            </form>
                             <br />
-                        <input ref="name" />
-                        <br />
-                    </label>
-                    <label>
-                        Email
-                            <br />
-                        <input ref="email" />
-                        <br />
-                    </label>
-                    <label>
-                        Номер телефону
-                            <br />
-                        <input ref="number" />
-                        <br />
-                    </label>
-                    <label>
-                        Повідомлення
-                            <br />
-                        <textarea ref="message" rows="5" />
-                        <br />
-                    </label>
-                    <button onClick={this.send} > Відправити </button>
-                </form>
-                <br />
-            </div>
-        );
+                        </td>
+                    </tr>
+                </table>
+            </div>);
     }
 }
 

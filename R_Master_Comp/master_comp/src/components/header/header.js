@@ -45,10 +45,9 @@ class Header extends Component {
                         </tr>
                     </tbody>
                 </table>
-                <span>
-                    <img src="./image/men.png" />
-                    MasterComp
-                </span>
+                <span> <img src="./image/men.png" /> </span>
+                <span className="Master"> Master</span>
+                <span className="Comp">Comp </span>
             </>
         );
     }

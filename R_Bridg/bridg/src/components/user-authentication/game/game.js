@@ -320,6 +320,14 @@ class Game extends Component {
             this.scoresUser = 0
             this.scoresComputer = 0
         }
+        if (this.scoresUser == 110)
+        {
+            this.scoresUser = 0
+        }
+        if (this.scoresComputer == 110)
+        {
+            this.scoresComputer = 0
+        }
     }
 
     render() {

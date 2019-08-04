@@ -1,5 +1,4 @@
 .footer {
-    background-image: url(../../citymap.png);
     background-size: 100vw; 
     color: black;
     font-size: 1.3vw;
@@ -14,6 +13,10 @@
     margin: 0.2vh;
 }
 
+.footer label {
+    color: rgba(246, 245, 245, 1);
+}
+
 .footer textarea {
     max-width: 400px;
     width: 45vw;
@@ -22,12 +25,12 @@
 
 .footer button {
     background-color: rgba(0, 0, 0, 0.2);
-    border: 2px solid black;
+    border: 2px solid rgba(246, 245, 245, 1);
     border-radius: 1vw;
     font-size: 1.3vw;
     font-style: italic;
     font-weight: bold;
-    color: black;
+    color: rgba(246, 245, 245, 1);
     width: 12vw;
     margin: auto;
 }
@@ -37,11 +40,26 @@
 }
 
 .footer form {
-    background-color: rgba(0, 0, 0, 0.2);
+    background-color: rgba(0, 0, 0, 0.6);
     border-radius: 5vw;
     max-width: 410px;
     width: 47vw;
     margin: auto;
     padding: 1vw;
     padding-right: 1vw;   
+}
+
+
+.footer table td:first-child div {
+    background-color: rgba(0, 0, 0, 0.6);
+    border-radius: 2vw;
+    color: rgba(246, 245, 245, 1);
+}
+
+.footer table td:first-child {
+    padding: 6vw;
+}
+
+.footer h1 {
+    color: rgba(0, 0, 0, 0.8);
 }

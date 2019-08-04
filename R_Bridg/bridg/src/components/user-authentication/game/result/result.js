@@ -1,11 +1,23 @@
 import React, { Component } from 'react';
+import ActionGenerators from '../../../../actions/ActionGenerators'
 import './result.css' 
 
 class Result extends Component {
     constructor(props) {
         super(props);
-        this.state = {  }
+        this.store = this.props.store
     }
+
+    restars() { 
+        const { render_again, start_game, result_false } = this.props
+
+        this.store.dispatch(ActionGenerators.restart())
+
+        start_game()
+        result_false()
+        render_again()
+    }
+
     render() {
         const { userName, scoresUser, scoresComputer } = this.props
         return (
@@ -19,7 +31,7 @@ class Result extends Component {
                     }
                     <h3> {userName} - {scoresUser} </h3>
                     <h3> Computer - {scoresComputer} </h3>
-                    <button> Ok </button>
+                    <button onClick={this.restars.bind(this)}> Ok </button>
                 </div>
             </div>
         );

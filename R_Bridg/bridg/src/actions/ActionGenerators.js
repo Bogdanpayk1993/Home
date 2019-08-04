@@ -86,12 +86,9 @@ const ActionGenerators = {
             }
         }
     },
-    changeCorse:function(corse){
+    restart:function(){
         return {
-            type:ActionTypes.CHENGE_CORSE,
-            payload:{
-                corse : corse
-            }
+            type:ActionTypes.RESTART
         }
     }
 }

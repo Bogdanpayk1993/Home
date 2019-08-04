@@ -8,6 +8,6 @@ const ActionTypes={
     THROW_CARD_USER:"THROW_CARD_USER",
     THROW_SEVEN:"THROW_SEVENS",
     CHANGE_MAST:"CHANGE_MAST",
-    CHENGE_CORSE:"CENGE_CORSE"
+    RESTART:"RESTART"
 }
 export default ActionTypes;

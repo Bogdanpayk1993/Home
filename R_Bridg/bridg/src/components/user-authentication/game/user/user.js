@@ -88,8 +88,7 @@ class User extends Component {
         return enable
     }
 
-    render() {
-        
+    render() {       
         return (      
             <div>
                 {

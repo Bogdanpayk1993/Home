@@ -1,4 +1,5 @@
 import ActionType from "../constants/ActionType"
+import ActionTypes from "../constants/ActionType";
 
 const Redusers = (state, action) => {
     switch (action.type) {
@@ -106,15 +107,9 @@ const Redusers = (state, action) => {
                 mast: action.payload.mast,
                 corse: state.corse
             }
-        case ActionType.CHENGE_CORSE:
+        case ActionTypes.RESTART:
             return {
-                colod: { ...(state.colod) },
-                usedCard: { ...(state.usedCard) },
-                computer: { ...(state.computer) },
-                user: { ...(state.user) },
-                seven: state.seven,
-                mast: state.mast,
-                corse: action.payload.corse
+
             }
         default:
             return state;

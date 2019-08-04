@@ -21,6 +21,10 @@ class Game extends Component {
         this.scoresComputer = 0
         this.result = false
 
+        this.start_game()
+    }
+
+    start_game = () => {
         this.getDeckCards()
         this.getFirstUsedCard()
         this.getStartCardUser()
@@ -240,7 +244,6 @@ class Game extends Component {
                     this.store.dispatch(ActionGenerators.takeCardUser(parseInt(this.giveCard())))
                 }
                 this.store.dispatch(ActionGenerators.throwSeven())
-                this.store.dispatch(ActionGenerators.changeCorse(0))
                 this.render_again()
             }
         }
@@ -306,8 +309,17 @@ class Game extends Component {
                 }
             })
         }
-        this.result = true 
-        this.render()  
+        this.result = true
+        this.render()
+    }
+
+    result_false = () => {
+        this.result = false
+        if (this.scoresUser >= 115 || this.scoresComputer >= 115)
+        {
+            this.scoresUser = 0
+            this.scoresComputer = 0
+        }
     }
 
     render() {
@@ -376,7 +388,7 @@ class Game extends Component {
                 }
                 {
                     this.result == true ?
-                        <Result userName={userName} scoresUser={this.scoresUser} scoresComputer={this.scoresComputer} /> 
+                        <Result store={this.store} render_again={this.render_again} result_false={this.result_false} start_game={this.start_game} userName={userName} scoresUser={this.scoresUser} scoresComputer={this.scoresComputer} />
                         :
                         null
                 }

@@ -39,6 +39,10 @@ class Send_Request extends Component {
                 <table>
                     <tr>
                         <td>
+                            <h1> Контакти: </h1>
+                            <div>
+                                <h2> (066) 537-60-25 Viber </h2> <h2 className="number_two"> (068) 243-83-74 </h2>
+                            </div>
                             <h1> Графік роботи: </h1>
                             <div>
                                 <h2> Пн - Пт: 08:30 - 22:00 </h2>
@@ -55,25 +59,25 @@ class Send_Request extends Component {
                                 <label>
                                     Ім'я
                                 <br />
-                                    <input ref="name" />
+                                    <input ref="name" placeholder="Ім'я" />
                                     <br />
                                 </label>
                                 <label>
                                     Email
                                 <br />
-                                    <input ref="email" />
+                                    <input ref="email" placeholder="mastercomp_uzh@ukr.net" />
                                     <br />
                                 </label>
                                 <label>
                                     Номер телефону
                                 <br />
-                                    <input ref="number" />
+                                    <input ref="number" placeholder="+38 (050) 333-33-33   +38 (068) 333-33-33"/>
                                     <br />
                                 </label>
                                 <label>
                                     Повідомлення
                                 <br />
-                                    <textarea ref="message" rows="5" />
+                                    <textarea ref="message" rows="5" placeholder="Ваше повідомлення" />
                                     <br />
                                 </label>
                                 <button onClick={this.send} > Відправити </button>
@@ -82,7 +86,8 @@ class Send_Request extends Component {
                         </td>
                     </tr>
                 </table>
-            </div>);
+            </div>
+        );
     }
 }
 

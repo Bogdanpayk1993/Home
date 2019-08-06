@@ -8,15 +8,15 @@ import Send_Request from './components/send_request'
 function App() {
   return (
     <div className="App">
-        <Header/>
-        <br/>
-        <hr/>
-        <Slider/>
-        <hr/>
-        <Services/>
-        <hr/>
-        <Send_Request/>
-        <br/>
+      <Header />
+      <br />
+      <hr />
+      <Slider />
+      <hr />
+      <Services />
+      <hr />
+      <Send_Request />
+      <br />
     </div>
   );
 }

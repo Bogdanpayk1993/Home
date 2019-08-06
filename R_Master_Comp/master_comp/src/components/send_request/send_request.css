@@ -1,10 +1,13 @@
+.footer table {
+    margin-top: -5vw;
+}
+
 .footer {
     background-size: 100vw; 
     color: black;
     font-size: 1.3vw;
     font-style: italic;
     font-weight: bold;
-    margin-bottom: 0.5vh;
 }
 
 .footer input {
@@ -62,4 +65,8 @@
 
 .footer h1 {
     color: rgba(0, 0, 0, 0.8);
+}
+
+.number_two {
+    margin-left: -6vw;
 }

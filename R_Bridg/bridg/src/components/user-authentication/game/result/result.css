@@ -13,6 +13,7 @@
     background-color: rgba(0, 0, 0, 0.4);
 }
 .result_div div {
+    border-radius: 2vw;
     width: 35vw;
     min-width: 300px;
     margin: auto;

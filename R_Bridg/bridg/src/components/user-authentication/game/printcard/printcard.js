@@ -9,17 +9,26 @@ class PrintCard extends Component {
     render() {
         const { card } = this.props
         
+        var usedCard = Object.keys(this.store.getState().usedCard)
+        
+        if (card == "usedCard")
+        {
+            if (usedCard.length > 19)
+            {
+                usedCard = usedCard.slice(usedCard.length - 19, usedCard.length)
+            }
+        }
+
         return (
             <div>
                 {
                     card == "usedCard" ?
                         (
-                            Object.keys(this.store.getState().usedCard).map((el) =>
+                            usedCard.map((el) =>
                                 (
                                     <img src={`image/${this.store.getState().usedCard[el].card}.png`} key={el} />
                                 )
                             )
-
                         )
                         :
                         (

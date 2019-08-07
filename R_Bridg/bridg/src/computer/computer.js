@@ -8,6 +8,7 @@ class Computer {
         this.check_move_user = check_move_user
         this.finish_state = finish_state
         this.store = store
+        this.valet = 0
         this.getStartCard()
     }
 
@@ -92,7 +93,7 @@ class Computer {
                     need_move.push(4)
                     break
                 case 4: //9
-                    need_move.push(3)
+                    need_move.push(2)
                     break
                 case 5: //10
                     need_move.push(3)
@@ -146,6 +147,12 @@ class Computer {
                 else {
                     seven = 0
                 }
+                if (mydeckCards[max1] % 9 == 6) {
+                    this.valet = this.valet + 1
+                }
+                else {
+                    this.valet = 0
+                }
                 this.store.dispatch(ActionGenerators.throwCardComputer(parseInt(mydeckCards[max1]), seven))
                 this.store.dispatch(ActionGenerators.changeMast(0))
                 if (mydeckCards[max1] % 9 == 3) {
@@ -173,6 +180,9 @@ class Computer {
                 let seven = this.store.getState().seven
                 if (can_move[0] % 9 == 2) {
                     seven++
+                }
+                if (can_move[0] % 9 == 6) {
+                    this.valet = this.valet + 1
                 }
                 this.store.dispatch(ActionGenerators.throwCardComputer(parseInt(can_move[0]), seven))
                 if (can_move[0] % 9 == 3) {
@@ -204,6 +214,9 @@ class Computer {
                     let seven = this.store.getState().seven
                     if (el % 9 == 2) {
                         seven++
+                    }
+                    if (can_move[0] % 9 == 6) {
+                        this.valet = this.valet + 1
                     }
                     this.store.dispatch(ActionGenerators.throwCardComputer(el, seven))
                     if (el % 9 == 3) {
@@ -278,7 +291,7 @@ class Computer {
                 }
                 else {
                     this.store.dispatch(ActionGenerators.changeMast(5))
-                    this.finish_state()
+                    this.finish_state(this.valet)
                 }
                 break;
 
@@ -287,7 +300,7 @@ class Computer {
                     this.check_move_user()
                 }
                 else {
-                    this.finish_state()
+                    this.finish_state(this.valet)
                 }
                 break;
         }

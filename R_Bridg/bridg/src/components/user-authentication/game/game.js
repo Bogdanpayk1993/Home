@@ -249,9 +249,10 @@ class Game extends Component {
         }
     }
 
-    finish_stage = () => {
+    finish_stage = (valet) => {
         let userCard = Object.keys(this.store.getState().user)
         let computerCard = Object.keys(this.store.getState().computer)
+        let usedCard = Object.keys(this.store.getState().usedCard)
 
         if (userCard.length == 0) {
             computerCard.forEach((el) => {
@@ -280,6 +281,19 @@ class Game extends Component {
                         break;
                 }
             })
+
+            if (valet != 0)
+            {
+                for (let i = 0; i < valet; i++)
+                {
+                    if (this.store.getState().usedCard[usedCard[usedCard.length - i - 1]].card == 24) {
+                        this.scoresUser -= 40
+                    }
+                    else {
+                        this.scoresUser -= 20
+                    }
+                }
+            }
         }
         if (computerCard.length == 0) {
             userCard.forEach((el) => {
@@ -308,6 +322,19 @@ class Game extends Component {
                         break;
                 }
             })
+
+            if (valet != 0)
+            {
+                for (let i = 0; i < valet; i++)
+                {
+                    if (this.store.getState().usedCard[usedCard[usedCard.length - i - 1]].card == 24) {
+                        this.scoresComputer -= 40
+                    }
+                    else {
+                        this.scoresComputer -= 20
+                    }
+                }
+            }
         }
         this.result = true
         this.render()

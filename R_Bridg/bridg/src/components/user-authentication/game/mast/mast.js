@@ -49,7 +49,7 @@ class Mast extends Component {
 
     render() {
         return (
-            <div className="mast_div">
+            <div className="div_mast">
                 <div>
                     <img src="image/Чирва.png" onClick={this.mast4} />
                     <img src="image/Пика.png" onClick={this.mast1} />

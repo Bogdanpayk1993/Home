@@ -6,6 +6,7 @@ class User extends Component {
         super(props);
         this.store = this.props.store
         this.corse = false
+        this.valet = 0
     }
 
     make_move_user(id) {
@@ -43,6 +44,7 @@ class User extends Component {
 
             if (id % 9 != 6)
             {
+                this.valet = 0
                 let enable2 = this.check_add_card()
                 if (enable2 == false) {
                     check_last_card_user()
@@ -56,6 +58,7 @@ class User extends Component {
             }
             else
             {
+                this.valet = this.valet + 1
                 this.corse = false
                 let enable2 = this.check_add_card()
                 if (enable2 == true) {
@@ -67,7 +70,7 @@ class User extends Component {
                     if (mydeckCards.length == 0)
                     {
                         this.store.dispatch(ActionGenerators.changeMast(5))
-                        finish_stage()
+                        finish_stage(this.valet)
                     }
                 }
             }

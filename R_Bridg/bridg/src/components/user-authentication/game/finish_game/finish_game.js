@@ -1,16 +1,19 @@
 import React, { Component } from 'react';
 import ActionGenerators from '../../../../actions/ActionGenerators'
-import './result.css'
+import './finish_game.css'
 
-class Result extends Component {
+class Finish_game extends Component {
     constructor(props) {
         super(props);
         this.store = this.props.store
     }
 
     restars() {
-        const { result } = this.props
-        result()
+        const { render_again, start_game, result_false } = this.props
+        this.store.dispatch(ActionGenerators.restart())
+        start_game()
+        result_false()
+        render_again()
     }
 
     render() {
@@ -18,8 +21,13 @@ class Result extends Component {
         return (
             <div className="result_div">
                 <div>
-                    <h1> Етап завершений </h1>
-                    <h2> З рахунком : </h2>
+                    {
+                        scoresUser < scoresComputer ?
+                            <h1> Гра завершена - Ви виграли </h1>
+                        :
+                            <h1> Гра завершена - Ви програли </h1>
+                    }
+                    <h2> З рахунком </h2>
                     <h3> {userName} - {scoresUser} </h3>
                     <h3> Computer - {scoresComputer} </h3>
                     <button onClick={this.restars.bind(this)}> Ok </button>
@@ -29,4 +37,4 @@ class Result extends Component {
     }
 }
 
-export default Result;
+export default Finish_game;

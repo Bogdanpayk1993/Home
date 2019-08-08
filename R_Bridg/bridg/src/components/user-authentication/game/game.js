@@ -6,7 +6,9 @@ import PrintCard from './printcard/printcard'
 import Computer from '../../../computer/computer'
 import Mast from './mast/mast'
 import Result from './result/result'
+import Finish_Game from './finish_game/finish_game'
 import ActionGenerators from '../../../actions/ActionGenerators'
+import Finish_game from './finish_game/finish_game';
 
 class Game extends Component {
     constructor(props) {
@@ -19,6 +21,8 @@ class Game extends Component {
 
         this.scoresUser = 0
         this.scoresComputer = 0
+        this.scoresUser1 = 0
+        this.scoresComputer1 = 0
         this.result = false
 
         this.start_game()
@@ -254,43 +258,44 @@ class Game extends Component {
         let computerCard = Object.keys(this.store.getState().computer)
         let usedCard = Object.keys(this.store.getState().usedCard)
 
+        this.scoresComputer1 = 0
+        this.scoresUser1 = 0
+
         if (userCard.length == 0) {
             computerCard.forEach((el) => {
                 switch (el % 9) {
                     case 5:
-                        this.scoresComputer += 10
+                        this.scoresComputer1 += 10
                         break;
 
                     case 6:
-                        this.scoresComputer += 20
+                        this.scoresComputer1 += 20
                         if (el == 24) {
-                            this.scoresComputer += 20
+                            this.scoresComputer1 += 20
                         }
                         break;
 
                     case 7:
-                        this.scoresComputer += 10
+                        this.scoresComputer1 += 10
                         break;
 
                     case 8:
-                        this.scoresComputer += 10
+                        this.scoresComputer1 += 10
                         break;
 
                     case 0:
-                        this.scoresComputer += 15
+                        this.scoresComputer1 += 15
                         break;
                 }
             })
 
-            if (valet != 0)
-            {
-                for (let i = 0; i < valet; i++)
-                {
+            if (valet != 0) {
+                for (let i = 0; i < valet; i++) {
                     if (this.store.getState().usedCard[usedCard[usedCard.length - i - 1]].card == 24) {
-                        this.scoresUser -= 40
+                        this.scoresUser1 -= 40
                     }
                     else {
-                        this.scoresUser -= 20
+                        this.scoresUser1 -= 20
                     }
                 }
             }
@@ -299,62 +304,67 @@ class Game extends Component {
             userCard.forEach((el) => {
                 switch (el % 9) {
                     case 5:
-                        this.scoresUser += 10
+                        this.scoresUser1 += 10
                         break;
 
                     case 6:
-                        this.scoresUser += 20
+                        this.scoresUser1 += 20
                         if (el == 24) {
-                            this.scoresUser += 20
+                            this.scoresUser1 += 20
                         }
                         break;
 
                     case 7:
-                        this.scoresUser += 10
+                        this.scoresUser1 += 10
                         break;
 
                     case 8:
-                        this.scoresUser += 10
+                        this.scoresUser1 += 10
                         break;
 
                     case 0:
-                        this.scoresUser += 15
+                        this.scoresUser1 += 15
                         break;
                 }
             })
 
-            if (valet != 0)
-            {
-                for (let i = 0; i < valet; i++)
-                {
+            if (valet != 0) {
+                for (let i = 0; i < valet; i++) {
                     if (this.store.getState().usedCard[usedCard[usedCard.length - i - 1]].card == 24) {
-                        this.scoresComputer -= 40
+                        this.scoresComputer1 -= 40
                     }
                     else {
-                        this.scoresComputer -= 20
+                        this.scoresComputer1 -= 20
                     }
                 }
             }
         }
         this.result = true
-        this.render()
+    }
+
+    result_f = () => {
+        this.scoresComputer += this.scoresComputer1
+        this.scoresUser += this.scoresUser1
+        if (this.scoresComputer == 110) {
+            this.scoresComputer = 0
+        }
+        if (this.scoresUser == 110) {
+            this.scoresUser = 0
+        }
+        this.result = false
+        if (this.scoresUser < 115 && this.scoresComputer < 115)   
+        { 
+            this.store.dispatch(ActionGenerators.restart())
+            this.start_game()
+        }
+        this.render_again()
     }
 
     result_false = () => {
         this.result = false
-        if (this.scoresUser >= 115 || this.scoresComputer >= 115)
-        {
-            this.scoresUser = 0
-            this.scoresComputer = 0
-        }
-        if (this.scoresUser == 110)
-        {
-            this.scoresUser = 0
-        }
-        if (this.scoresComputer == 110)
-        {
-            this.scoresComputer = 0
-        }
+        this.scoresUser = 0
+        this.scoresComputer = 0
+        this.render()
     }
 
     render() {
@@ -362,6 +372,8 @@ class Game extends Component {
         let keys = Object.keys(this.store.getState().usedCard)
         let mast = this.store.getState().mast
         let usedCard = this.store.getState().usedCard[keys[keys.length - 1]].card
+
+        console.log("render")
 
         return (
             <>
@@ -423,7 +435,13 @@ class Game extends Component {
                 }
                 {
                     this.result == true ?
-                        <Result store={this.store} render_again={this.render_again} result_false={this.result_false} start_game={this.start_game} userName={userName} scoresUser={this.scoresUser} scoresComputer={this.scoresComputer} />
+                        <Result store={this.store} result={this.result_f} userName={userName} scoresUser={this.scoresUser1} scoresComputer={this.scoresComputer1} />
+                        :
+                        null
+                }
+                {
+                    this.scoresUser >= 115 || this.scoresComputer >= 115 ?
+                        <Finish_game store={this.store} render_again={this.render_again} result_false={this.result_false} start_game={this.start_game} userName={userName} scoresUser={this.scoresUser} scoresComputer={this.scoresComputer} />
                         :
                         null
                 }

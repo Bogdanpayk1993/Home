@@ -51,6 +51,11 @@ const ActionGenerators = {
             }
         }
     },
+    computerClear:function(){
+        return {
+            type:ActionTypes.COMPUTER_CLEAR,
+        }
+    },
     takeCardUser:function(cardId){
         return {
             type:ActionTypes.TAKE_CARD_USER,
@@ -69,6 +74,11 @@ const ActionGenerators = {
                 corse : 1
             }
         }
+    },
+    userClear:function(){
+       return {
+           type:ActionTypes.USER_CLEAR,
+       } 
     },
     throwSeven:function(){
         return {

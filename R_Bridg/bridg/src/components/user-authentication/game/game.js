@@ -6,9 +6,9 @@ import PrintCard from './printcard/printcard'
 import Computer from '../../../computer/computer'
 import Mast from './mast/mast'
 import Result from './result/result'
-import Finish_Game from './finish_game/finish_game'
+import Finish_game from './finish_game/finish_game'
 import ActionGenerators from '../../../actions/ActionGenerators'
-import Finish_game from './finish_game/finish_game';
+
 
 class Game extends Component {
     constructor(props) {
@@ -111,9 +111,13 @@ class Game extends Component {
                 for (let i = 0; i < seven * 2 - 1; i++) {
                     this.store.dispatch(ActionGenerators.takeCardUser(parseInt(this.giveCard())))
                 }
+                if (seven == 4) {
+                    this.store.dispatch(ActionGenerators.computerClear())
+                    this.finish_stage(0)
+                }
                 this.store.dispatch(ActionGenerators.throwSeven())
+                this.render_again()
             }
-            this.render_again()
         }
 
         let computerCard = Object.keys(this.store.getState().computer)

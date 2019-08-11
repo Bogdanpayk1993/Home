@@ -3,7 +3,7 @@ import './services.css'
 
 const Services = () => (
     <>
-        <table className="table">
+        <table>
             <tr>
                 <td>
                     <div className="services">

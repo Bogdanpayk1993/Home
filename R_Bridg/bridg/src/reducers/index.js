@@ -62,6 +62,16 @@ const Redusers = (state, action) => {
                 mast: state.mast,
                 corse: action.payload.corse
             }
+        case ActionType.COMPUTER_CLEAR:
+            return {
+                colod: { ...(state.colod) },
+                usedCard: { ...(state.usedCard) },
+                computer: { },
+                user: { ...(state.user) },
+                seven: state.seven,
+                mast: state.mast,
+                corse: state.corse
+            }
         case ActionType.TAKE_CARD_USER:
             let ob3 = { ...state.colod }
             delete ob3[action.payload.id]
@@ -86,6 +96,16 @@ const Redusers = (state, action) => {
                 mast: state.mast,
                 corse: action.payload.corse
             }
+        case ActionType.USER_CLEAR:
+                return {
+                    colod: { ...(state.colod) },
+                    usedCard: { ...(state.usedCard) },
+                    computer: { ...(state.computer) },
+                    user: { },
+                    seven: state.seven,
+                    mast: state.mast,
+                    corse: state.corse
+                }
         case ActionType.THROW_SEVEN:
             return {
                 colod: { ...(state.colod) },

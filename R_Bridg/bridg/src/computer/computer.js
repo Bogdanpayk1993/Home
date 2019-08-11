@@ -67,101 +67,110 @@ class Computer {
                 for (let i = 0; i < seven * 2 - 1; i++) {
                     this.store.dispatch(ActionGenerators.takeCardComputer(parseInt(this.giveCard())))
                 }
-                this.store.dispatch(ActionGenerators.throwSeven())
+                if (seven == 4) {
+                    this.store.dispatch(ActionGenerators.userClear())
+                    this.finish_state(0)
+                }
+                else {
+                    this.store.dispatch(ActionGenerators.throwSeven())
+                }
                 this.render_again()
             }
         }
 
-        mydeckCards.forEach((el, i) => {
-            let enable1 = this.check_move(el)
-            if (enable1 == true) {
-                can_move.push(mydeckCards[i])
-            }
-        })
-
-
-        let need_move = []
-        can_move.forEach((el) => {
-            switch (el % 9) {
-                case 1: //6 
-                    need_move.push(5)
-                    break
-                case 2: //7
-                    need_move.push(2)
-                    break
-                case 3: //8
-                    need_move.push(4)
-                    break
-                case 4: //9
-                    need_move.push(2)
-                    break
-                case 5: //10
-                    need_move.push(3)
-                    break
-                case 6: //В
-                    need_move.push(0)
-                    break
-                case 7: //Д
-                    need_move.push(3)
-                    break
-                case 8: //К
-                    need_move.push(3)
-                    break
-                case 0: //Т
-                    need_move.push(4)
-                    break
-            }
-        })
-
-        if (need_move.length > 0) {
-            can_move.map((el, i) => {
-                mydeckCards.map((el1) => {
-                    if ((el > 0 && el < 10 && el1 > 0 && el1 < 10) ||
-                        (el > 9 && el < 19 && el1 > 9 && el1 < 19) ||
-                        (el > 18 && el < 28 && el1 > 18 && el1 < 28) ||
-                        (el > 27 && el < 37 && el1 > 27 && el1 < 37)) {
-                        need_move[i] = need_move[i] * 2
-                    }
-                })
+        if (seven != 4)
+        {
+            mydeckCards.forEach((el, i) => {
+                let enable1 = this.check_move(el)
+                if (enable1 == true) {
+                    can_move.push(mydeckCards[i])
+                }
             })
 
-            let max = need_move.indexOf(Math.max(...need_move))
-            let max1 = mydeckCards.indexOf(can_move[max])
-            let enable1 = false
 
-            if (this.store.getState().usedCard[usedCard_key[usedCard_key.length - 1]].card % 9 == mydeckCards[max1] % 9 && mast == 0) {
-                mydeckCards.forEach((el, i) => {
-                    if (el % 9 == mydeckCards[max1] % 9 && el != mydeckCards[max1] && enable1 == false) {
-                        max1 = i
-                        enable1 = true
-                    }
+            let need_move = []
+            can_move.forEach((el) => {
+                switch (el % 9) {
+                    case 1: //6 
+                        need_move.push(5)
+                        break
+                    case 2: //7
+                        need_move.push(2)
+                        break
+                    case 3: //8
+                        need_move.push(4)
+                        break
+                    case 4: //9
+                        need_move.push(2)
+                        break
+                    case 5: //10
+                        need_move.push(3)
+                        break
+                    case 6: //В
+                        need_move.push(0)
+                        break
+                    case 7: //Д
+                        need_move.push(3)
+                        break
+                    case 8: //К
+                        need_move.push(3)
+                        break
+                    case 0: //Т
+                        need_move.push(4)
+                        break
+                }
+            })
+
+            if (need_move.length > 0) {
+                can_move.map((el, i) => {
+                    mydeckCards.map((el1) => {
+                        if ((el > 0 && el < 10 && el1 > 0 && el1 < 10) ||
+                            (el > 9 && el < 19 && el1 > 9 && el1 < 19) ||
+                            (el > 18 && el < 28 && el1 > 18 && el1 < 28) ||
+                            (el > 27 && el < 37 && el1 > 27 && el1 < 37)) {
+                            need_move[i] = need_move[i] * 2
+                        }
+                    })
                 })
-            }
 
-            if (max1 != -1) {
-                enable = true
-                let seven = this.store.getState().seven
-                if (mydeckCards[max1] % 9 == 2) {
-                    seven++
+                let max = need_move.indexOf(Math.max(...need_move))
+                let max1 = mydeckCards.indexOf(can_move[max])
+                let enable1 = false
+
+                if (this.store.getState().usedCard[usedCard_key[usedCard_key.length - 1]].card % 9 == mydeckCards[max1] % 9 && mast == 0) {
+                    mydeckCards.forEach((el, i) => {
+                        if (el % 9 == mydeckCards[max1] % 9 && el != mydeckCards[max1] && enable1 == false) {
+                            max1 = i
+                            enable1 = true
+                        }
+                    })
                 }
-                else {
-                    seven = 0
-                }
-                if (mydeckCards[max1] % 9 == 6) {
-                    this.valet = this.valet + 1
-                }
-                else {
-                    this.valet = 0
-                }
-                this.store.dispatch(ActionGenerators.throwCardComputer(parseInt(mydeckCards[max1]), seven))
-                this.store.dispatch(ActionGenerators.changeMast(0))
-                if (mydeckCards[max1] % 9 == 3) {
-                    this.store.dispatch(ActionGenerators.takeCardUser(this.giveCard()))
+
+                if (max1 != -1) {
+                    enable = true
+                    let seven = this.store.getState().seven
+                    if (mydeckCards[max1] % 9 == 2) {
+                        seven++
+                    }
+                    else {
+                        seven = 0
+                    }
+                    if (mydeckCards[max1] % 9 == 6) {
+                        this.valet = this.valet + 1
+                    }
+                    else {
+                        this.valet = 0
+                    }
+                    this.store.dispatch(ActionGenerators.throwCardComputer(parseInt(mydeckCards[max1]), seven))
+                    this.store.dispatch(ActionGenerators.changeMast(0))
+                    if (mydeckCards[max1] % 9 == 3) {
+                        this.store.dispatch(ActionGenerators.takeCardUser(this.giveCard()))
+                    }
                 }
             }
+            this.render_again()
+            return enable
         }
-        this.render_again()
-        return enable
     }
 
     add_card() {

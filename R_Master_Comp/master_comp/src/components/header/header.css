@@ -64,12 +64,12 @@ span {
 
 .Master {
     color: rgba(0, 71, 107, 0.7);
-    -webkit-text-stroke-width: 4px;
+    -webkit-text-stroke-width: 0.3vw;
     -webkit-text-stroke-color: black;
 }
 
 .Comp {
     color: rgba(130, 1, 1, 0.7);
-    -webkit-text-stroke-width: 4px;
+    -webkit-text-stroke-width: 0.3vw;
     -webkit-text-stroke-color: black;
 }

@@ -8,7 +8,7 @@ class Header extends Component {
     }
 
     goFacebook = () => {
-        window.location.assign('http://www.facebook.com/mastercomp2/')
+        window.location.assign('http://www.facebook.com/mastercomp.uzh/')
     }
 
     goInstagram = () => {

@@ -14,7 +14,7 @@ function App() {
       <Slider />
       <hr />
       <Services />
-      <hr />
+      <hr className="three"/>
       <Send_Request />
       <br />
     </div>

@@ -1,17 +1,36 @@
-.services {
-    border-spacing: 1vw 1vw;
-}
-.services td {
+.services h3 {
     background-color: rgba(0, 0, 0, 0.6);
     border-radius: 2vw;
     border-spacing: 1vw;
     font-weight: bold;
-    font-size: 1.5vw;
+    font-size: 2vw;
     color: rgba(246, 245, 245, 1);
-    width: 20vw;
+    width: 23%;
+    height: 11vw;
+    float: left;
+    margin: 1%;
+
+}
+
+.services h3 table td {
     height: 10vw;
 }
 
-h3 {
-    margin: 0vw;
+@media screen and (max-width: 600px) {
+    .services h3 {
+        background-color: rgba(0, 0, 0, 0.6);
+        border-radius: 2vw;
+        border-spacing: 1vw;
+        font-weight: bold;
+        font-size: 4vw;
+        color: rgba(246, 245, 245, 1);
+        width: 48%;
+        height: 22vw;
+        float: left;
+        margin: 1%;
+    }
+    
+    .services h3 table td {
+        height: 20vw;
+    }
 }

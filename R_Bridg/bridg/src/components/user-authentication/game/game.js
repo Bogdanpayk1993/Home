@@ -115,19 +115,24 @@ class Game extends Component {
                     this.store.dispatch(ActionGenerators.computerClear())
                     this.finish_stage(0)
                 }
-                this.store.dispatch(ActionGenerators.throwSeven())
+                else {
+                    this.store.dispatch(ActionGenerators.throwSeven())
+                }
                 this.render_again()
             }
         }
 
-        let computerCard = Object.keys(this.store.getState().computer)
-        if (computerCard.length > 0) {
-            this.check_user()
-        }
-        else {
-            let keys = Object.keys(this.store.getState().usedCard)
-            if (this.store.getState().usedCard[keys[keys.length - 1]].card % 9 == 2) {
+        if (seven != 4)
+        {
+            let computerCard = Object.keys(this.store.getState().computer)
+            if (computerCard.length > 0) {
                 this.check_user()
+            }
+            else {
+                let keys = Object.keys(this.store.getState().usedCard)
+                if (this.store.getState().usedCard[keys[keys.length - 1]].card % 9 == 2) {
+                    this.check_user()
+                }
             }
         }
     }

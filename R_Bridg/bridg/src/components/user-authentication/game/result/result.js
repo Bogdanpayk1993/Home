@@ -18,7 +18,12 @@ class Result extends Component {
         return (
             <div className="result_div">
                 <div>
-                    <h1> Етап завершений </h1>
+                    {
+                        this.store.getState().seven < 4 ?
+                            <h1> Етап завершений </h1> 
+                            :
+                            <h1> Етап завершений комбінацією брідж </h1>
+                    }
                     <h2> З рахунком : </h2>
                     <h3> {userName} - {scoresUser} </h3>
                     <h3> Computer - {scoresComputer} </h3>

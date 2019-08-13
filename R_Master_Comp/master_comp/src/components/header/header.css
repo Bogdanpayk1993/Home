@@ -73,3 +73,9 @@ span {
     -webkit-text-stroke-width: 0.3vw;
     -webkit-text-stroke-color: black;
 }
+
+@media screen and (max-width: 600px) {
+    table {
+        margin-bottom: 2vw;
+    }
+}

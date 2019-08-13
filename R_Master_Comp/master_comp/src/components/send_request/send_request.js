@@ -35,13 +35,14 @@ class Send_Request extends Component {
 
     render() {
         return (
-            <div className="footer">
-                <table>
-                    <tr>
-                        <td>
+            <table className="footer">
+                <tr>
+                    <td>
+                        <div className="first">
                             <h1> Контакти: </h1>
-                            <div>
-                                <h2> (066) 537-60-25 Viber </h2> <h2 className="number_two"> (068) 243-83-74 </h2>
+                            <div className="phone">
+                                <h2> (066) 537-60-25 Viber </h2>
+                                <h2> (068) 243-83-74 </h2>
                             </div>
                             <h1> Графік роботи: </h1>
                             <div>
@@ -52,8 +53,8 @@ class Send_Request extends Component {
                             <div>
                                 <h3> м.Ужгород вул.Стрільнична 80/А </h3>
                             </div>
-                        </td>
-                        <td>
+                        </div>
+                        <div className="second">
                             <h1> Зворотній зв'язок </h1>
                             <form>
                                 <label>
@@ -71,7 +72,7 @@ class Send_Request extends Component {
                                 <label>
                                     Номер телефону
                                 <br />
-                                    <input ref="number" placeholder="+38 (050) 333-33-33   +38 (068) 333-33-33"/>
+                                    <input ref="number" placeholder="+38 (050) 333-33-33   +38 (068) 333-33-33" />
                                     <br />
                                 </label>
                                 <label>
@@ -83,10 +84,10 @@ class Send_Request extends Component {
                                 <button onClick={this.send} > Відправити </button>
                             </form>
                             <br />
-                        </td>
-                    </tr>
-                </table>
-            </div>
+                        </div>
+                    </td>
+                </tr>
+            </table>
         );
     }
 }

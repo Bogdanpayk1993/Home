@@ -14,6 +14,7 @@ function App() {
       <Slider />
       <hr />
       <Services />
+      <a name="contacts"></a>
       <hr className="three"/>
       <Send_Request />
       <br />

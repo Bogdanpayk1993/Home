@@ -7,8 +7,14 @@ table {
 }
 
 .header td:first-child {
-    width: 20vw;
     padding-left: 12vw;
+    padding-right: 5vw;
+}
+
+.header td:nth-child(n + 2) {
+    float: right;
+    padding-right: 7vw;
+    padding-top: 0.3vw;
 }
 
 .header td img {
@@ -18,35 +24,12 @@ table {
     margin-right: 1.5vw;
 }
 
-.header td:nth-child(2) {
-    text-align: right;
-    padding-right: 5vw;
-}
-
 form {
     color: white;
     font-size: 1.5vw;
     font-style: italic;
     font-weight: bold;
-}
-
-select {
-    color: white;
-    border: 0px;
-    font-weight: bold;
-    font-size: 1.5vw;
-    font-style: italic;
-    margin-left: 0.5vw;
-    margin-bottom: 0.1vw;
-    background-color: rgba(0, 0, 0, 0.8);
-    padding: 0.3vw;
-}
-
-option {
-    font-weight: bold;
-    font-size: 1.5vw;
-    font-style: italic;
-    background-color: rgba(0, 0, 0, 0.6);
+    float: left;
 }
 
 span img {
@@ -74,8 +57,36 @@ span {
     -webkit-text-stroke-color: black;
 }
 
+samp {
+    font-size: 1.5vw;
+    border: 0.2vw solid white;
+    border-radius: 0.5vw;
+    margin-top: 0.3vw;
+    color: white;
+    font-style: italic;
+    padding-left: 0.5vw;
+    padding-right: 0.5vw;
+}
+
 @media screen and (max-width: 600px) {
     table {
         margin-bottom: 2vw;
+    }
+
+    .header td:nth-child(n + 2) {
+        float: right;
+        padding-right: 7vw;
+        padding-top: 0.5vw;
+    }
+
+    samp {
+        font-size: 1.7vw;
+        border: 0.2vw solid white;
+        border-radius: 0.5vw;
+        margin-top: 0.5vw;
+        color: white;
+        font-style: italic;
+        padding-left: 1vw;
+        padding-right: 1vw;
     }
 }

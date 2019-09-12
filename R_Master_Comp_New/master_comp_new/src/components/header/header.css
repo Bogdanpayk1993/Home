@@ -1,0 +1,79 @@
+table {
+    width: 100%;
+}
+
+.header {
+    background-color: rgba(0, 0, 0, 0.6);
+    margin-bottom: -1.5vw;
+}
+
+.header td:first-child {
+    padding-left: 12vw;
+    padding-right: 5vw;
+}
+
+.header td img {
+    width: 2vw;
+    height: 2vw;
+    margin-top: 0.3vw;
+    margin-right: 1.5vw;
+}
+
+form {
+    color: white;
+    font-size: 1.5vw;
+    font-style: italic;
+    font-weight: bold;
+    float: left;
+}
+
+span img {
+    height: 8vw;
+    margin-right: 2vw;
+    vertical-align: -0.5vw;
+}
+
+span {
+    text-align: center;
+    font-size: 8vw;
+    font-style: italic;
+    font-weight: 600;
+}
+
+.Master {
+    color: rgba(0, 0, 0, 0.7);
+    -webkit-text-stroke-width: 0.15vw;
+    -webkit-text-stroke-color: white;
+    vertical-align: 1vw;
+}
+
+.Comp {
+    color: rgba(130, 1, 1, 0.7);
+    -webkit-text-stroke-width: 0.15vw;
+    -webkit-text-stroke-color: white;
+    vertical-align: 1vw;
+}
+
+samp {
+    font-size: 1.5vw;
+    border: 0.2vw solid white;
+    border-radius: 0.5vw;
+    margin-top: 0.3vw;
+    color: white;
+    font-style: italic;
+    padding-left: 0.5vw;
+    padding-right: 0.5vw;
+}
+
+@media screen and (max-width: 600px) {
+    samp {
+        font-size: 1.7vw;
+        border: 0.2vw solid white;
+        border-radius: 0.5vw;
+        margin-top: 0.5vw;
+        color: white;
+        font-style: italic;
+        padding-left: 1vw;
+        padding-right: 1vw;
+    }
+}

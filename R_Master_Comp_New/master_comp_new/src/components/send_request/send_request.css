@@ -1,0 +1,182 @@
+.footer input {
+    width: 20vw;
+    margin: 0.2vh;
+    font-size: 1vw;
+}
+
+.footer label {
+    color: rgba(246, 245, 245, 1);
+    font-size: 2.25vw;
+}
+
+.footer textarea {
+    width: 20vw;
+    margin: 0.2vh;
+    font-size: 1vw;
+} 
+
+.footer button {
+    background-color: rgba(0, 0, 0, 0.2);
+    border: 2px solid rgba(246, 245, 245, 1);
+    border-radius: 1vw;
+    font-size: 1.3vw;
+    font-style: italic;
+    font-weight: bold;
+    color: rgba(246, 245, 245, 1);
+    width: 12vw;
+    margin: auto;
+}
+
+.footer {
+    margin-bottom: 1vh;
+}
+
+.footer form {
+    background-color: rgba(0, 0, 0, 0.6);
+    border-radius: 5vw;
+    width: 22%;
+    padding: 1%;
+    margin-left: 38%;
+    margin-right: 38%
+}
+
+.first div {
+    background-color: rgba(0, 0, 0, 0.6);
+    border-radius: 2vw;
+    color: rgba(246, 245, 245, 1);
+}
+
+.first {
+    width: 50%;
+    margin: auto;
+}
+
+.first div {
+    margin-left: 2vw;
+    margin-right: 2vw;
+}
+
+.footer h1 {
+    color: rgba(0, 0, 0, 0.8);
+    font-size: 3vw;
+    font-style: italic;
+    font-weight: bold;
+}
+
+.footer h2 {
+    font-size: 2.1vw;
+    margin: auto;
+    margin-bottom: 1vw;
+    margin-top: 1vw;
+} 
+
+.footer h3 {
+    font-size: 1.5vw;
+}
+
+.phone h2 {
+    width: 22vw;
+    text-align: left;
+    margin: auto;
+    margin-bottom: 1vw;
+    margin-top: 1vw;
+}
+
+@media screen and (max-width: 600px) {
+    .first {
+        width: 100%;
+        float: left;
+        margin-top: -9vw;
+    }
+    
+    .first div {
+        margin-left: 10vw;
+        margin-right: 10vw;
+    }
+    
+    .second {
+        width: 100%;
+        float: left;
+        margin-top: 5vh;
+        margin-bottom: 2vh;
+    }
+
+    .second h1 {
+        margin-top: 0px;
+    }
+    
+    .second form  {
+        margin-left: 18vw;
+        margin-right: 18vw;
+    }
+    
+    .footer h1 {
+        color: black;
+        font-size: 8vw;
+        font-style: italic;
+        font-weight: bold;
+    }
+
+    .footer h2 {
+        font-size: 6.3vw;
+    }
+    
+    .footer h3 {
+        font-size: 4.5vw;
+    }
+
+    .footer form {
+        background-color: rgba(0, 0, 0, 0.6);
+        border-radius: 5vw;
+        width: 60vw;
+        padding: 1vw;
+        padding-right: 1vw;   
+    }
+
+    .footer input {
+        width: 58vw;
+        margin: 0.2vh;
+    }
+ 
+    .footer textarea {
+        width: 58vw;
+        margin: 0.2vh;
+    } 
+
+    .footer label {
+        color: rgba(246, 245, 245, 1);
+        font-size: 4.5vw;
+    }
+
+    .footer button {
+        background-color: rgba(0, 0, 0, 0.2);
+        border: 2px solid rgba(246, 245, 245, 1);
+        border-radius: 1vw;
+        font-size: 2.6vw;
+        font-style: italic;
+        font-weight: bold;
+        color: rgba(246, 245, 245, 1);
+        width: 24vw;
+        margin: auto;
+    }
+    
+    .footer {
+        margin-bottom: -2vh;
+    }
+
+    .phone h2 {
+        width: 44vw;
+        text-align: left;
+        margin: auto;
+        margin-bottom: 1vw;
+        margin-top: 1vw;
+    }
+
+    .footer h2 {
+        font-size: 4.2vw;
+        margin: auto;
+        margin-bottom: 1vw;
+        margin-top: 1vw;
+    } 
+    
+}

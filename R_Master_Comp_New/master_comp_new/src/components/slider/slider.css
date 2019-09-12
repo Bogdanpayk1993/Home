@@ -1,0 +1,15 @@
+.prev {
+    width: 5vw;
+    height: 5vw;
+    float: left;
+    margin-left: 3vw;
+    margin-top: 12.9vw;
+}
+
+.next {
+    width: 5vw;
+    height: 5vw;
+    float: right;
+    margin-right: 3vw;
+    margin-top: 12.9vw;
+}

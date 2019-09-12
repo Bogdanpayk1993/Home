@@ -1,0 +1,51 @@
+.table_services {
+    width: 60%;
+    margin: auto;
+}
+
+.services {
+    margin: auto;
+}
+
+.services h3 {
+    background-color: rgba(0, 0, 0, 0.6);
+    border-radius: 2vw;
+    border-spacing: 1vw;
+    font-weight: bold;
+    font-size: 2vw;
+    color: rgba(246, 245, 245, 1);
+    width: 46%;
+    height: 11vw;
+    float: left;
+    margin: 1%;
+    padding: 1%;
+}
+
+.services h3 table td {
+    height: 10vw;
+}
+
+@media screen and (max-width: 600px) {
+    .table_services {
+        width: 100%;
+        margin: auto;
+        margin-top: -5vh;
+    }
+    
+    .services h3 {
+        background-color: rgba(0, 0, 0, 0.6);
+        border-radius: 2vw;
+        border-spacing: 1vw;
+        font-weight: bold;
+        font-size: 4vw;
+        color: rgba(246, 245, 245, 1);
+        width: 46%;
+        height: 22vw;
+        float: left;
+        margin: 1%;
+    }
+    
+    .services h3 table td {
+        height: 20vw;
+    }
+}

@@ -1,0 +1,50 @@
+.description {
+    background-color: rgba(0, 0, 0, 0.6);
+    border-radius: 2vw;
+    border-spacing: 1vw;
+    font-weight: bold;
+    font-size: 12pt;
+    color: rgba(246, 245, 245, 1);
+    margin-left: 15%;
+    margin-right: 15%;
+    padding: 1%;
+    padding-left: 3%;
+    padding-right: 3%;
+}
+
+hr {
+    color: black;
+    border: 0px;
+    background-color: rgba(0, 0, 0, 0.6);
+    height: 1vw;
+}
+
+p {
+    text-indent: 1.5em;
+    text-align: justify;
+}
+
+li {
+    text-align: left;
+}
+
+.Facebook {
+    text-decoration: underline;
+    cursor: default;
+}
+
+@media screen and (max-width: 600px) {
+    .description {
+        background-color: rgba(0, 0, 0, 0.6);
+        border-radius: 2vw;
+        border-spacing: 1vw;
+        font-weight: bold;
+        font-size: 8pt;
+        color: rgba(246, 245, 245, 1);
+        margin-left: 15%;
+        margin-right: 15%;
+        padding: 1%;
+        padding-left: 3%;
+        padding-right: 3%;
+    }
+}

@@ -26,11 +26,7 @@ class Send_Request extends Component {
         this.setState({
             request: [...this.state.request, { name: this.refs.name.value, email: this.refs.email.value, number: this.refs.number.value, message: this.refs.message.value }]
         })
-        this.refs.name.value = ""
-        this.refs.email.value = ""
-        this.refs.number.value = ""
-        this.refs.message.value = ""
-        this.render()
+        this.props.history.push("/")
     }
 
     render() {

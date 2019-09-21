@@ -1,89 +1,38 @@
 import React, { Component } from 'react';
-import './slider.css'
+import $ from 'jquery';
+import Popper from 'popper.js';
+import 'bootstrap/dist/js/bootstrap.bundle.min';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
-class Slider extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            picture: "./image/phone1.jpg"
-        }
-        var picture1 = "./image/phone1.jpg"
-        setInterval(() => {
-            if (picture1 == "./image/phone1.jpg") {
-                this.setState({
-                    picture: "./image/phone2.jpg"
-                })
-                picture1 = "./image/phone2.jpg"
-            }
-            else
-            {
-                if (picture1 == "./image/phone2.jpg") {
-                    this.setState({
-                        picture: "./image/phone3.jpg"
-                    })
-                    picture1 = "./image/phone3.jpg"
-                }
-                else
-                {
-                    if (picture1 == "./image/phone3.jpg") {
-                        this.setState({
-                            picture: "./image/phone1.jpg"
-                        })
-                        picture1 = "./image/phone1.jpg"
-                    }
-                }
-            }
-        }, 4000)
-    }
-
-    prev = () => {
-        if (this.state.picture == "./image/phone1.jpg") {
-            this.setState({
-                picture: "./image/phone3.jpg"
-            })
-        }
-        if (this.state.picture == "./image/phone2.jpg") {
-            this.setState({
-                picture: "./image/phone1.jpg"
-            })
-        }
-        if (this.state.picture == "./image/phone3.jpg") {
-            this.setState({
-                picture: "./image/phone2.jpg"
-            })
-        }
-    }
-
-    next = () => {
-        if (this.state.picture == "./image/phone1.jpg") {
-            this.setState({
-                picture: "./image/phone2.jpg"
-            })
-        }
-        if (this.state.picture == "./image/phone2.jpg") {
-            this.setState({
-                picture: "./image/phone3.jpg"
-            })
-        }
-        if (this.state.picture == "./image/phone3.jpg") {
-            this.setState({
-                picture: "./image/phone1.jpg"
-            })
-        }
-    }
-
-    render() {
-        return (
-            <>
-                <div style={{ backgroundImage: `url(${this.state.picture})`, backgroundSize: "100vw", height: "31.2vw" }} >
-                    <img src="./image/prev.png" className="prev" onClick={this.prev} />
-                    <img src="./image/next.png" className="next" onClick={this.next} />
+const Slider = () => (
+    <>
+        <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+            <ol class="carousel-indicators">
+                <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+                <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+                <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+            </ol>
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <img src="./image/phone1.jpg" class="d-block w-100" alt="phone1" />
                 </div>
-                <hr />
-                <br />
-            </>
-        );
-    }
-}
+                <div class="carousel-item">
+                    <img src="./image/phone2.jpg" class="d-block w-100" alt="phone2" />
+                </div>
+                <div class="carousel-item">
+                    <img src="./image/phone3.jpg" class="d-block w-100" alt="phone3" />
+                </div>
+            </div>
+            <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="sr-only">Previous</span>
+            </a>
+            <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="sr-only">Next</span>
+            </a>
+        </div>
+    </>
+)
 
 export default Slider;

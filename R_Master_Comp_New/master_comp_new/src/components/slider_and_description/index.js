@@ -1,0 +1,2 @@
+import Slider_And_Description from './slider_and_description'
+export default Slider_And_Description

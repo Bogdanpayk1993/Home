@@ -57,7 +57,9 @@
 }
 
 .footer h1 {
-    color: rgba(0, 0, 0, 0.8);
+    color: rgba(0, 0, 0, 0.7);
+    -webkit-text-stroke-width: 0.08vw;
+    -webkit-text-stroke-color: white;    
     font-size: 3vw;
     font-style: italic;
     font-weight: bold;

@@ -1,7 +1,13 @@
+.header {
+    height:2vw;
+    line-height: 1.7vw;
+}
+
 .header .first {
     width: 28%;
     float: left;
     text-align: right;
+    height: 2vw;
 }
 
 .header .second {
@@ -10,12 +16,14 @@
     text-align: left;
     padding-left: 2%;
     padding-right: 2%;
+    height: 2vw;
 }
 
 .header .third {
     width:  28%;
     float: left;
     text-align: left;
+    height: 2vw;
 }
 
 .header div {
@@ -47,10 +55,26 @@
 }
 
 @media screen and (max-width: 600px) {
-    .header div {
+    .header {
+        height: 4vw;
+        line-height: 3.7vw;
+        background-color: black;
+    }
+
+    .header p { 
+        font-size: 1.3vw;
+        margin: 0vw;
+    }
+
+    .header select {
+        font-size: 1vw;
         background-color: black;
         color: white;
-        padding-top: 0.4vw;
-        padding-bottom: 1vw;
+        margin-bottom: -2;
+        border: 0px;
+    }
+
+    .header option {
+        font-size: 3vw;
     }
 }

@@ -1,8 +1,12 @@
 .menu {
     background-color: #222;
     color: white;
-    height: 3.6vw;
+    height: 3vw;
     line-height: 3vw;
+    width: 100%;
+    text-align: right;
+    position: fixed;
+    margin-top: 2.4vw;
 }
 
 .menu h1 {
@@ -30,6 +34,7 @@
     padding-left: 1vw;
     padding-right: 1vw;
     margin-left: 1.5vw;
+    margin-right: 8vw;
     outline: none;
 }
 

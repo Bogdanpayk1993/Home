@@ -1,0 +1,61 @@
+.tarrif img {
+    width: 100%;
+    margin-bottom: -0.6vh;
+    border-top-left-radius: 2vw;
+    border-top-right-radius: 2vw;
+}
+
+.tarrif div {
+    width: 100%;
+    margin: auto;
+    background-color: #222;
+    border-bottom-left-radius: 2vw;
+    border-bottom-right-radius: 2vw;
+}
+
+.tarrif div h2 {
+    margin: 0px;
+    padding: 1vh;
+    color: white;
+}
+
+.tarrif div h2:first-child {
+    border-bottom: 0.2vw solid white;
+}
+
+.tarrif:hover div h2 {
+    border-bottom: 0.2vw solid white;
+}
+
+.tarrif div h3 { 
+    margin: 0px;
+    padding: 0.5vh;
+    font-size: 1.5vw;
+    border-bottom: 0.2vw solid white;
+    color: white;
+}
+
+.tarrif .parameters {
+    position: absolute;
+    top: -1000vh;
+}
+
+.tarrif:hover .parameters {
+    position: static;
+    top: 0px;
+}
+
+.tarrif button {
+    font-size: 1.3vw;
+    font-weight: bold;
+    border-radius: 0.2vw;
+    background-color: white;
+    border: 0px;
+    margin: 0.5vw;
+    outline: none;
+}
+
+.tarrif button:active {
+    border-style: outset;
+    background-color: lightgray;
+}

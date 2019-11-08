@@ -1,6 +1,8 @@
 .header {
     height:2vw;
     line-height: 1.7vw;
+    width: 100%;
+    position: fixed;
 }
 
 .header .first {

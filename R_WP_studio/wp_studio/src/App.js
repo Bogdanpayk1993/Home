@@ -1,22 +1,12 @@
 import React from 'react';
 
-import Header from './components/header';
-import Menu from './components/menu';
-import Baner from './components/baner';
-import Classification from './components/classification';
-import Send_request from './components/send_request';
-
+import WP_studio from './components/wp_studio';
 import './App.css';
 
 function App() {
   return (
-    
     <div className="App">
-      <Header />
-      <Menu />
-      <Baner />
-      <Classification />
-      <Send_request />
+      <WP_studio />
     </div>
   );
 }

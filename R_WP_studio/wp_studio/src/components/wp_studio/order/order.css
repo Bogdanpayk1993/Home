@@ -1,0 +1,155 @@
+.order {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    display: flex;
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+.order .form {
+    width: 60%;
+    height: 90vh;
+    background-color: white;
+    border-radius: 2vw;
+    margin: auto;
+    padding-left: 2%;
+    padding-right: 2%;
+    text-align: right;
+    border: 0.2vw solid black;
+    font-weight: bold;
+    position: relative;
+}
+
+.order .form div {
+    text-align: left;
+    font-weight: bold;
+}
+
+.order button {
+    font-size: 12pt;
+    font-weight: bold;
+    text-align: right;
+    border-radius: 0.2vw;
+    background-color: #222;
+    color: white;
+    border: 0px;
+    outline: none;
+}
+
+.order h1 {
+    text-align: center;
+    margin: 0px;
+    margin-top: -0.5vw;
+}
+
+.order p {
+    margin: 0px;
+    font-size: 2vw;
+}
+
+.order hr {
+    height: 0.2vw;
+    background-color: black;
+}
+
+.order .option {
+    height: 70vh;
+    display: flex;
+}
+
+.order .option div {
+    width: 80%;
+    margin: auto;
+}
+
+.order .option div div {
+    width: 100%;
+    text-align: center;
+}
+
+.order .option div .p {
+    text-align: center;
+}
+
+.order .option table {
+    width: 100%;
+    font-size: 1.3vw;
+}
+
+.order .option table td {
+    width: 50%;
+}
+
+.order .option table td:nth-child(1) {
+    text-align: left;
+}
+
+.order .option table td:nth-child(2) {
+    text-align: right;
+}
+
+.order .option .input {
+    width: 30%;
+    font-size: 1vw;
+    margin-top: 0.2vw;
+}
+
+.order .option textarea {
+    width: 99.4%;
+    font-size: 1vw;
+    border-width: 2px;
+}
+
+#back {
+    float: left;
+}
+
+@media screen and (max-width: 600px) {
+    .order .form {
+        width: 90%;
+        height: 90vh;
+        background-color: white;
+        border-radius: 2vw;
+        margin: auto;
+        padding-left: 2%;
+        padding-right: 2%;
+        text-align: right;
+        border: 0.2vw solid black;
+        font-weight: bold;
+    }
+
+    .order .option {
+        height: 72vh;
+        display: flex;
+    }
+
+    .order h1 {
+        text-align: center;
+        font-size: 6vw;
+    }
+
+    .order .form .option p {
+        font-size: 4vw;
+    }
+
+    .order .form table {
+        font-size: 4vw;
+    }
+
+    .order .form button {
+        font-size:  4vw;
+    }
+
+    .order .option .input {
+        width: 50%;
+        font-size: 4vw;
+        margin-top: 0.2vw;
+    }
+    
+    .order .option textarea {
+        width: 99.4%;
+        font-size: 4vw;
+        border-width: 2px;
+    }
+    
+}

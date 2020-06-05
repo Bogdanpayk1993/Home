@@ -1,0 +1,11 @@
+body {
+  background-image: url(./image/Fon.jpg);
+  background-size: 100%;
+  min-height: 100vh;
+}
+
+.App {
+  text-align: center;
+  padding-left: 0.5vw;
+  padding-right: 0.5vw;
+}

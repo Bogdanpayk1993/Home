@@ -1,0 +1,10 @@
+@media screen and (max-width: 600px) {
+    .slider {
+        background-color: rgba(255, 255, 255, 0.5);
+        padding: 1.5vw;
+        padding-left: 4vw;
+        padding-right: 4vw;
+        border-radius: 2vw;
+        margin-bottom: 1vw;
+    }
+}

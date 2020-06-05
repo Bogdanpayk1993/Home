@@ -1,0 +1,107 @@
+.contacts {
+    background-color: rgba(255, 255, 255, 0.5);
+    margin-left: 1vw;
+    margin-right: 1vw;
+    padding: 0.5vw;
+    border-radius: 2vw;  
+    font-weight: bold;
+    color: black;
+}
+
+.contacts {
+    margin-bottom: 1.55vw;
+}
+
+.contacts:last-child {
+    margin-bottom: 0px;
+}
+
+.contacts table {
+    width: 100%;
+    font-size: 1.1vw;
+}
+
+.contacts td:nth-child(1) {
+    width: 45%;
+}
+
+.contacts td:nth-child(2) {
+    width: 10%;
+}
+
+.contacts td:nth-child(3) {
+    width: 45%;
+}
+
+.contacts h3 {
+    margin: 0px;
+    font-weight: bold;
+    font-size: 1.6vw;
+}
+
+.contacts p {
+    margin: 0px;
+    font-weight: bold;
+    font-size: 1.1vw;
+}
+
+.contacts_button {
+    width: 94%;
+    font-weight: bold;
+    font-size: 2vw;
+    margin-top: 1vw;
+    margin-bottom: 1vw;
+    padding-top: 1.45vw;
+    padding-bottom: 1.45vw;
+    background-color: rgba(103,58,183,0.1);
+    border: 1px solid rgba(126, 122, 133, 1);
+}
+
+.contacts_button:hover {
+    color: white;
+    background-color: rgba(202, 1, 13, 1);
+    border: 1px solid rgba(126, 122, 133, 1);
+}
+
+.contacts_button:focus {
+    outline: none;
+}
+
+@media screen and (max-width: 600px) {
+
+    .contacts {
+        margin-bottom: 5vw;
+    }
+    
+    .contacts:last-child {
+        margin-bottom: 0px;
+    }
+
+    .contacts h3 {
+        margin: 0px;
+        font-size: 4.8vw;
+    }
+    
+    .contacts p {
+        margin: 0px;
+        font-weight: bold;
+        font-size: 3.3vw;
+    }
+    
+    .contacts table {
+        width: 100%;
+        font-size: 3.3vw;
+    }
+
+    .contacts_button {
+        width: 94%;
+        font-weight: bold;
+        font-size: 6vw;
+        margin-top: 1vw;
+        margin-bottom: 1vw;
+        padding-top: 1.9vw;
+        padding-bottom: 1.9vw;
+        background-color: rgba(103,58,183,0.1);
+        border: 1px solid rgba(126, 122, 133, 1);
+    }
+}

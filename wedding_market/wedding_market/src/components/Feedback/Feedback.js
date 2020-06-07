@@ -29,7 +29,7 @@ class Feedback extends Component {
             var template_id = "template_nX8BTPGS"
             var user_id = "user_i05opLh3d3XKKsDSWbnDS"
             
-            emailjs.send(service_id, template_id, this.userDate, user_id) 
+            //emailjs.send(service_id, template_id, this.userDate, user_id) 
 
             this.refs.userName.value = ""
             this.refs.userPhone.value = ""

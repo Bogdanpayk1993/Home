@@ -1,0 +1,48 @@
+.siteName_wedding_market {
+  margin: 0vh;
+  color: white;
+  font-size: 7vw;
+  font-family: Brush;
+  -webkit-text-stroke-width: 0.2vw;
+  -webkit-text-stroke-color: rgba(202, 1, 13, 1);
+}
+
+.column {
+  width: 33vw;
+}
+
+.column:nth-child(1) {
+  background-color: rgba(255, 255, 255, 0.5);
+  padding: 0.5vw;
+  border-radius: 2vw;
+  padding-left: 4vw;
+  padding-right: 4vw;
+}
+
+.column:nth-child(3) {
+  background-color: rgba(255, 255, 255, 0.5);
+  padding: 0.5vw;
+  border-radius: 2vw;
+}
+
+.column_wedding_market {
+  width: 100%;
+  margin-bottom: 5vw;
+}
+
+@media screen and (max-width: 600px){
+  .siteName_wedding_market {
+    margin: 0vh;
+    color: white;
+    font-size: 9vw;
+    font-family: Brush;
+    -webkit-text-stroke-width: 0.3vw;
+    -webkit-text-stroke-color: rgba(202, 1, 13, 1);
+  }
+
+} 
+  
+@font-face {
+  font-family: Brush;
+  src: url(../../BRUSHSCI.TTF);
+}

@@ -1,0 +1,23 @@
+.big_img {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    z-index: 16;
+    background-color: rgba(0, 0, 0, 0.8);
+    margin-left: -0.5vw;
+}
+
+.big_img img {
+    height: 100vh;
+    cursor: -webkit-zoom-out;
+    cursor: zoom-out;
+}
+
+@media screen and (max-width: 600px) {
+    .big_img img {
+        height: 100vh;
+        margin-left: -11vw;
+        cursor: -webkit-zoom-out;
+        cursor: zoom-out;
+    }
+}

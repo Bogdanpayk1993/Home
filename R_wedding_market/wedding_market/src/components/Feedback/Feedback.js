@@ -29,7 +29,7 @@ class Feedback extends Component {
             var template_id = "template_nX8BTPGS"
             var user_id = "user_i05opLh3d3XKKsDSWbnDS"
             
-            emailjs.send(service_id, template_id, this.userDate, user_id) 
+            //emailjs.send(service_id, template_id, this.userDate, user_id) 
 
             this.refs.userName.value = ""
             this.refs.userPhone.value = ""
@@ -65,14 +65,15 @@ class Feedback extends Component {
     }
 
     render() { 
+        const { language_map, language } = this.props
         return ( 
             <div className="feedback">
-                <h3> Зворотній зв'язок </h3>
-                <p> <input className="input" type="search" placeholder="Ваше ім'я:" ref="userName" /> </p>
-                <p> <input className="input" type="search" placeholder="Номер телефону:" ref="userPhone" /> </p>
-                <p> <input className="input" type="search" placeholder="e-mail:" ref="userEmail" /> </p>
-                <p> <textarea className="input" rows="11" placeholder="Ваше повідомлення:" ref="userMessage"/> </p>
-                <button className="feedback_button" onClick={this.sendMessage}> Надіслати </button>
+                <h3> {language_map[language].feedback.title} </h3>
+                <p> <input className="input" type="search" placeholder={language_map[language].feedback.name} ref="userName" /> </p>
+                <p> <input className="input" type="search" placeholder={language_map[language].feedback.phone} ref="userPhone" /> </p>
+                <p> <input className="input" type="search" placeholder={language_map[language].feedback.email} ref="userEmail" /> </p>
+                <p> <textarea className="input" rows="11" placeholder={language_map[language].feedback.message} ref="userMessage"/> </p>
+                <button className="feedback_button" onClick={this.sendMessage}> {language_map[language].feedback.buttom} </button>
             </div>
          );
     }

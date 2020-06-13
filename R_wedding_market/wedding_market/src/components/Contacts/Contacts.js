@@ -12,61 +12,62 @@ class Contacts extends Component {
     }
  
     render() {
+        const { language_map, language } = this.props
         return (
             <>
                 <div className="contacts">
-                    <h3> Контакти </h3>
-                    <p> Телефон: 050 582 40 42 </p>
-                    <p> e-mail: annakrochak71@gmail.com </p>
+                    <h3> {language_map[language].contacts.title} </h3>
+                    <p> {language_map[language].contacts.phone} </p>
+                    <p> {language_map[language].contacts.e_mail} </p>
                 </div>
                 <div className="contacts">
-                    <h3> Адреса </h3>
-                    <p> Ужгород, Ринок "Краснодонців", вул.Замкома, маг.13 </p>
+                    <h3> {language_map[language].address.title} </h3>
+                    <p> {language_map[language].address.address} </p>
                 </div>
                 <div className="contacts"> 
-                    <h3> Графік роботи </h3>
+                    <h3> {language_map[language].work_schedule.title} </h3>
                     <table>
                         <tbody>
                             <tr>
-                                <td> Понеділок </td>
+                                <td> {language_map[language].work_schedule.schedule.mon.title} </td>
                                 <td> : </td>
-                                <td> Зачинено </td>
+                                <td> {language_map[language].work_schedule.schedule.mon.work_time} </td>
                             </tr>
                             <tr>
-                                <td> Вівторок </td>
+                                <td> {language_map[language].work_schedule.schedule.tue.title} </td>
                                 <td> : </td>
-                                <td> з 09:00 до 14:30 </td>
+                                <td> {language_map[language].work_schedule.schedule.tue.work_time} </td>
                             </tr>
                             <tr>
-                                <td> Середа </td>
+                                <td> {language_map[language].work_schedule.schedule.wed.title} </td>
                                 <td> : </td>
-                                <td> з 09:00 до 14:30 </td>
+                                <td> {language_map[language].work_schedule.schedule.wed.work_time} </td>
                             </tr>
                             <tr>
-                                <td> Четвер </td>
+                                <td> {language_map[language].work_schedule.schedule.thu.title} </td>
                                 <td> : </td>
-                                <td> з 09:00 до 14:30 </td>
+                                <td> {language_map[language].work_schedule.schedule.thu.work_time} </td>
                             </tr>
                             <tr>
-                                <td> П'ятниця </td>
+                                <td> {language_map[language].work_schedule.schedule.fri.title} </td>
                                 <td> : </td>
-                                <td> з 09:00 до 14:30 </td>
+                                <td> {language_map[language].work_schedule.schedule.fri.work_time} </td>
                             </tr>
                             <tr>
-                                <td> Субота </td>
+                                <td> {language_map[language].work_schedule.schedule.sat.title} </td>
                                 <td> : </td>
-                                <td> з 09:00 до 15:00 </td>
+                                <td> {language_map[language].work_schedule.schedule.sat.work_time} </td>
                             </tr>
                             <tr>
-                                <td> Неділя </td>
+                                <td> {language_map[language].work_schedule.schedule.sun.title} </td>
                                 <td> : </td>
-                                <td> з 09:00 до 15:00 </td>
+                                <td> {language_map[language].work_schedule.schedule.sun.work_time} </td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
                 <div className="contacts">
-                    <button className="contacts_button" onClick={this.goToFacebook}> Переглянути наші товари </button>
+                    <button className="contacts_button" onClick={this.goToFacebook}> {language_map[language].buttom} </button>
                 </div>
             </>
         );

@@ -1,0 +1,110 @@
+.header td:nth-child(1) {
+    width: 5vw;
+}
+
+.header td:nth-child(2) {
+    width: 90vw;
+}
+
+.header td:nth-child(3) {
+    width: 5vw;
+}
+
+.header h1 {
+    margin: 0vh;
+    color: white;
+    font-size: 7vw;
+    font-family: Brush;
+    -webkit-text-stroke-width: 0.2vw;
+    -webkit-text-stroke-color: rgba(202, 1, 13, 1);
+}
+
+.header div {
+    position: fixed;
+    background-color: rgba(255, 255, 255, 0.5);
+    margin-top: -1.6vw;
+    padding: 0.4vw;
+    padding-top: 0.2vw;
+    width: 4.8vw;
+    border-radius: 0.4vw;
+    z-index: 1;
+}
+
+.header div div {
+    position: static;
+    width: 4vw;
+    height: 3vw;
+    line-height: 2.2vw;
+}
+
+.header div div:first-child {
+    margin-top: 0.2vw;
+}
+
+.header div div:nth-child(n + 2) {
+    position: absolute;
+    margin-top: -1000vh;
+}
+
+.header div:hover div {
+    position: static;
+    margin-top: 0.2vw;
+}
+
+.header div div:hover:nth-child(n + 2) {
+    border: 0.15vw solid rgba(202, 1, 13, 1);
+}
+
+.header img {
+    width: 3vw;
+}
+
+
+@media screen and (max-width: 600px){
+    .header h1 {
+      margin: 0vh;
+      color: white;
+      font-size: 9vw;
+      font-family: Brush;
+      -webkit-text-stroke-width: 0.3vw;
+      -webkit-text-stroke-color: rgba(202, 1, 13, 1);
+    }
+
+    .header div {
+        position: absolute;
+        background-color: rgba(255, 255, 255, 0.5);
+        margin-top: -1.4vw;
+        padding: 0.4vw;
+        width: 4.8vw;
+        height: 4.2vw;
+        border-radius: 0.4vw;
+        z-index: 1;
+    }
+
+    .header div:hover {
+        position: fixed;
+        height: 20vw;
+    }
+
+    .header div div {
+        margin-top: -1000vh;
+        width: 4vw;
+        height: 3vw;
+        line-height: 1vw;
+    }
+    
+    .header div div:hover {
+        margin-top: -1000vh;
+        width: 4vw;
+        height: 4vw;
+    }
+
+    .header img {
+        width: 3vw;
+    }
+} 
+
+@font-face {
+    font-family: Brush;
+    src: url(../../BRUSHSCI.TTF);
+  }

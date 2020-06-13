@@ -1,6 +1,7 @@
 .feedback h3 {
     font-weight: bold;
     font-size: 1.6vw;
+    color: black;
 }
 
 .input {
@@ -57,6 +58,7 @@
     margin-bottom: 1vw;
     padding-top: 0.2vw;
     padding-bottom: 0.2vw;
+    color: black;
     background-color: rgba(103,58,183,0.1);
     border: 1px solid rgba(126, 122, 133, 1);
 }
@@ -80,6 +82,7 @@
 
     .feedback h3 {
         font-size: 4.8vw;
+        color: black;
     }
 
     .input {
@@ -136,6 +139,7 @@
         margin-bottom: 1vw;
         padding-top: 0.2vw;
         padding-bottom: 0.2vw;
+        color: black;
         background-color: rgba(103,58,183,0.1);
         border: 1px solid rgba(126, 122, 133, 1);
     }

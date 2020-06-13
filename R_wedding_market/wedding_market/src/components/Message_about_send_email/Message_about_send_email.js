@@ -8,16 +8,16 @@ class Message_about_send_email extends Component {
     }
 
     change_regime = () => {
-        const {change_regime} = this.props
+        const { change_regime } = this.props
         change_regime(0)
     }
 
     render() { 
-        
+        const {language_map, language } = this.props 
         return ( 
             <div className="message_about_send_email">
-                <h3> Ваше повідомлення надіслане </h3>
-                <p> Наш оператор зв'яжеться з вами протягом доби </p>
+                <h3> {language_map[language].message_about_send_email.title} </h3>
+                <p> {language_map[language].message_about_send_email.massage} </p>
                 <button onClick={this.change_regime} className="message_about_send_email_button"> Ok </button>
             </div>
          );

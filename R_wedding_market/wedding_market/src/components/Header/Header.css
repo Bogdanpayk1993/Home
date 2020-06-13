@@ -1,3 +1,7 @@
+.header {
+    margin-top: -0.5vw;
+}
+
 .header td:nth-child(1) {
     width: 5vw;
 }
@@ -20,7 +24,7 @@
 }
 
 .header div {
-    position: fixed;
+    position: absolute;
     background-color: rgba(255, 255, 255, 0.5);
     margin-top: -1.6vw;
     padding: 0.4vw;
@@ -51,16 +55,29 @@
     margin-top: 0.2vw;
 }
 
-.header div div:hover:nth-child(n + 2) {
-    border: 0.15vw solid rgba(202, 1, 13, 1);
-}
-
 .header img {
     width: 3vw;
 }
 
+@media screen and (min-width: 601px){
+    .header div div:hover:nth-child(n + 2) {
+        background-color: white;
+    }
+}
 
 @media screen and (max-width: 600px){
+    .header td:nth-child(1) {
+        width: 7vw;
+    }
+    
+    .header td:nth-child(2) {
+        width: 86vw;
+    }
+    
+    .header td:nth-child(3) {
+        width: 7vw;
+    }
+
     .header h1 {
       margin: 0vh;
       color: white;
@@ -73,34 +90,42 @@
     .header div {
         position: absolute;
         background-color: rgba(255, 255, 255, 0.5);
-        margin-top: -1.4vw;
+        margin-top: -2vw;
         padding: 0.4vw;
-        width: 4.8vw;
-        height: 4.2vw;
+        width: 5.8vw;
+        height: 5.2vw;
         border-radius: 0.4vw;
         z-index: 1;
     }
 
     .header div:hover {
-        position: fixed;
-        height: 20vw;
+        position: absolute;
+        height: 26.3vw;
     }
 
-    .header div div {
-        margin-top: -1000vh;
-        width: 4vw;
-        height: 3vw;
-        line-height: 1vw;
+    .header div:hover div {
+        position: static;
+        margin-top: 0.3vw;
     }
     
-    .header div div:hover {
-        margin-top: -1000vh;
-        width: 4vw;
+
+    .header div div:first-child {
+        width: 5vw;
+        height: 4vw;
+    }
+
+    .header div div:nth-child(n + 2) {
+        width: 5vw;
+        height: 4vw;
+    }
+    
+    .header div div:hover:nth-child(n + 2) {
+        width: 5vw;
         height: 4vw;
     }
 
     .header img {
-        width: 3vw;
+        width: 4vw;
     }
 } 
 
